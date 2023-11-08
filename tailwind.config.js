@@ -5,6 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      Fira:['Fira Sans', 'sans-serif'],
+      Montserrat: ['Montserrat Alternates', 'sans-serif'],
+      Rosarivo: ['Rosarivo', 'cursive'],
+    },
     extend: {},
   },
   plugins: [],
