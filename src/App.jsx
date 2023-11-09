@@ -8,19 +8,32 @@ import Footer from './components/layout/Footer'
 
 
 function App() {
-  console.log(import.meta.env.VITE_APPWRITE_URL);
+  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
 
-
-
-  return (
+  useEffect(() => {
+    authService.getCurrentUser()
+    .then((userData) => {
+      if (userData) {
+        dispatch(login({userData}))
+      } else {
+        dispatch(logout())
+      }
+    })
+    .finally(() => setLoading(false))
+  }, [])
+  
+  return !loading ? (
     <div className="flex justify-center overflow-hidden">
-      <div>
-      <Navbar />
-      <Outlet />
-      <Footer />
+      <div className=''>
+        <Navbar />
+        <main>
+        <Outlet />
+        </main>
+        <Footer />
       </div>
     </div>
-  )
+  ) : null
 }
 
 export default App
