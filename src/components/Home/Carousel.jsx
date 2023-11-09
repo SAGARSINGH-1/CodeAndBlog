@@ -12,6 +12,7 @@ export default function Carousels() {
         infiniteLoop={true}
         showStatus={false}
         showIndicators={false}
+        showThumbs={false}
         >
        
             <div className="flex border-2 bg-slate-100 rounded-lg p-4 shadow-md h-[58vh] w-[70vw]">
@@ -25,8 +26,8 @@ export default function Carousels() {
                         Sports and life are intertwined in countless ways. Beyond physical health, sports teach teamwork, discipline, and resilience.
                         They mirror life's challenges, victories, and the pursuit of excellence, offering valuable life lessons through the arena of competition.
                     </p>
-                    <p class=" text-gray-600 mt-10">
-                        <span class="text-lg font-semibold text-orange-500 italic">James Rick</span> in Sports
+                    <p className=" text-gray-600 mt-10">
+                        <span className="text-lg font-semibold text-orange-500 italic">James Rick</span> in Sports
                         <p className="text-gray-600">Jun 13</p>
                     </p>
                 </div>
@@ -43,8 +44,8 @@ export default function Carousels() {
                     In the pursuit of a healthy life, the role of nutrition is paramount. A diet rich in whole foods, balanced with exercise, and a positive mindset, 
                     can transform your life. Discover the power of mindful eating and its impact on overall well-being.
                     </p>
-                    <p class=" text-gray-600 mt-10">
-                        <span class="text-lg font-semibold text-orange-500 italic">Lemu Vin</span> in Fitness
+                    <p className=" text-gray-600 mt-10">
+                        <span className="text-lg font-semibold text-orange-500 italic">Lemu Vin</span> in Fitness
                         <p className="text-gray-600">Aug 15</p>
                     </p>
                 </div>
@@ -61,8 +62,8 @@ export default function Carousels() {
                     In the realm of technology, artificial intelligence stands as a beacon of innovation. Its far-reaching influence touches every facet of our lives, 
                     from automation and data analysis to healthcare and self-driving cars. Discover how AI is revolutionizing the future
                     </p>
-                    <p class=" text-gray-600 mt-10">
-                        <span class="text-lg font-semibold text-orange-500 italic">David Grahm</span> in AI
+                    <p className=" text-gray-600 mt-10">
+                        <span className="text-lg font-semibold text-orange-500 italic">David Grahm</span> in AI
                         <p className="text-gray-600">Jun 13</p>
                     </p>
                 </div>

@@ -23,17 +23,17 @@ export const features = [
     {
         id: 3,
         icon: <MdFeedback className='h-10 w-10 mx-auto mt-2'/>,
-        title: "Immediate Feedback",
-        discription: "Offer instant feedback on quiz answers, explaining correct solutions for study.",
+        title: "Recent Posts",
+        discription: "Latest insights, timely updates, fresh content – the blogs heartbeat.",
     }
 ]
 
-export const latestBlog = [
+export const topBlog = [
 
     {
         id: 1,
         icon: "./Blogs/Politics-2.jpg",
-        title: "User-Friendly Interface",
+        title: "Protest On The Streets ",
         author: "Andrew Malik",
         date: "05 Jun 24", 
     },
@@ -41,9 +41,88 @@ export const latestBlog = [
     {
         id: 2,
         icon: "./Blogs/Politics-3.jpg",
-        title: "User-Friendly Interface",
-        author: "Andrew Malik",
-        date: "05 Jun 24", 
+        title: "Union Meeting ON go",
+        author: "Katu Nit",
+        date: "02 Jul 23", 
     },
 
+]
+
+export const latestBlog = [
+    {
+        id: 1,
+        img: "./Blogs/Lifestyle.jpeg",
+        title: "Living Well: Embrace the Lifestyle.",
+        author: "Kao Ren",
+        date: "01 May 23", 
+        category: "Lifestyle",
+        desc: "Discovering the art of living: Lifestyle, fashion, wellness, and culture."
+    },
+
+    {
+        id: 2,
+        img: "./Blogs/Science.jpeg",
+        title: "Science: A Universe of Knowledge.",
+        author: "Andrew Malik",
+        date: "07 Apr 23", 
+        category: "Science",
+        desc: "Exploring the wonders of the universe: Science, space, and beyond"
+    },
+
+    {
+        id: 3,
+        img: "./Blogs/Travel.jpeg",
+        title: "Wanderlust: Exploring the Globe.",
+        author: "Samantha Rao",
+        date: "17 Mar 23", 
+        category: "Travel",
+        desc: "Exploring new horizons, cultures, and experiences: The world of travel"
+    },
+
+    {
+        id: 4,
+        img: "./Blogs/Health.jpeg",
+        title: "Fitness Journey: Unleash Your Potential Through Exercise",
+        author: "Leo zang",
+        date: "02 Feb 23", 
+        category: "Health",
+        desc: "Fitness, Achieving Your Best through Active Living and Exercise Routines"
+    },
+]
+
+export const popularblog = [
+    {
+        id: 1,
+        title: "Fitness Journey: Unleash Your Potential Through Exercise",
+        author: "Leo zang",
+        date: "07 Aug", 
+    },
+
+    {
+        id: 2,
+        title: "Productivity Hacks: Mastering Time Management",
+        author: "Kin Cho",
+        date: "07 Mar", 
+    },
+
+    {
+        id: 3,
+        title: "The Cosmos Unveiled: A Journey Through Space and Time",
+        author: "Rakesh Singh",
+        date: "04 Jul", 
+    },
+
+    {
+        id: 4,
+        title: "Gaming Galore: Exploring the World of Video Games",
+        author: "Tim Gore",
+        date: "13 Jun", 
+    },
+
+    {
+        id: 5,
+        title: "Hidden Gems: Exploring Off-the-Beaten-Path Destinations",
+        author: "Lisa Brown",
+        date: "17 Apr", 
+    },
 ]
