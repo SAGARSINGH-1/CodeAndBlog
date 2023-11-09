@@ -17,7 +17,7 @@ export default function Home() {
             </div>
           <div className='featurecard flex justify-center m-3 absolute top-[40rem] left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
             {
-                feature.map((item, key) => {
+                feature.map((item) => {
                     return (
                       <div key={item.id} className='border-2 m-5 p-5 py-10 w-[20vw] rounded-2xl bg-slate-300 flex flex-col justify-center items-center hover:scale-105 transform transition-transform duration-300 text-center'>
                       <div className='bg-white w-[5vw] h-[8vh] rounded-full p-1'>
@@ -36,6 +36,7 @@ export default function Home() {
         </div>
 
         <div>
+
           <section>
             <div className='flex justify-center gap-40 text-center p-10 mt-10 mb-10 font-semibold text-xl bg-orange-400 text-white'>
                       <div className="div-1">
@@ -55,7 +56,10 @@ export default function Home() {
                           <h3>Rating</h3>
                       </div>
               </div>
+
           </section>
+
+s
         </div>
 
         <div className='w-[70vw] h-[58vh] mx-auto shadow-lg my-5'>
