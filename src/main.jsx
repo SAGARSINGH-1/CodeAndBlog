@@ -6,8 +6,8 @@ import { Provider } from 'react-redux'
 import store from './store/store.js'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Home from './components/Home/Home.jsx'
-import LoginForm from './registration/Login.jsx'
-import SignupForm from './registration/Signup.jsx'
+import LoginForm from './components/registration/Login.jsx'
+import SignupForm from './components/registration/Signup.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

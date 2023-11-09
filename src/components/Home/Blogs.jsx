@@ -26,7 +26,7 @@ export default function Blogs() {
                 {
                     latest.map((item) =>{
                         return(
-                            <div className='relative m-3 mb-5 h-[31vh] w-[30vw] '>
+                            <div key={item.id} className='relative m-3 mb-5 h-[31vh] w-[30vw] '>
                                 <img className='w-full h-full object-cover hover:scale-105 transition duration-300 ' src={item.icon} alt="politics"/>
 
                                 <div className="absolute bottom-0 left-0 text-white p-4">

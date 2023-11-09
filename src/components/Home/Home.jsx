@@ -19,15 +19,15 @@ export default function Home() {
             {
                 feature.map((item, key) => {
                     return (
-                      <div class='border-2 m-5 p-5 py-10 w-[20vw] rounded-2xl bg-slate-300 flex flex-col justify-center items-center hover:scale-105 transform transition-transform duration-300 text-center'>
-                      <div class='bg-white w-[5vw] h-[8vh] rounded-full p-1'>
+                      <div key={item.id} className='border-2 m-5 p-5 py-10 w-[20vw] rounded-2xl bg-slate-300 flex flex-col justify-center items-center hover:scale-105 transform transition-transform duration-300 text-center'>
+                      <div className='bg-white w-[5vw] h-[8vh] rounded-full p-1'>
                           {item.icon}
                       </div>
-                      <div class='mt-5'>
+                      <div className='mt-5'>
                           <h1 className='text-xl font-semibold m-3'>{item.title}</h1>
                           <p className='text-base m-3 my-5 text-gray-500'>{item.discription}</p>
                       </div>
-                      <button class='ml-3 bg-orange-500 text-white font-bold py-2 px-4 rounded-lg text-lg hover:bg-orange-600 transition duration-300'>Learn More</button>
+                      <button className='ml-3 bg-orange-500 text-white font-bold py-2 px-4 rounded-lg text-lg hover:bg-orange-600 transition duration-300'>Learn More</button>
                   </div>
                     )
                 })
@@ -36,7 +36,7 @@ export default function Home() {
         </div>
 
         <div>
-          <achivement>
+          <section>
             <div className='flex justify-center gap-40 text-center p-10 mt-10 mb-10 font-semibold text-xl bg-orange-400 text-white'>
                       <div className="div-1">
                           <h1>100+</h1>
@@ -55,7 +55,7 @@ export default function Home() {
                           <h3>Rating</h3>
                       </div>
               </div>
-          </achivement>
+          </section>
         </div>
 
         <div className='w-[70vw] h-[58vh] mx-auto shadow-lg my-5'>
