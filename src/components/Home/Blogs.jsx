@@ -82,7 +82,7 @@ export default function Blogs() {
                     </div>
                     <div>
                         {
-                            popularblog.map((item)=>{
+                            popular.map((item)=>{
                                 return(
                                     <div key={item.id} className='flex gap-3 p-3 mt-5 hover:bg-slate-100 hover:cursor-pointer'>
                                         <div>
