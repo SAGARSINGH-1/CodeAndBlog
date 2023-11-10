@@ -1,33 +1,49 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import authService from '../../appwrite/auth'
+import {Link ,useNavigate,NavLink} from 'react-router-dom'
+import {login} from '../../store/authSlice'
+import {useDispatch} from 'react-redux'
+import {useForm} from 'react-hook-form'
 
 export default function SignupForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate()
+  const [error, setError] = useState("")
+  const dispatch = useDispatch()
+  const {register, handleSubmit} = useForm()
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-    // Add your signup logic here
-  };
+  const create = async(data) => {
+    setError("")
+    try {
+        const userData = await authService.createAccount(data)
+        if (userData) {
+            const userData = await authService.getCurrentUser()
+            if(userData) dispatch(login(userData));
+            navigate("/")
+        }
+    } catch (error) {
+        setError(error.message)
+    }
+}
 
   return (
     <div className="flex items-center justify-center bg-gray-100 m-5 p-5">
       <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-semibold text-center mb-4">Sign Up</h2>
-        <form onSubmit={handleSignup}>
+        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        <form onSubmit={handleSubmit(create)}>
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-600 text-sm font-medium mb-2">
-              Name
+             Full Name
             </label>
             <input
               type="text"
               id="name"
               className="w-full border rounded-md py-2 px-3 focus:outline-none focus:border-blue-400"
               placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
               required
+              {...register("name", {
+                required: true,
+            })}
             />
           </div>
           <div className="mb-4">
@@ -39,9 +55,14 @@ export default function SignupForm() {
               id="email"
               className="w-full border rounded-md py-2 px-3 focus:outline-none focus-border-blue-400"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               required
+              {...register("email", {
+                required: true,
+                validate: {
+                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                    "Email address must be a valid address",
+                }
+            })}
             />
           </div>
           <div className="mb-4">
@@ -53,9 +74,9 @@ export default function SignupForm() {
               id="password"
               className="w-full border rounded-md py-2 px-3 focus:outline-none focus-border-blue-400"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               required
+              {...register("password", {
+                required: true,})}
             />
           </div>
           <div className="mb-4">

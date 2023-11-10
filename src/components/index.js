@@ -25,4 +25,10 @@ import authService from "../appwrite/auth";
 import service from "../appwrite/config";
 
 
-export default { Navbar, Footer, Button, Blogs, Carousel, Categorybtn, Home, Form, Login, Signup, conf, store, authSlice, authService, service };
+
+import RTE from "../RTE";
+import Select from "../Select";
+
+
+
+export default { Button,Navbar, Footer, Blogs, Carousel, Categorybtn, Home, Form, Login, Signup, conf, store, authSlice, authService, service,RTE,Select };    
