@@ -41,6 +41,24 @@ export const Category = [
         post: 40,
     },
 
+    {
+        id: 8,
+        category: "Finance",
+        post: 17,
+    },
+
+    {
+        id: 9,
+        category: "Food and Cooking",
+        post: 7,
+    },
+
+    {
+        id: 10,
+        category: "Lifestyle",
+        post: 5,
+    },
+
 ]
 
 export const Posts = [
