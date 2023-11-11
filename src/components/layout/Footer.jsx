@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Footer Top Section */}
           <div className="w-full sm:w-1/2 md:w-1/4 px-4 mb-4">
             <li className="block mb-4">COMPANY LOGO</li>
-            <p className="text-sm">Explore the world with our website</p>
+            <p className="text-sm"> Explore, connect, and be inspired on our blog, where every post unfolds a new chapter in the journey of curiosity. </p>
           </div>
 
           {/* Footer Menu Links */}

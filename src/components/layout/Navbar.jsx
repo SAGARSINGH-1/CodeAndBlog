@@ -13,7 +13,7 @@ export default function Navbar() {
           <div className='link'>
             <ul className='flex gap-10 text-base font-medium mt-2 poppins text-gray-500'>
               <li className='hover:text-pink-400 cursor-pointer'> <NavLink to=''>Home</NavLink></li>
-              <li className='hover:text-pink-400 cursor-pointer'>Blog</li>
+              <li className='hover:text-pink-400 cursor-pointer'><NavLink to='Blogs'>Blog</NavLink></li>
               <li className='hover:text-pink-400 cursor-pointer'>About</li>
               <li className='hover:text-pink-400 cursor-pointer'>Contact Us</li>
               <li className='hover:text-pink-400 cursor-pointer'>Help</li>

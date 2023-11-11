@@ -28,7 +28,7 @@ export default function Carousels() {
                     </p>
                     <p className=" text-gray-600 mt-10">
                         <span className="text-lg font-semibold text-orange-500 italic">James Rick</span> in Sports
-                        <p className="text-gray-600">Jun 13</p>
+                        <span className="text-gray-600 block">Jun 13</span>
                     </p>
                 </div>
             </div>
@@ -46,7 +46,7 @@ export default function Carousels() {
                     </p>
                     <p className=" text-gray-600 mt-10">
                         <span className="text-lg font-semibold text-orange-500 italic">Lemu Vin</span> in Fitness
-                        <p className="text-gray-600">Aug 15</p>
+                        <span className="text-gray-600 block">Aug 15</span>
                     </p>
                 </div>
             </div>
@@ -64,7 +64,7 @@ export default function Carousels() {
                     </p>
                     <p className=" text-gray-600 mt-10">
                         <span className="text-lg font-semibold text-orange-500 italic">David Grahm</span> in AI
-                        <p className="text-gray-600">Jun 13</p>
+                        <span className="text-gray-600 block">Jun 9</span>
                     </p>
                 </div>
             </div>

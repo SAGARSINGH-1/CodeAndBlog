@@ -46,8 +46,8 @@ export default function Blogs() {
             </div>
       </div>
 
-      <div className='bloglist w-[85vw] m-3 flex gap-3 p-3'>
-                <div className=' w-[65vw]'>
+      <div className='bloglist mx-auto flex gap-3'>
+                <div className=' w-[60vw]'>
                     <div className='bg-black text-white mb-5'>
                         <h2 className="font-Montserrat font-semibold p-3 ml-3">Latest Blog</h2>
                     </div>
@@ -55,7 +55,7 @@ export default function Blogs() {
                         {
                             latest.map((item) =>{
                                 return(
-                                    <div key={item.id} className='blog flex bg-slate-100 hover:bg-slate-200 hover:cursor-pointer mb-5 w-[57vw]'>
+                                    <div key={item.id} className='blog flex bg-slate-100 hover:bg-slate-200 hover:cursor-pointer mb-5 w-[60vw]'>
                                        <div className='img relative h-[25vh] w-[25vw]'>
                                             <img className='w-full h-full object-cover hover:scale-105 transition duration-300 ' src={item.img} alt="blog" />
                                             <div className="absolute inset-x-0 bottom-0 bg-opacity-50 text-white p-2">
@@ -76,7 +76,7 @@ export default function Blogs() {
                         }
                     </div>
                 </div>
-                <div className='w-[30vw]'>
+                <div className='w-[25vw]'>
                     <div className='bg-black text-white mb-5'>
                         <h2 className="font-Montserrat font-semibold p-3 ml-3">Popular Blog</h2>
                     </div>
