@@ -52,7 +52,7 @@ export default function UserBlog() {
             <div className='bg-black text-white mb-5'>
                 <h2 className="font-Montserrat font-semibold p-3 ml-3">Categories</h2>
             </div>
-            <div className='trend h-[75vh] overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
+            <div className='trend h-[70vh] overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
                 {
                     category.map((item) => (
                     <div key={item.id} className='Category bg-slate-100 p-3.5 px-5 hover:bg-slate-200 cursor-pointer transition duration-300'>
