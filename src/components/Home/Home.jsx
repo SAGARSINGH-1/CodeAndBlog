@@ -5,7 +5,7 @@ import Blogs from './Blogs'
 
 
 export default function Home() {
-  const [feature, setFeature] = useState(features)
+  const [feature, setFeature] = useState(features);
   return (
     <div className='overflow-x-hidden overflow-y-hidden'>
         <div className='hero h-[100vh]'>

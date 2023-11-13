@@ -1,9 +1,17 @@
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
 import conf from '../conf/conf.js'
 import { Client, Account, ID } from 'appwrite'
 
 export class AuthService {
     client = new Client();
     account;
+
+   notify = (message) => { toast.success(message, { autoClose: 2000,});}
+   notifywar = (message) => { toast.console.warn();(message, { autoClose: 2000,});}
+   notifyer  = (message) => { toast.error(message, { autoClose: 2000,});}
+
 
     constructor() {
         this.client
@@ -16,19 +24,27 @@ export class AuthService {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
             if (userAccount) {
+                this.notify("Account created successfully!");
                 return this.login({ email, password });
             } else {
+                this.notifywar("Account creation failed. Please try again.");
                 return userAccount;
             }
         } catch (error) {
+            this.notifyer("An error occurred. Please try again.");
             throw error;
         }
     }
 
     async login({ email, password }) {
         try {
-            return await this.account.createEmailSession(email, password);
+            const result = await this.account.createEmailSession(email, password);
+            if (result) {
+                this.notify("Login successfully!");
+            }
+            return result;
         } catch (error) {
+            this.notifyer("An error occurred. Please try again.");
             throw error;
         }
     }
@@ -44,8 +60,13 @@ export class AuthService {
 
     async logout() {
         try {
-            return await this.account.deleteSessions();
+            const result = await this.account.deleteSessions();
+            if (result) {
+                this.notify("Logout successfully!");
+            }
+            return result;
         } catch (error) {
+            this.notifyer("An error occurred. Please try again.");
             throw error;
         }
     }
