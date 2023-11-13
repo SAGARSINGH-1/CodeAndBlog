@@ -6,6 +6,10 @@ export class Service {
     databases;
     bucket;
 
+    notify = (message) => { toast.success(message, { autoClose: 2000,});}
+    notifywar = (message) => { toast.console.warn();(message, { autoClose: 2000,});}
+    notifyer  = (message) => { toast.error(message, { autoClose: 2000,});}
+
     constructor() {
         this.client
             .setEndpoint(conf.appwriteUrl)
@@ -16,7 +20,7 @@ export class Service {
 
     async creatPost({ tittle, slug, content, featuredImage, status, userId }) {
         try {
-            return await this.databases.createDocument(
+            const result =  await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
@@ -28,14 +32,18 @@ export class Service {
                     userId,
                 }
             );
+            if (result) {
+                this.notify("Post created successfully!");
+            }
         } catch (error) {
+            this.notifyer("An error occurred, Please try again!");
             throw error
         }
     }
 
     async updatePost(slug, { tittle, content, featuredImage, status }) {
         try {
-            return await this.databases.updateDocument(
+            const result = await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
@@ -46,7 +54,11 @@ export class Service {
                     status,
                 }
             );
+            if (result) {
+                this.notify("Post Updated successfully!");
+            }
         } catch (error) {
+            this.notifyer("An error occurred, Please try again!");
             throw error
         }
     }
@@ -54,13 +66,18 @@ export class Service {
 
     async deletePost(slug) {
         try {
-            return await this.databases.deleteDocument(
+            this.notify("Post Deleted successfully!");
+            const result = await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
             );
-            return true;
+             if (result) {
+                this.notify("Post created successfully!");
+            }
+            return result;
         } catch (error) {
+            this.notifyer("An error occurred, Please try again!");
             throw error
         }
     }

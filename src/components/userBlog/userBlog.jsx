@@ -10,6 +10,8 @@ import { RxCross2 } from 'react-icons/rx';
 import { FaRegSmileWink } from 'react-icons/fa';
 
 import 'emoji-picker-element';
+import { NavLink } from 'react-router-dom';
+import Button from '../layout/Button';
 
 export default function UserBlog() {
 
@@ -64,40 +66,13 @@ export default function UserBlog() {
             </div>
 
             <div className="mt-[9vh] flex justify-center">
-                <button onClick={toggleForm} className="bg-orange-500 w-28 text-white text-xl font-bold py-2 px-4 rounded hover:bg-orange-400 focus:outline-none focus:shadow-outline-blue transition duration-300">Post</button>
-
-                {isFormVisible && (
-                    <div className="absolute top-32 left-1/2 h-[40vh] w-[50vw] transform -translate-x-1/2 bg-white p-4 rounded shadow-md z-10">
-                        <div className="flex justify-end">
-                            <button className="text-gray-600 hover:text-gray-800 focus:outline-none" onClick={toggleForm} >
-                                <RxCross2 size="1.5em"/>
-                            </button>
-                        </div>
-                        <textarea className="w-full h-[20vh] p-2 border border-gray-300 rounded mt-4" id='textarea' placeholder="Write your post..."></textarea>
-                        <div className='flex justify-between'>
-                            <div className='flex gap-3'>
-                                <div>
-                                    <label className="bg-orange-500 text-white text-lg font-bold py-2 px-4 rounded mt-4 hover:bg-orange-400 focus:outline-none focus:shadow-outline-blue transition duration-300 float-right cursor-pointer">
-                                        <span>Choose File</span>
-                                        <input type="file" className="hidden" />
-                                    </label>
-                                </div>
-                                
-                                <div>
-                                    <button className='mt-5 ml-3' id='showPickerButton' onClick={toggleTooltip}><FaRegSmileWink size="2em"/></button>
-                                    <div  className={`tooltip ${isTooltipShown ? 'opacity-100' : 'opacity-0 hidden'} absolute top-[35vh] p-4 rounded shadow-md transition-opacity duration-300`} role="tooltip">
-                                        <emoji-picker></emoji-picker>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <button className="bg-orange-500 text-white text-lg font-bold py-2 px-4 rounded mt-4 hover:bg-orange-400 focus:outline-none focus:shadow-outline-blue transition duration-300 float-right mr-2">Post</button>
-                        </div>
-                        
-                    </div>
-                )}
+                <NavLink to='/add-post'>
+                    <Button className=" w-28 text-xl font-bold py-2 px-4">Post</Button>
+                </NavLink>
             </div>
         </div>
+
+       
 
         {/* Block-2 */}
         <div className='w-[45vw] h-[95vh] overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
