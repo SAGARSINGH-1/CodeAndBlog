@@ -3,6 +3,7 @@ import Button from './Button'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import LogoutBtn from './LogoutBtn'
 
 export default function Navbar() {
   const authStatus = useSelector((state) => state.auth.status)
@@ -26,7 +27,7 @@ export default function Navbar() {
 
           {
             authStatus ? (
-              <NavLink to='/'><Button val="Logout" /></NavLink>
+              <NavLink to='/'><LogoutBtn/></NavLink>
             ) : (<NavLink to='signup'><Button val="Sign up" /></NavLink>)
           }
 

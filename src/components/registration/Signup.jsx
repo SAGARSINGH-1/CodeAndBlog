@@ -5,7 +5,7 @@ import {login} from '../../store/authSlice'
 import {useDispatch} from 'react-redux'
 import {useForm} from 'react-hook-form'
 
-export default function SignupForm() {
+export default function Signup() {
   const navigate = useNavigate()
   const [error, setError] = useState("")
   const dispatch = useDispatch()
