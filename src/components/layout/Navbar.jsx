@@ -27,8 +27,10 @@ export default function Navbar() {
 
           {
             authStatus ? (
-              <NavLink to='/'><LogoutBtn/></NavLink>
-            ) : (<NavLink to='signup'><Button val="Sign up" /></NavLink>)
+              <NavLink to='/'><LogoutBtn /></NavLink>
+            ) : (<NavLink to='signup'><Button type="submit" className="w-full">
+              Signup
+            </Button></NavLink>)
           }
 
         </div>
