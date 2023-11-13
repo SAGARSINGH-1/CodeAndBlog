@@ -74,6 +74,10 @@ const router = createBrowserRouter([
             element: <Post />,
         },
         {
+            path :"/blogs",
+            element:<UserBlog/>
+        },
+        {
           path:'*',
           element:<Error/>
         },

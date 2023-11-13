@@ -5,6 +5,7 @@ import {login,logout} from './store/authSlice';
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
+import CreatePost from './components/layout/CreatePost'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <main>
         <Outlet />
         </main>
+        <CreatePost/>
         <Footer />
       </div>
     </div>
