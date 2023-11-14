@@ -7,7 +7,7 @@ import { FiMessageSquare, FiShare2 } from 'react-icons/fi';
 import { BsBookmark } from 'react-icons/bs';
 import { CiSearch } from 'react-icons/ci';
 import { RxCross2 } from 'react-icons/rx';
-import { FaRegSmileWink } from 'react-icons/fa';
+import { FaRegSmileWink, FaHeart } from 'react-icons/fa';
 
 import 'emoji-picker-element';
 import { NavLink } from 'react-router-dom';
@@ -43,6 +43,15 @@ export default function UserBlog() {
 
     const toggleTooltip = () => {
         setIsTooltipShown((prev) => !prev);
+    };
+
+    //For like
+    const randomNumber = Math.floor(Math.random() * 30) + 1;
+
+    const [isHeartFilled, setIsHeartFilled] = useState(false);
+
+    const handleClick = () => {
+        setIsHeartFilled(!isHeartFilled);
     };
 
   return (
@@ -116,16 +125,13 @@ export default function UserBlog() {
                                 </div>
 
                                 <div className='btns flex justify-around'>
-                                    <div className='flex cursor-pointer'>
-                                        <AiOutlineHeart size="1.2em" className='mt-0.5'/> <p className='text-gray-500 ml-1.5'>{item.likes}</p>
+                                    <div onClick={handleClick}  className='flex cursor-pointer hover:text-orange-500'>
+                                    {isHeartFilled ? (<FaHeart color='#FF5733' size="1.1em" className='mt-0.5' />) : (<AiOutlineHeart size="1.2em" className='mt-0.5' />)} <p className='text-gray-500 ml-1.5'>{randomNumber}</p>
                                     </div>
-                                    <div className='flex cursor-pointer'>
-                                        <FiMessageSquare size="1.2em" className='mt-0.5'/><p className='text-gray-500 ml-1'>{item.comment}</p>
+                                    <div className='flex cursor-pointer hover:text-orange-500'>
+                                        <FiMessageSquare size="1.2em" className='mt-0.5 '/><p className='text-gray-500 ml-1'>{randomNumber + 4 + randomNumber}</p>
                                     </div>
-                                    <div className='cursor-pointer'>
-                                        <BsBookmark size="1.1em" className='mt-0.5'/>
-                                    </div>
-                                    <div className='cursor-pointer'>
+                                    <div className='cursor-pointer hover:text-orange-500'>
                                         <FiShare2 size="1.1em" className='mt-0.5'/>
                                     </div>
                                 </div>

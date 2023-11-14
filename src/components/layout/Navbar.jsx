@@ -1,25 +1,27 @@
 import React from 'react'
 import Button from './Button'
 import { NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import LogoutBtn from './LogoutBtn'
 import { useState } from 'react'
 import { BsFillMoonStarsFill, BsSunFill } from 'react-icons/bs';
-
+import { changeCheck } from '../../store/authSlice'
 
 export default function Navbar() {
   const authStatus = useSelector((state) => state.auth.status)
+  const authcheck = useSelector((state) => state.auth.isChecked)
 
-  const [isChecked, setIsChecked] = useState(false);
+  const dispatch = useDispatch();                           
 
-  const toggleButton = () => {
-    setIsChecked(!isChecked);
+  const togglecheck = () => {
+    dispatch(changeCheck());
   };
+  
 
   return (
     <div>
-      <nav className='p-3 w-[100vw]'>
+      <nav className={`p-3 w-[100vw]`}>
         <div className='flex justify-between max-w-6xl mx-auto'>
           <div className='img mt-2'>
             LOGO
@@ -38,11 +40,11 @@ export default function Navbar() {
           <div className='flex items-center'>
           {/* Dark mode toggle button */}
             <div className='inline-block mt-1 mr-3 md:right-[12rem] sm:right-[13rem] lg:right-[20rem]'>
-              <div className={`relative inline-block w-10 h-6 ${isChecked ? 'bg-gray-300' : 'bg-black'} rounded-full cursor-pointer`} onClick={toggleButton}>
+              <div className={`relative inline-block w-10 h-6 ${authcheck ? 'bg-gray-300' : 'bg-black'} rounded-full cursor-pointer`} onClick={togglecheck}>
                 {/* Thumb */}
-                <div className={`absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${isChecked ? 'translate-x-full' : 'translate-x-0'}`}> {isChecked ? <BsFillMoonStarsFill size="0.9rem" className='mt-1 ml-1.5'/>:  <BsSunFill size="0.9rem" className='mt-1 ml-1.5' />}</div>
+                <div className={`absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${authcheck ? 'translate-x-full' : 'translate-x-0'}`}> {authcheck ? <BsFillMoonStarsFill size="0.9rem" className='mt-1 ml-1.5 text-black'/>:  <BsSunFill size="0.9rem" className='mt-1 ml-1.5' />}</div>
                 {/* Input */}
-                <input type="checkbox" className="absolute w-full h-full opacity-0 cursor-pointer" checked={isChecked} onChange={() => {}} aria-label="Dark mode toggle" />
+                <input type="checkbox" className="absolute w-full h-full opacity-0 cursor-pointer" checked={authcheck} onChange={() => {}} aria-label="Dark mode toggle" />
               </div>
             </div>
 

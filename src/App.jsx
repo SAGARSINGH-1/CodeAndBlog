@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import authService from './appwrite/auth';
 import {login,logout} from './store/authSlice';
 import { Outlet } from 'react-router-dom';
@@ -13,7 +13,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const authcheck = useSelector((state) => state.auth.isChecked)                          
+  const togglecheck = () => {
+    dispatch(changeCheck());
+  };
 
   useEffect(() => {
     authService.getCurrentUser()
@@ -29,7 +34,7 @@ function App() {
   
   return !loading ? (
     <div className="flex justify-center overflow-hidden">
-      <div className=''>
+      <div className={`${authcheck ? 'bg-black text-gray-500' : 'bg-white'}`}>
         <Navbar />
         <main>
         <Outlet />
@@ -37,7 +42,7 @@ function App() {
         <CreatePost/>
         <Footer />
       </div>
-      <div className='absolute top-0 right-0'>
+      <div className='absolute-0 right-0'>
             <ToastContainer />
         </div>
     </div>

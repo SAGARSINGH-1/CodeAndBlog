@@ -6,9 +6,9 @@ export class Service {
     databases;
     bucket;
 
-    notify = (message) => { toast.success(message, { autoClose: 2000,});}
-    notifywar = (message) => { toast.console.warn();(message, { autoClose: 2000,});}
-    notifyer  = (message) => { toast.error(message, { autoClose: 2000,});}
+    notify = (message) => { toast.success(message, { position: "bottom-right", autoClose: 2000,});}
+    notifywar = (message) => { toast.console.warn();(message, { position: "bottom-right", autoClose: 2000,});}
+    notifyer  = (message) => { toast.error(message, { position: "bottom-right", autoClose: 2000,});}
 
     constructor() {
         this.client
