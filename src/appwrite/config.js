@@ -1,5 +1,6 @@
 import conf from '../conf/conf.js'
 import { Client, ID, Databases, Storage, Query } from 'appwrite'
+import { ToastContainer, toast } from 'react-toastify';
 
 export class Service {
     client = new Client();
@@ -18,18 +19,18 @@ export class Service {
         this.bucket = new Storage(this.client);
     }
 
-    async creatPost({ tittle, slug, content, featuredImage, status, userId }) {
+    async createPost({ title, slug, content, featuredImage, status, userid }) {
         try {
             const result =  await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
                 {
-                    tittle,
+                    title,
                     content,
                     featuredImage,
                     status,
-                    userId,
+                    userid,
                 }
             );
             if (result) {
@@ -41,14 +42,14 @@ export class Service {
         }
     }
 
-    async updatePost(slug, { tittle, content, featuredImage, status }) {
+    async updatePost(slug, { title, content, featuredImage, status }) {
         try {
             const result = await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
                 {
-                    tittle,
+                    title,
                     content,
                     featuredImage,
                     status,
@@ -82,7 +83,7 @@ export class Service {
         }
     }
 
-    async getPosts(slug) {
+    async getPost(slug) {
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
@@ -110,7 +111,7 @@ export class Service {
 
     // Upload files 
 
-    async uploadFiles(file) {
+    async uploadFile(file) {
         try {
             return await this.bucket.createFile(
                 conf.appwriteBucketId,

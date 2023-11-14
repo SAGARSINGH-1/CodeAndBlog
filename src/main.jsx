@@ -15,6 +15,7 @@ import AuthLayout from './AuthLayout.jsx'
 import AddPost from './components/pages/AddPost.jsx'
 import EditPost from './components/pages/EditPost.jsx'
 import Post from './components/pages/Post.jsx'
+import Hero from './components/pages/Hero.jsx'
 
 
 const router = createBrowserRouter([
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
     children: [
         {
             path: "/",
-            element: <Home />,
+            element: <Hero/>,
         },
         {
             path: "/login",
