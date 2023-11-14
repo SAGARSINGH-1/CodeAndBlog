@@ -1,5 +1,4 @@
 import React,{ useState,useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import authService from './appwrite/auth';
 import {login,logout} from './store/authSlice';
 import { Outlet } from 'react-router-dom';
@@ -12,13 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
-  const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch();
-
-  const authcheck = useSelector((state) => state.auth.isChecked)                          
-  const togglecheck = () => {
-    dispatch(changeCheck());
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     authService.getCurrentUser()
@@ -31,11 +24,18 @@ function App() {
     })
     .finally(() => setLoading(false))
   }, [])
+
+  // Toggle Dark Mode
+  const [isActive, setIsActive] = useState(false);
+
+  const handleButtonClick = (isActive) => {
+    setIsActive(isActive);
+  };
   
   return !loading ? (
     <div className="flex justify-center overflow-hidden">
-      <div className={`${authcheck ? 'bg-black text-gray-500' : 'bg-white'}`}>
-        <Navbar />
+      <div className={`${isActive ? 'bg-black text-gray-500' : 'bg-white'}`}>
+        <Navbar onButtonClick={handleButtonClick}/>
         <main>
         <Outlet />
         </main>
