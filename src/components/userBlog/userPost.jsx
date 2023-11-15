@@ -2,18 +2,26 @@ import React, { useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { FaHeart } from 'react-icons/fa';
 import { FiMessageSquare, FiShare2 } from 'react-icons/fi';
+import { FaUserSecret } from "react-icons/fa6";
 
-function Post({ item }) {
+import appwriteService from "../../appwrite/config"
+import {Link} from 'react-router-dom'
+import parse from "html-react-parser";
+
+
+function Post({$id, title, featuredImage,name, content}) {
 
     const [showMoreMap, setShowMoreMap] = useState({});
 
+    const description = parse(content);
+
     // Show more
-    const toggleShowMore = (itemId) => {
-        setShowMoreMap((prevShowMoreMap) => ({
-          ...prevShowMoreMap,
-          [itemId]: !prevShowMoreMap[itemId],
-        }));
-      };
+    // const toggleShowMore = (itemId) => {
+    //     setShowMoreMap((prevShowMoreMap) => ({
+    //       ...prevShowMoreMap,
+    //       [itemId]: !prevShowMoreMap[itemId],
+    //     }));
+    //   };
 
 
       //For like dislike
@@ -28,42 +36,70 @@ function Post({ item }) {
     // For Comment
     const [randomComment, setRandomComment] = useState(Math.floor(Math.random() * 30) + 1);
     
+    function getRandomMonthName() {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const randomIndex = Math.floor(Math.random() * months.length);
+        return months[randomIndex];
+      }
+      
+      // Usage
+      const [randomMonthName, setRandomMonthName] = useState(getRandomMonthName());
+    const randomDate = useState(Math.floor(Math.random() * 30) + 1);
+
+
   return (
-   
-                            <div key={item.id} className='Category bg-slate-100 p-3 hover:bg-slate-200 cursor-pointer transition duration-300 mb-3'>
-                                <div className='user flex items-center'>
-                                    <div className='flex-shrink-0'>
-                                        <img className='w-10 h-10 rounded-full' src={item.userimg} alt="User" />
+    
+                        <div key={$id} className='Category bg-slate-100 p-3 hover:bg-slate-200 cursor-pointer transition duration-300 mb-3'>
+                            <Link to={`/post/${$id}`}>
+                                <div className='user flex justify-between items-center'>
+                                    <div className='flex flex-row items-center'>
+                                        <div className='flex-shrink-0 w-10 h-10 rounded-full bg-gray-300 flex justify-center items-center'>
+                                            <FaUserSecret size="1.5em"/>
+                                        </div>
+                                        <div>
+                                            <h2 className='ml-3 font-medium'>{name ? name : 'Xavier'}</h2>
+                                            <h2 className='ml-4 text-sm text-gray-500'>{}</h2>
+                                        </div>
                                     </div>
+                                   
                                     <div>
-                                        <h2 className='ml-3 font-medium'>{item.username}</h2>
-                                        <h2 className='ml-4 text-sm text-gray-500'>{item.category}</h2>
+                                        <h1 className='text-sm items-center'>{randomMonthName} {randomDate}</h1>
                                     </div>
                                 </div>
 
                                 <div className='content'>
-                                    <div className='px-5 py-3'>
-                                        {showMoreMap[item.id] ? (
+                                    <div className='px-5 py-3 '>
+                                        <div className="text-xl font-semibold text-black pb-2">
+                                            <h1>{title}</h1>
+                                        </div>
+                                        <div className='text-gray-500 text-sm'>
+                                            {/* It show text written by user */}
+                                        {/* {showMoreMap[item.id] ? (
                                             <p>
-                                            {item.posttext}{' '}
-                                            {item.posttext.split(' ').length > 20 && (
-                                                <span onClick={() => toggleShowMore(item.id)}  className='text-blue-500 cursor-pointer'>show less</span>
-                                            )}
+                                                {item.posttext}{' '}
+                                                {item.posttext.split(' ').length > 20 && (
+                                                    <span onClick={() => toggleShowMore(item.id)}  className='text-blue-500 cursor-pointer'>show less</span>
+                                                )}
                                             </p>
                                         ) : (
                                             <p>
-                                            {item.posttext.split(' ').slice(0, 20).join(' ')}{' '}
-                                            {item.posttext.split(' ').length > 20 && (
-                                                <span
-                                                onClick={() => toggleShowMore(item.id)} className='text-blue-500 cursor-pointer'>... show more</span>
-                                            )}
+                                                {item.posttext.split(' ').slice(0, 20).join(' ')}{' '}
+                                                {item.posttext.split(' ').length > 20 && (
+                                                    <span
+                                                    onClick={() => toggleShowMore(item.id)} className='text-blue-500 cursor-pointer'>... show more</span>
+                                                )}
                                             </p>
-                                        )}
+                                        )} */}
+                                            <p>{description}</p>
+                                        </div>
+                                        
                                     </div>
                                     <div className='p-5 w-[30vw] h-[30vh] mx-auto'>
-                                        <img className="w-full h-full object-cover rounded-lg" src={item.postimg} alt="img" />
+                                        <img className="w-full h-full object-cover rounded-lg" src={appwriteService.getFilePreview(featuredImage)} alt="img" />
                                     </div>
                                 </div>
+                                
+                            </Link>
 
                                 <div className='btns flex justify-around'>
                                     <div onClick={handleClick}  className='flex cursor-pointer hover:text-orange-500'>
@@ -77,6 +113,7 @@ function Post({ item }) {
                                     </div>
                                 </div>
                             </div>
+   
   )              
 }
 
