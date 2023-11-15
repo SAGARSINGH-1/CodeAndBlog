@@ -3,7 +3,6 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
     status: false,
     userData:null,
-    isChecked: false,
 }
 
 const authSlice = createSlice({
@@ -18,14 +17,11 @@ const authSlice = createSlice({
             state.status = false;
             state.userData = null;
         },
-        changeCheck: (state) => {
-            state.isChecked = !state.isChecked;
-        }
     }
 });
 
 
 
-export const {login,logout,changeCheck} = authSlice.actions;
+export const {login,logout} = authSlice.actions;
 export default authSlice.reducer;
 
