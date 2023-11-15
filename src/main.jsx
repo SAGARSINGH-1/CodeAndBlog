@@ -19,78 +19,82 @@ import Hero from './components/pages/Hero.jsx'
 
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-        {
-            path: "/",
-            element: <Hero/>,
-        },
-        {
-            path: "/login",
-            element: (
-                <AuthLayout authentication={false}>
-                    <Login />
-                </AuthLayout>
-            ),
-        },
-        {
-            path: "/signup",
-            element: (
-                <AuthLayout authentication={false}>
-                    <Signup />
-                </AuthLayout>
-            ),
-        },
-        {
-            path: "/all-posts",
-            element: (
-                <AuthLayout authentication>
-                    {" "}
-                    <AllPosts />
-                </AuthLayout>
-            ),
-        },
-        {
-            path: "/add-post",
-            element: (
-                <AuthLayout authentication>
-                    {" "}
-                    <AddPost />
-                </AuthLayout>
-            ),
-        },
-        {
-            path: "/edit-post/:slug",
-            element: (
-                <AuthLayout authentication>
-                    {" "}
-                    <EditPost />
-                </AuthLayout>
-            ),
-        },
-        {
-            path: "/post/:slug",
-            element: <Post />,
-        },
-        {
-            path :"/blogs",
-            element:<UserBlog/>
-        },
-        {
-          path:'*',
-          element:<Error/>
-        },
-    ],
-},
+    {
+        path: "/",
+        element: <App />,
+        children: [
+            {
+                path: "/",
+                element: (
+                    <AuthLayout authentication={false}>
+                        <Hero />
+                    </AuthLayout>
+                ),
+            },
+            {
+                path: "/login",
+                element: (
+                    <AuthLayout authentication={false}>
+                        <Login />
+                    </AuthLayout>
+                ),
+            },
+            {
+                path: "/signup",
+                element: (
+                    <AuthLayout authentication={false}>
+                        <Signup />
+                    </AuthLayout>
+                ),
+            },
+            {
+                path: "/all-posts",
+                element: (
+                    <AuthLayout authentication>
+                        {" "}
+                        <AllPosts />
+                    </AuthLayout>
+                ),
+            },
+            {
+                path: "/add-post",
+                element: (
+                    <AuthLayout authentication>
+                        {" "}
+                        <AddPost />
+                    </AuthLayout>
+                ),
+            },
+            {
+                path: "/edit-post/:slug",
+                element: (
+                    <AuthLayout authentication>
+                        {" "}
+                        <EditPost />
+                    </AuthLayout>
+                ),
+            },
+            {
+                path: "/post/:slug",
+                element: <Post />,
+            },
+            {
+                path: "/blogs",
+                element: <UserBlog />
+            },
+            {
+                path: '*',
+                element: <Error />
+            },
+        ],
+    },
 ])
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-    <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>,
+    <React.StrictMode>
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
+    </React.StrictMode>,
 )

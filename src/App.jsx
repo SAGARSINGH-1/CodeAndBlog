@@ -7,11 +7,13 @@ import Footer from './components/layout/Footer'
 import CreatePost from './components/layout/CreatePost'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
 
 
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     authService.getCurrentUser()

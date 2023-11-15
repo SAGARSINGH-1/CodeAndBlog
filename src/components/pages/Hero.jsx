@@ -7,6 +7,8 @@ import Container from "../container/Container";
 function Home() {
     const [posts, setPosts] = useState([])
 
+    // console.log(posts);
+
     useEffect(() => {
         appwriteService.getPosts().then((posts) => {
             if (posts) {
