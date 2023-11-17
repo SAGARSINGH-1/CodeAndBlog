@@ -15,7 +15,6 @@ import AuthLayout from './AuthLayout.jsx'
 import AddPost from './components/pages/AddPost.jsx'
 import EditPost from './components/pages/EditPost.jsx'
 import Post from './components/pages/Post.jsx'
-import Hero from './components/pages/Hero.jsx'
 
 
 const router = createBrowserRouter([
@@ -24,10 +23,10 @@ const router = createBrowserRouter([
         element: <App />,
         children: [
             {
-                path: "/",
+                path: "",
                 element: (
                     <AuthLayout authentication={false}>
-                        <Hero />
+                        <Home />
                     </AuthLayout>
                 ),
             },
@@ -76,11 +75,20 @@ const router = createBrowserRouter([
             },
             {
                 path: "/post/:slug",
-                element: <Post />,
+                element:(
+                    <AuthLayout authentication>
+                        <Post />
+                    </AuthLayout>
+                )
             },
             {
+                
                 path: "/blogs",
-                element: <UserBlog />
+                element: (
+                    <AuthLayout authentication>
+                        <UserBlog />
+                    </AuthLayout>
+                ),
             },
             {
                 path: '*',
