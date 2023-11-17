@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import authService from '../../appwrite/auth'
 import {Link ,useNavigate,NavLink} from 'react-router-dom'
 import {login} from '../../store/authSlice'
 import {useDispatch} from 'react-redux'
 import {useForm} from 'react-hook-form'
+import LoadingBar from 'react-top-loading-bar'
+
 
 export default function Signup() {
   const navigate = useNavigate()
@@ -14,18 +16,44 @@ export default function Signup() {
   const create = async(data) => {
     setError("")
     try {
-        const userData = await authService.createAccount(data)
+        const userData = await authService.createAccount(data);
         if (userData) {
-            const userData = await authService.getCurrentUser()
+            const userData = await authService.getCurrentUser();
             if(userData) dispatch(login(userData));
-            navigate("/")
+            navigate("/");
         }
     } catch (error) {
-        setError(error.message)
+        setError(error.message);
     }
 }
 
+
+// top Loader
+const [isContentLoaded, setContentLoaded] = useState(false);
+const [progress, setProgress] = useState(0);
+useEffect(() => {
+  const timeoutId = setTimeout(() => {
+    setContentLoaded(true);
+  }, 2000);
+
+  const intervalId = setInterval(() => {
+    setProgress((prevProgress) => {
+      const randomIncrement = Math.floor(Math.random() * 50) + 1;
+      const newProgress = Math.min(prevProgress + randomIncrement, 100);
+      return newProgress;
+    });
+  }, 300);
+
+  // Clean up the timeout and interval when the component unmounts
+  return () => {
+    clearTimeout(timeoutId);
+    clearInterval(intervalId);
+  };
+}, []);
+
   return (
+    <div>
+    {isContentLoaded ? (
     <div className="flex items-center justify-center bg-gray-100 m-5 p-5">
       <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-semibold text-center mb-4">Sign Up</h2>
@@ -86,6 +114,10 @@ export default function Signup() {
           
         <p className="text-center text-gray-600 text-sm"> Have an account? <NavLink className="text-indigo-500" to='/login'>Login</NavLink> </p>
       </div>
+    </div>
+    ) : (<LoadingBar color='#ff7c05' progress={progress} height = {3} onLoaderFinished={() => setProgress(0)}/>)}
+
+{!isContentLoaded && <p className="text-center text-gray-500 mt-5 absolute top-[40%]">Loading...</p>}
     </div>
   );
 }
