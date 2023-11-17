@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect,  useState } from 'react'
 import { Category, Posts, TrendBlogs } from './BlogData'
 import { CiSearch } from 'react-icons/ci';
 import 'emoji-picker-element';
@@ -8,6 +7,8 @@ import Button from '../layout/Button';
 import Post from './userPost';
 import Container from '../container/Container';
 import appwriteService from "../../appwrite/config";
+import LoadingBar from 'react-top-loading-bar'
+
 
 export default function UserBlog() {
 
@@ -40,9 +41,33 @@ export default function UserBlog() {
         setIsTooltipShown((prev) => !prev);
     };
 
+
+    // top Loader
+const [isContentLoaded, setContentLoaded] = useState(false);
+const [progress, setProgress] = useState(0);
+useEffect(() => {
+  const timeoutId = setTimeout(() => {
+    setContentLoaded(true);
+  }, 2000);
+
+  const intervalId = setInterval(() => {
+    setProgress((prevProgress) => {
+      const randomIncrement = Math.floor(Math.random() * 50) + 1;
+      const newProgress = Math.min(prevProgress + randomIncrement, 100);
+      return newProgress;
+    });
+  }, 300);
+
+  // Clean up the timeout and interval when the component unmounts
+  return () => {
+    clearTimeout(timeoutId);
+    clearInterval(intervalId);
+  };
+}, []);
     
   return (
     <div className='max-w-6xl mx-auto'>
+         {isContentLoaded ? (
       <div className='flex m-5 p-5 gap-5'>
 
         {/* Block-1 */}
@@ -67,8 +92,6 @@ export default function UserBlog() {
                 </NavLink>
             </div>
         </div>
-
-       
 
         {/* Block-2 */}
         <div className='w-[45vw] h-[95vh] overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
@@ -122,6 +145,9 @@ export default function UserBlog() {
         </div>
 
       </div>
+       ) : (<LoadingBar color='#ff7c05' progress={progress} height = {3} onLoaderFinished={() => setProgress(0)}/>)}
+
+       {!isContentLoaded && <p className="text-center text-gray-500 mt-5 absolute top-[40%]">Loading...</p>}
     </div>
   )
 }

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom'
 import { login as authLogin } from '../../store/authSlice'
 import { useDispatch } from "react-redux"
 import authService from "../../appwrite/auth"
 import { useForm } from "react-hook-form"
+import LoadingBar from 'react-top-loading-bar'
+
 
 export default function Login() {
   const navigate = useNavigate()
@@ -26,8 +28,33 @@ export default function Login() {
     }
   }
 
+
+  // top Loader
+const [isContentLoaded, setContentLoaded] = useState(false);
+const [progress, setProgress] = useState(0);
+useEffect(() => {
+  const timeoutId = setTimeout(() => {
+    setContentLoaded(true);
+  }, 1000);
+
+  const intervalId = setInterval(() => {
+    setProgress((prevProgress) => {
+      const randomIncrement = Math.floor(Math.random() * 50) + 1;
+      const newProgress = Math.min(prevProgress + randomIncrement, 100);
+      return newProgress;
+    });
+  }, 300);
+
+  // Clean up the timeout and interval when the component unmounts
+  return () => {
+    clearTimeout(timeoutId);
+    clearInterval(intervalId);
+  };
+}, []);
+
   return (
     <div className="flex items-center justify-center bg-gray-100 m-5 p-5">
+      {isContentLoaded ? (
       <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-semibold text-center mb-4">Login</h2>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
@@ -80,6 +107,9 @@ export default function Login() {
           Don't have an account? <NavLink className="text-indigo-500" to='/signup'>Signup</NavLink>
         </p>
       </div>
+      ) : (<LoadingBar color='#ff7c05' progress={progress} height = {3} onLoaderFinished={() => setProgress(0)}/>)}
+
+    {!isContentLoaded && <p className="text-center text-gray-500 mt-5 absolute top-[40%]">Loading...</p>}
     </div>
   );
 }
