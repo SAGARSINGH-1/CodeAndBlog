@@ -9,7 +9,7 @@ import { IoReorderThree } from "react-icons/io5";
 
 export default function Navbar({ onButtonClick }) {
   const authStatus = useSelector((state) => state.auth.status)
-  const [ShowNav, setShowNav] = useState(true)
+  const [ShowNav, setShowNav] = useState(false)
  
   // Toggle Dark Mode
   const [isActive, setIsActive] = useState(false);
@@ -21,10 +21,10 @@ export default function Navbar({ onButtonClick }) {
 
   return (
     <div>
-      <nav className={`relative p-3 w-[100vw]`}>
-        <div className=' flex flex-col justify-between md:flex-row md:justify-between md:max-w-6xl md:mx-auto'>
-          <div className='img'>
-            <img className='h-7' src={isActive ? "../Logo.png" : "../Logo d.png"} alt="logo" />
+      <nav className={`relative p-3 w-[100vw] z-10`}>
+        <div className=' flex flex-col justify-center items-center md:flex-row md:justify-between md:max-w-6xl md:mx-auto'>
+          <div className='img flex items-center'>
+            <img className='h-7 max-w-max' src={isActive ? "../Logo.png" : "../Logo d.png"} alt="logo" />
           </div>
 
           <div className={`link flex justify-center items-center w-[100%] ${ShowNav?"hidden":""}`}>
@@ -40,7 +40,7 @@ export default function Navbar({ onButtonClick }) {
           <div className='flex items-center md:static'>
           {/* Dark mode toggle button */}
             <div className='absolute top-2 right-14 md:static inline-block mt-1 mr-3 md:right-[12rem]'>
-              <div className={`inline-block w-10 h-6 ${isActive ? 'bg-gray-300' : 'bg-black'} rounded-full cursor-pointer`} onClick={handleButtonClick}>
+              <div className={`relative inline-block w-10 h-6 ${isActive ? 'bg-gray-300' : 'bg-black'} rounded-full cursor-pointer`} onClick={handleButtonClick}>
                 {/* Thumb */}
                 <div className={`absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${isActive ? 'translate-x-full' : 'translate-x-0'}`}> {isActive ? <BsFillMoonStarsFill size="0.9rem" className='mt-1 ml-1.5 text-black'/>:  <BsSunFill size="0.9rem" className='mt-1 ml-1.5' />}</div>
                 {/* Input */}
