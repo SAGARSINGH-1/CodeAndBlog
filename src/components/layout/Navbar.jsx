@@ -21,8 +21,8 @@ export default function Navbar({ onButtonClick }) {
     <div>
       <nav className={`p-3 w-[100vw]`}>
         <div className='flex justify-between max-w-6xl mx-auto'>
-          <div className='img mt-2'>
-            LOGO
+          <div className='img flex items-center'>
+            <img className='h-7' src={isActive ? "../Logo.png" : "../Logo d.png"} alt="logo" />
           </div>
 
           <div className='link'>
