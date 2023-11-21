@@ -66,7 +66,7 @@ function App() {
       <div className={`${isActive ? 'bg-black text-gray-500' : 'bg-white'}`}>
         <Navbar onButtonClick={handleButtonClick}/>
         <main>
-        <Outlet />
+        {/* <Outlet /> */}
         </main>
         <CreatePost/>
         <Footer />
