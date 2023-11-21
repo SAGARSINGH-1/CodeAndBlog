@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="container mx-auto flex flex-wrap justify-between">
           {/* Footer Top Section */}
           <div className="w-full sm:w-1/2 md:w-1/4 px-4 mb-4">
-            <li className="block mb-4">COMPANY LOGO</li>
+            <li className="block my-4"><img className='h-10' src="../Logo.png" alt="logo" /></li>
             <p className="text-sm"> Explore, connect, and be inspired on our blog, where every post unfolds a new chapter in the journey of curiosity. </p>
           </div>
 
