@@ -20,6 +20,8 @@ export default function Navbar({ onButtonClick }) {
     onButtonClick(!isActive);
   };
 
+  const userData=useSelector((state)=>state.auth.userData)
+
   // Dropdown
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -31,7 +33,7 @@ export default function Navbar({ onButtonClick }) {
   return (
     <div>
       <nav className={`relative p-3 w-[100vw] z-10`}>
-        <div className=' flex flex-col justify-center items-center md:flex-row md:justify-between md:max-w-6xl md:mx-auto'>
+        <div className=' flex flex-col justify-between md:flex-row md:justify-between md:max-w-6xl md:mx-auto'>
           <div className='img flex items-center'>
             <img className='h-7 max-w-max' src={isActive ? "../Logo.png" : "../Logo d.png"} alt="logo" />
           </div>
@@ -64,7 +66,7 @@ export default function Navbar({ onButtonClick }) {
               {
                 authStatus ? (
                   <div className='relative'>
-                    <button className='p-1' onClick={toggleDropdown}><FaUserCircle size="2em" /></button>
+                    <button className={`p-1 mt-2 ${ShowNav?"hidden":""}`} onClick={toggleDropdown}><FaUserCircle size="2em" /></button>
                     {isDropdownOpen && (
                       <div className='absolute top-full w-[10vw] right-[-10vh] mt-1 bg-white border border-gray-200 rounded shadow-md text-center'>
                         {/* Your dropdown content */}
