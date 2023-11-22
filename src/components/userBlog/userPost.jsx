@@ -94,8 +94,8 @@ function Post({$id, title, featuredImage,name, content}) {
                                         </div>
                                         
                                     </div>
-                                    <div className='p-5 w-[30vw] h-[30vh] mx-auto'>
-                                        <img className="w-full h-full object-cover rounded-lg" src={appwriteService.getFilePreview(featuredImage)} alt="img" />
+                                    <div className='p-5 mx-auto'>
+                                        <img className="w-full h-full object-cover rounded-lg bg-white"  src={appwriteService.getFilePreview(featuredImage)} alt="img" />
                                     </div>
                                 </div>
                                 

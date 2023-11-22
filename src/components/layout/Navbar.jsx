@@ -6,6 +6,7 @@ import LogoutBtn from './LogoutBtn'
 import { useState } from 'react'
 import { BsFillMoonStarsFill, BsSunFill } from 'react-icons/bs';
 import { IoReorderThree } from "react-icons/io5";
+import { FaUserCircle } from "react-icons/fa";
 
 export default function Navbar({ onButtonClick }) {
   const authStatus = useSelector((state) => state.auth.status)
@@ -18,6 +19,14 @@ export default function Navbar({ onButtonClick }) {
     setIsActive(!isActive);
     onButtonClick(!isActive);
   };
+
+  // Dropdown
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
 
   return (
     <div>
@@ -51,10 +60,21 @@ export default function Navbar({ onButtonClick }) {
               <IoReorderThree onClick={()=>{setShowNav(!ShowNav)}} className='cursor-pointer text-5xl absolute top-[1px] right-3 md:hidden'/>
 
             {/* Sign-up or Logout button */}
-            <div className={`link ml-[-20px] mt-3 md:ml-4 flex justify-center items-center w-[100%] ${ShowNav?"hidden":""}`}>
+            <div className={`link ml-[-20px] md:ml-4 flex justify-center items-center w-[100%] ${ShowNav?"hidden":""}`}>
               {
                 authStatus ? (
-                  <NavLink to='/'><LogoutBtn /></NavLink>
+                  <div className='relative'>
+                    <button className='p-1' onClick={toggleDropdown}><FaUserCircle size="2em" /></button>
+                    {isDropdownOpen && (
+                      <div className='absolute top-full w-[10vw] right-[-10vh] mt-1 bg-white border border-gray-200 rounded shadow-md text-center'>
+                        {/* Your dropdown content */}
+                        <div className='p-3 hover:bg-gray-100'>Account</div>
+                        <div className='p-3 hover:bg-gray-100'><NavLink to={'/blogs'}>Blogs</NavLink></div>
+                        <div className='p-3 hover:bg-gray-100'>Setting</div>
+                        <div className='p-3 hover:bg-gray-100'><NavLink to='/'><LogoutBtn /></NavLink></div>
+                      </div>
+                    )}
+                  </div>
                 ) : (<NavLink to='signup'><Button type="submit" className="w-full">
                   Signup
                 </Button></NavLink>)
