@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { BsFillMoonStarsFill, BsSunFill } from 'react-icons/bs';
 import { IoReorderThree } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
+import { MdOutlineArrowDropDown } from "react-icons/md";
 
 export default function Navbar({ onButtonClick }) {
   const authStatus = useSelector((state) => state.auth.status)
@@ -66,13 +67,13 @@ export default function Navbar({ onButtonClick }) {
               {
                 authStatus ? (
                   <div className='relative'>
-                    <button className={`p-1 mt-2 ${ShowNav?"hidden":""}`} onClick={toggleDropdown}><FaUserCircle size="2em" /></button>
+                    <button className={`p-1 flex ${ShowNav?"hidden":""}`} onClick={toggleDropdown}><FaUserCircle size="2em" /><MdOutlineArrowDropDown className='mt-[.20rem] text-2xl'/></button>
                     {isDropdownOpen && (
-                      <div className='absolute top-full w-[10vw] right-[-10vh] mt-1 bg-white border border-gray-200 rounded shadow-md text-center'>
+                      <div className='absolute top-full w-[10vw] right-[-8vh] mt-1 bg-white border border-gray-200 rounded shadow-md text-center'>
                         {/* Your dropdown content */}
-                        <div className='p-3 hover:bg-gray-100'>Account</div>
+                        <div className='p-3 hover:bg-gray-100'><NavLink to={'/account'}>Account</NavLink></div>
                         <div className='p-3 hover:bg-gray-100'><NavLink to={'/blogs'}>Blogs</NavLink></div>
-                        <div className='p-3 hover:bg-gray-100'>Setting</div>
+                        <div className='p-3 hover:bg-gray-100'><NavLink to={'/setting'}>Setting</NavLink></div>
                         <div className='p-3 hover:bg-gray-100'><NavLink to='/'><LogoutBtn /></NavLink></div>
                       </div>
                     )}
