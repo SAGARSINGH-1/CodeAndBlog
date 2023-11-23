@@ -19,7 +19,7 @@ export default function PostForm({ post }) {
     });
 
     const navigate = useNavigate();
-    const userData = useSelector((state) => state.auth.userData);
+
     const name = useSelector((state) => state.auth.userData.userData.name);
 
     const submit = async (data) => {
@@ -30,14 +30,19 @@ export default function PostForm({ post }) {
                 appwriteService.deleteFile(post.featuredImage);
             }
 
-            const dbPost = await appwriteService.updatePost(post.$id, {
-                ...data,
-                featuredImage: file ? file.$id : undefined,
-            });
-
-            if (dbPost) {
-                navigate(`/post/${dbPost.$id}`);
+            if (userData.userData.name==post.name) {
+                const dbPost = await appwriteService.updatePost(post.$id, {
+                    ...data,
+                    featuredImage: file ? file.$id : undefined,
+                });
+                if (dbPost) {
+                    navigate(`/post/${dbPost.$id}`);
+                }
+            }else{
+                console.log("You are not the owner of this post");
             }
+                
+
         } else {
             const file = await appwriteService.uploadFile(data.image[0]);
 

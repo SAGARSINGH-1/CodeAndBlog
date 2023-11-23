@@ -97,23 +97,24 @@ useEffect(() => {
         <div className='w-[45vw] h-[95vh] overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
             <Container>
                 <div className='posts'>
+                    {console.log(post)}
                     {post.slice().reverse().map((item) => (
                         <Post key={item.id}  {...item} />
-                    ))}
+                        ))}
                 </div>
             </Container>
         </div>
 
         {/* Block-3 */}
         <div className='w-[30vw]'>
-            <div class="bg-white mb-5 p-2 rounded-full flex border-2 border-gray-400" >
+            <div className="bg-white mb-5 p-2 rounded-full flex border-2 border-gray-400" >
                 <div className='mt-1.5 mr-1'>
                     <CiSearch size="2em" className='ml-3'/>
                 </div>
                 <input
                     type="text"
                     placeholder="Search..."
-                    class="w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-500"
                 />
             </div>
 
