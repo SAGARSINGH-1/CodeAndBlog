@@ -15,6 +15,7 @@ import AuthLayout from './AuthLayout.jsx'
 import AddPost from './components/pages/AddPost.jsx'
 import EditPost from './components/pages/EditPost.jsx'
 import Post from './components/pages/Post.jsx'
+import MyBlogs from './components/pages/MyBlogs.jsx'
 
 
 const router = createBrowserRouter([
@@ -89,6 +90,14 @@ const router = createBrowserRouter([
                         <UserBlog />
                     </AuthLayout>
                 ),
+            },
+            {
+                path: "/my-blogs",
+                element:(
+                    <AuthLayout authentication>
+                        <MyBlogs />
+                    </AuthLayout>
+                )
             },
             {
                 path: '*',
