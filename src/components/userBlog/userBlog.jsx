@@ -97,7 +97,6 @@ useEffect(() => {
         <div className='w-[45vw] h-[95vh] overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
             <Container>
                 <div className='posts'>
-                    {console.log(post)}
                     {post.slice().reverse().map((item) => (
                         <Post key={item.id}  {...item} />
                         ))}
