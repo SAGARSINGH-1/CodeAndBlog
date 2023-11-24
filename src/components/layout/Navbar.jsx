@@ -71,7 +71,7 @@ export default function Navbar({ onButtonClick }) {
                     {isDropdownOpen && (
                       <div className='absolute top-full w-[10vw] right-[-8vh] mt-1 bg-white border border-gray-200 rounded shadow-md text-center'>
                         {/* Your dropdown content */}
-                        <NavLink to={`/user=${userData.userData.name}`}><div className='p-3 hover:bg-gray-100'>Account</div></NavLink>
+                        <NavLink to={`/user/${userData.userData.name}`}><div className='p-3 hover:bg-gray-100'>Account</div></NavLink>
                         <NavLink to={`/my-blogs`}><div className='p-3 hover:bg-gray-100'>My Blogs</div></NavLink>
                         <NavLink to={'/setting'}><div className='p-3 hover:bg-gray-100'>Setting</div></NavLink>
                         <div className='p-3'><NavLink to='/'><LogoutBtn /></NavLink></div>
