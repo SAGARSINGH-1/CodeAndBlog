@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from './Button'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -30,6 +30,41 @@ export default function Navbar({ onButtonClick }) {
     setIsDropdownOpen((prev) => !prev);
   };
 
+  useEffect(() => {
+    // Retrieve the stored state from local storage
+    const storedDropdownState = localStorage.getItem('dropdownState');
+    setIsDropdownOpen(storedDropdownState === 'true');
+  }, []);
+
+  useEffect(() => {
+    // Store the current dropdown state in local storage
+    localStorage.setItem('dropdownState', isDropdownOpen.toString());
+  }, [isDropdownOpen]);
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+    setShowNav(true);
+  };
+
+  
+  useEffect(() => {
+    const handleResize = () => {
+      // Set ShowNav to true if the screen size is small
+      setShowNav(window.innerWidth <= 770); // Adjust the threshold as needed
+    };
+
+    // Initial check on component mount
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   return (
     <div>
@@ -39,13 +74,13 @@ export default function Navbar({ onButtonClick }) {
             <img className='h-7 max-w-max' src={isActive ? "../Logo.png" : "../Logo d.png"} alt="logo" />
           </div>
 
-          <div className={`link flex justify-center items-center w-[100%] ${ShowNav?"hidden":""}`}>
-            <ul className='flex-col gap-4 md:flex-row flex md:gap-10 text-base font-medium mt-2 poppins text-gray-500'>
-              <li className='hover:text-pink-400 cursor-pointer'> <NavLink to=''>Home</NavLink></li>
-              <li className='hover:text-pink-400 cursor-pointer'><NavLink to={'/blogs'}>Blogs</NavLink></li>
-              <li className='hover:text-pink-400 cursor-pointer'><NavLink to={'/about'}>About</NavLink></li>
-              <li className='hover:text-pink-400 cursor-pointer'><NavLink to={"/contact"}>Contact Us</NavLink></li>
-              <li className='hover:text-pink-400 cursor-pointer'><NavLink to={'/help'}>Help</NavLink></li>
+          <div className={`link md:flex justify-center items-center w-[100%] ${ShowNav ? 'sm:hidden' : 'sm:flex'} `}>
+          <ul className={`flex-col gap-4 md:relative md:top-0 md:bg-transparent md:p-0 md:flex-row flex md:gap-10 text-base font-medium mt-2 poppins text-gray-500 sm:absolute sm:bg-slate-50 sm:p-5 sm:top-10 sm:right-0`}>
+              <li className='hover:text-pink-400 cursor-pointer'> <NavLink to='' onClick={closeDropdown}>Home</NavLink></li>
+              <li className='hover:text-pink-400 cursor-pointer'><NavLink to={'/blogs'} onClick={closeDropdown}>Blogs</NavLink></li>
+              <li className='hover:text-pink-400 cursor-pointer'><NavLink to={'/about'} onClick={closeDropdown}>About</NavLink></li>
+              <li className='hover:text-pink-400 cursor-pointer'><NavLink to={"/contact"} onClick={closeDropdown}>Contact Us</NavLink></li>
+              <li className='hover:text-pink-400 cursor-pointer'><NavLink to={'/help'} onClick={closeDropdown}>Help</NavLink></li>
             </ul>
           </div>
 
@@ -60,20 +95,23 @@ export default function Navbar({ onButtonClick }) {
               </div>
               
             </div>
-              <IoReorderThree onClick={()=>{setShowNav(!ShowNav)}} className='cursor-pointer text-5xl absolute top-[1px] right-3 md:hidden'/>
 
+            <div>
+                <IoReorderThree onClick={()=>{setShowNav(!ShowNav)}} className='cursor-pointer text-5xl absolute top-[1px] right-3 md:hidden'/>
+            </div>
+             
             {/* Sign-up or Logout button */}
-            <div className={`link ml-[-20px] md:ml-4 flex justify-center items-center w-[100%] ${ShowNav?"hidden":""}`}>
+            <div className={`link ml-[-20px] md:ml-4 md:relative flex justify-center items-center sm:absolute sm:right-[-2rem]`}>
               {
                 authStatus ? (
                   <div className='relative'>
-                    <button className={`p-1 flex ${ShowNav?"hidden":""}`} onClick={toggleDropdown}><FaUserCircle size="2em" /><MdOutlineArrowDropDown className='mt-[.20rem] text-2xl'/></button>
+                    <button className={`p-1 md:flex `} onClick={toggleDropdown}><FaUserCircle size="2em" /><MdOutlineArrowDropDown className='mt-[.20rem] text-2xl'/></button>
                     {isDropdownOpen && (
-                      <div className='absolute top-full w-[10vw] right-[-8vh] mt-1 bg-white border border-gray-200 rounded shadow-md text-center'>
+                      <div className='absolute top-full md:w-[10vw] md:right-[-5vh] sm:right-0 sm:w-[20vw] mt-1 bg-white border border-gray-200 rounded shadow-md text-center'>
                         {/* Your dropdown content */}
-                        <NavLink to={`/user/${userData.userData.name}`}><div className='p-3 hover:bg-gray-100'>Account</div></NavLink>
-                        <NavLink to={`/my-blogs`}><div className='p-3 hover:bg-gray-100'>My Blogs</div></NavLink>
-                        <NavLink to={'/setting'}><div className='p-3 hover:bg-gray-100'>Setting</div></NavLink>
+                        <NavLink to={`/user/${userData.userData.name}`} onClick={closeDropdown}><div className='p-3 hover:bg-gray-100'>Account</div></NavLink>
+                        <NavLink to={`/my-blogs`}><div className='p-3 hover:bg-gray-100' onClick={closeDropdown}>My Blogs</div></NavLink>
+                        <NavLink to={'/setting'}><div className='p-3 hover:bg-gray-100' onClick={closeDropdown}>Setting</div></NavLink>
                         <div className='p-3'><NavLink to='/'><LogoutBtn /></NavLink></div>
                       </div>
                     )}
