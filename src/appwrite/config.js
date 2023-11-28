@@ -38,7 +38,7 @@ export class Service {
                 this.notify("Post created successfully!");
             }
         } catch (error) {
-            this.notifyer("An error occurred, Please try again!");
+           this.notifyer(`${error.message}`);
             throw error
         }
     }
@@ -60,7 +60,7 @@ export class Service {
                 this.notify("Post Updated successfully!");
             }
         } catch (error) {
-            this.notifyer("An error occurred, Please try again!");
+           this.notifyer(`${error.message}`);
             throw error
         }
     }
@@ -79,7 +79,7 @@ export class Service {
             }
             return result;
         } catch (error) {
-            this.notifyer("An error occurred, Please try again!");
+           this.notifyer(`${error.message}`);
             throw error
         }
     }

@@ -31,7 +31,7 @@ export class AuthService {
                 return userAccount;
             }
         } catch (error) {
-            this.notifyer("An error occurred. Please try again.");
+            this.notifyer(`${error.message}`);
             throw error;
         }
     }
@@ -44,7 +44,7 @@ export class AuthService {
             }
             return result;
         } catch (error) {
-            this.notifyer("An error occurred. Please try again.");
+            this.notifyer(`${error.message}`);
             throw error;
         }
     }
@@ -66,7 +66,7 @@ export class AuthService {
             }
             return result;
         } catch (error) {
-            this.notifyer("An error occurred. Please try again.");
+            this.notifyer(`${error.message}`);
             throw error;
         }
     }
