@@ -1,8 +1,12 @@
 import React from 'react'
 import Button from '../layout/Button'
 import { useSelector } from 'react-redux';
-import { FaFacebookF, FaLinkedin, FaUserSecret, FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF, FaLinkedin, FaUserSecret, FaXTwitter, FaLink } from "react-icons/fa6";
 import { BsGithub } from 'react-icons/bs';
+import { CiEdit } from "react-icons/ci";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default function Profile() {
     const userData = useSelector((state) => state.auth.userData.userData);
@@ -12,6 +16,60 @@ export default function Profile() {
     let phone = userData.phone;
     let password = userData.password;
     let status = userData.status;
+
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [inputText, setInputText] = useState('');
+
+    const handleEditClick = () => {
+        setIsEditing((prevIsEditing) => !prevIsEditing);
+    };
+
+    // User Links
+    const [Links, setLinks] = useState({
+        github: "",
+        twitter: "",
+        facebook: "",
+        linkedin: "",
+        random: "",
+      });
+
+    const handleSaveClick = () => {
+        // Update Links based on input text
+        const lowercaseInputText = inputText.toLowerCase();
+      
+        setLinks((prevLinks) => {
+          const updatedLinks = { ...prevLinks }; // Create a copy of the current state
+          if (lowercaseInputText.includes('github')) {
+            updatedLinks.github = inputText;
+          }
+      
+          else if (lowercaseInputText.includes('twitter')) {
+            updatedLinks.twitter = inputText;
+          }
+      
+          else if (lowercaseInputText.includes('linkedin')) {
+            updatedLinks.linkedin = inputText;
+          }
+      
+          else if (lowercaseInputText.includes('facebook')) {
+            updatedLinks.facebook = inputText;
+          }
+          else {
+            updatedLinks.random = inputText;
+          }
+      
+         
+      
+          return updatedLinks; // Return the updated state
+        });
+      
+        setInputText('');
+        setIsEditing(false);
+      };
+
+      console.log(Links.github)
+   
     
   return (
     <div>
@@ -31,20 +89,57 @@ export default function Profile() {
                     <div className='flex items-center justify-center'>
                         <h1 className='text-2xl text-center text-gray-500 font-semibold'>Status</h1><span className={`block w-4 h-4 rounded-full ml-3 mt-1  ${status ? 'bg-green-500' : 'bg-red-500'}`}></span>
                     </div>
+
                     <div className="cursor-pointer mt-5">
+                        <div className='flex justify-center mb-3'>
+                            <h3 className='text-gray-600 text-lg font-semibold'>Add Links </h3><span onClick={handleEditClick}><CiEdit size="1.3em" className="text-xl ml-2  hover:text-orange-500"/></span>
+                        </div>
+                        {isEditing && (
+                            <div className="absolute top-[40vh] p-3 flex flex-col">
+                                <input type="text"  className="p-3 w-[40vw] m-3 rounded-xl border-2 border-orange-400 focus:outline-none" value={inputText} onChange={(e) => setInputText(e.target.value)}/>
+                                <button className="bg-orange-500 hover:bg-orange-400 text-white w-[7vw] p-3 text-lg font-semibold mx-auto rounded-md" onClick={handleSaveClick}>Save</button>
+                            </div>
+                        )}
                             <div className="flex space-x-2">
-                                <li className="block">
-                                    <BsGithub size="1.3em" className="text-xl mr-3 hover:text-orange-500"/>
-                                </li>
-                                <li className="block">
-                                    <FaXTwitter size="1.3em" className="text-xl mr-3 hover:text-orange-500"/>
-                                </li>
-                                <li className="block">
-                                    <FaFacebookF size="1.3em" className="text-xl mr-3 hover:text-orange-500"/>
-                                </li>
-                                <li className="block">
-                                    <FaLinkedin size="1.3em" className="text-xl mr-3 hover:text-orange-500"/>
-                                </li>
+                                {Links.github && (
+                                     <NavLink to={Links.github} target="_blank" rel="noopener noreferrer">
+                                        <li className="block" >
+                                            <BsGithub size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
+                                        </li>
+                                    </NavLink>
+                                )}
+
+                                {Links.twitter && (
+                                    <NavLink to={Links.twitter} target="_blank" rel="noopener noreferrer">
+                                        <li className="block">
+                                            <FaXTwitter size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
+                                        </li>
+                                    </NavLink>
+                                )}
+
+                                {Links.facebook && (
+                                    <NavLink to={Links.facebook} target="_blank" rel="noopener noreferrer">
+                                        <li className="block">
+                                            <FaFacebookF size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
+                                        </li>
+                                    </NavLink>
+                                )}
+
+                                {Links.linkedin && (
+                                    <NavLink to={Links.linkedin} target="_blank" rel="noopener noreferrer">
+                                        <li className="block">
+                                            <FaLinkedin size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
+                                        </li>
+                                    </NavLink>
+                                )}
+
+                                {Links.random && (
+                                    <NavLink to={Links.random} target="_blank" rel="noopener noreferrer">
+                                        <li className="block">
+                                            <FaLink size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
+                                        </li>
+                                    </NavLink>
+                                )}
                             </div>
                     </div>
                 </div>
