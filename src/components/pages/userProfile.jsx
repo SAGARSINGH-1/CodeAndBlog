@@ -44,15 +44,15 @@ export default function Profile() {
             updatedLinks.github = inputText;
           }
       
-          if (lowercaseInputText.includes('twitter')) {
+          else if (lowercaseInputText.includes('twitter')) {
             updatedLinks.twitter = inputText;
           }
       
-          if (lowercaseInputText.includes('linkedin')) {
+          else if (lowercaseInputText.includes('linkedin')) {
             updatedLinks.linkedin = inputText;
           }
       
-          if (lowercaseInputText.includes('facebook')) {
+          else if (lowercaseInputText.includes('facebook')) {
             updatedLinks.facebook = inputText;
           }
           else {
