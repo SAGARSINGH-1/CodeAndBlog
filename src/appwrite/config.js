@@ -68,12 +68,12 @@ export class Service {
 
     async deletePost(slug) {
         try {
-            this.notify("Post Deleted successfully!");
             const result = await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
-            );
+                );
+                this.notify("Post Deleted successfully!");
              if (result) {
                 this.notify("Post created successfully!");
             }

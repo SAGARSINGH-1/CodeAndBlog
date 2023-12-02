@@ -80,23 +80,6 @@ function Post({ $id, title, featuredImage, name, content }) {
                             <h1>{title}</h1>
                         </div>
                         <div className='text-gray-500 text-sm'>
-                            {/* It show text written by user */}
-                            {/* {showMoreMap[item.id] ? (
-                                            <p>
-                                                {item.posttext}{' '}
-                                                {item.posttext.split(' ').length > 20 && (
-                                                    <span onClick={() => toggleShowMore(item.id)}  className='text-blue-500 cursor-pointer'>show less</span>
-                                                )}
-                                            </p>
-                                        ) : (
-                                            <p>
-                                                {item.posttext.split(' ').slice(0, 20).join(' ')}{' '}
-                                                {item.posttext.split(' ').length > 20 && (
-                                                    <span
-                                                    onClick={() => toggleShowMore(item.id)} className='text-blue-500 cursor-pointer'>... show more</span>
-                                                )}
-                                            </p>
-                                        )} */}
                             <p>{description}</p>
                         </div>
 

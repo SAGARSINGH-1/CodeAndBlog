@@ -5,15 +5,21 @@ import Container from '../container/Container'
 import PostForm from '../../postForm/PostForm'
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import Button from "../layout/Button";
 
 export default function Post() {
     const [post, setPost] = useState(null);
+    const [isAuthor, setIsAuthor] = useState(false);
     const { slug } = useParams();
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.auth.userData);
 
-    const isAuthor = post && userData ? post.userid === userData.$id : false;
+    useEffect(() => {
+        if (post && userData) {
+            setIsAuthor(userData ? post.name === userData.userData.name : false);
+        }
+    }, [post, userData]);
 
     useEffect(() => {
         if (slug) {
@@ -61,7 +67,7 @@ export default function Post() {
                 </div>
                 <div className="browser-css">
                     {parse(post.content)}
-                    </div>
+                </div>
             </Container>
         </div>
     ) : null;
