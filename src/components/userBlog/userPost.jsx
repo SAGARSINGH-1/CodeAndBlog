@@ -16,14 +16,6 @@ function Post({ $id, title, featuredImage, name, content }) {
 
     const description = parse(content);
 
-    // Show more
-    // const toggleShowMore = (itemId) => {
-    //     setShowMoreMap((prevShowMoreMap) => ({
-    //       ...prevShowMoreMap,
-    //       [itemId]: !prevShowMoreMap[itemId],
-    //     }));
-    //   };
-
     // for edit
     const userData = useSelector((state) => state.auth.userData.userData);
 
