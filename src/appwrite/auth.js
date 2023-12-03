@@ -8,9 +8,9 @@ export class AuthService {
     client = new Client();
     account;
 
-   notify = (message) => { toast.success(message, { position: "bottom-right", autoClose: 2000,});}
-   notifywar = (message) => { toast.console.warn();(message, { position: "bottom-right", autoClose: 2000,});}
-   notifyer  = (message) => { toast.error(message, { position: "bottom-right", autoClose: 2000,});}
+    notify = (message) => { toast.success(message, { position: "bottom-right", autoClose: 2000, }); }
+    notifywar = (message) => { toast.console.warn(); (message, { position: "bottom-right", autoClose: 2000, }); }
+    notifyer = (message) => { toast.error(message, { position: "bottom-right", autoClose: 2000, }); }
 
 
     constructor() {
@@ -53,7 +53,7 @@ export class AuthService {
         try {
             return await this.account.get();
         } catch (error) {
-            console.log("\n\nUser Not Registered yet please Signup \n\n\n",error);
+            console.log("\n\nUser Not Registered yet please Signup \n\n\n", error);
         }
         return null;
     }
@@ -70,10 +70,13 @@ export class AuthService {
             throw error;
         }
     }
-    
-    async googleauth(){
+
+    async googleauth() {
         try {
-            const result = this.account.createOAuth2Session('google', 'https://code-and-blog.vercel.app', 'https://code-and-blog.vercel.app');
+            const vercelAppUrl = 'https://your-vercel-app-name.vercel.app';
+
+            const result = this.account.createOAuth2Session('google', vercelAppUrl, vercelAppUrl);
+
             if (result) {
                 this.notify("Login successfully!");
             }
@@ -82,7 +85,7 @@ export class AuthService {
             this.notifyer(`${error.message}`);
             throw error;
         }
-    
+
     }
 
 }
