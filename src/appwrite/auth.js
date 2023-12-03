@@ -70,6 +70,20 @@ export class AuthService {
             throw error;
         }
     }
+    
+    async googleauth(){
+        try {
+            const result = this.account.createOAuth2Session('google', 'https://code-and-blog.vercel.app/home', 'https://code-and-blog.vercel.app/home');
+            if (result) {
+                this.notify("Login successfully!");
+            }
+            return result;
+        } catch (error) {
+            this.notifyer(`${error.message}`);
+            throw error;
+        }
+    
+    }
 
 }
 
