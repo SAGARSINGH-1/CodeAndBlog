@@ -73,7 +73,7 @@ export class AuthService {
     
     async googleauth(){
         try {
-            const result = this.account.createOAuth2Session('google', 'https://code-and-blog.vercel.app/home', 'https://code-and-blog.vercel.app/home');
+            const result = this.account.createOAuth2Session('google', 'https://code-and-blog.vercel.app', 'https://code-and-blog.vercel.app');
             if (result) {
                 this.notify("Login successfully!");
             }
