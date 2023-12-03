@@ -73,7 +73,7 @@ export class AuthService {
 
     async googleauth() {
         try {
-            const vercelAppUrl = 'https://your-vercel-app-name.vercel.app';
+            const vercelAppUrl = 'https://code-and-blog.vercel.app';
 
             const result = this.account.createOAuth2Session('google', vercelAppUrl, vercelAppUrl);
 
