@@ -120,14 +120,31 @@ export default function Signup() {
                   })}
                 />
               </div>
-              <NavLink onClick={googleauth}>
-                <Button className="rounded-2xl w-full" style={{ backgroundColor: '#4285F4', color: 'white' }}>
-                  Google
-                </Button>
-              </NavLink>
+
               <div className="mb-4">
                 <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">Sign Up</button>
               </div>
+
+              <div className="social-login-label relative mt-5 text-center">
+                <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold">
+                  or connect with
+                </span>
+                <div className="absolute top-1/2 left-0 right-0 border-t border-gray-300 mt-0.5"></div>
+              </div>
+
+              <NavLink onClick={googleauth}>
+                <button className="rounded-full w-full font-medium bg-white border border-gray-300 flex items-center justify-center p-3 shadow-sm hover:shadow-md my-5">
+                  <span className="mr-2">
+                    <img
+                      src="../search.png"
+                      alt="google"
+                      className="max-h-6 max-w-8 object-contain"
+                    />
+                  </span>
+                  Continue with Google
+                </button>
+              </NavLink>
+
             </form>
 
             <p className="text-center text-gray-600 text-sm"> Have an account? <NavLink className="text-indigo-500" to='/login'>Login</NavLink> </p>
@@ -139,3 +156,28 @@ export default function Signup() {
     </div>
   );
 }
+
+// .social-login .social-login-label::before {
+//   position: absolute;
+//   top: 50%;
+//   left: 0;
+//   margin-top: -0.5px;
+//   width: 100%;
+//   border-top: 1px solid var(--color-shade-medium);
+//   content: "";
+// }
+
+// .social-login .social-login-label {
+//   position: relative;
+//   margin: 30px 0 20px;
+//   color: #b7c9cc;
+//   text-align: center;
+// }
+
+// .social-login .label-text {
+//   position: relative;
+//   z-index: 1;
+//   display: inline-block;
+//   padding: 0 30px;
+//   background: #fff;
+// }
