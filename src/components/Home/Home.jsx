@@ -72,7 +72,7 @@ useEffect(() => {
           </div>
         </div>
 
-        <div>
+        <div className="lg:mt-20">
           <section>
             <div className="flex justify-center gap-40 text-center p-10 mt-10 mb-10 font-semibold text-xl bg-orange-400 text-white">
               <div className="div-1">
