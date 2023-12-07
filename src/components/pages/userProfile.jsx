@@ -55,7 +55,7 @@ export default function Profile() {
           else if (lowercaseInputText.includes('facebook')) {
             updatedLinks.facebook = inputText;
           }
-          else { 
+          else {
             updatedLinks.random = inputText;
           }
       
