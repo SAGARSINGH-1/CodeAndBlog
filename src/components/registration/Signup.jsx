@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import LoadingBar from 'react-top-loading-bar'
 import Button from '../layout/Button';
+import { FcGoogle } from "react-icons/fc";
+
 
 
 export default function Signup() {
@@ -120,14 +122,26 @@ export default function Signup() {
                   })}
                 />
               </div>
-              <NavLink onClick={googleauth}>
-                <Button className="rounded-2xl w-full" style={{ backgroundColor: '#4285F4', color: 'white' }}>
-                  Google
-                </Button>
-              </NavLink>
+
               <div className="mb-4">
                 <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">Sign Up</button>
               </div>
+
+              <div className="social-login-label relative mt-4 text-center">
+                <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold">
+                  or connect with
+                </span>
+                <div className="absolute top-1/2 left-0 right-0 border-t border-gray-300 mt-0.5"></div>
+              </div>
+
+          
+              <NavLink onClick={googleauth}>
+                <button className="rounded-full w-full bg-white border border-gray-300 flex items-center justify-center p-3 shadow-sm hover:shadow-md my-3 font-semibold">
+                  <span className="mr-2"><FcGoogle size="1.5em"/></span>
+                  Continue with Google
+                </button>
+              </NavLink>
+              
             </form>
 
             <p className="text-center text-gray-600 text-sm"> Have an account? <NavLink className="text-indigo-500" to='/login'>Login</NavLink> </p>
