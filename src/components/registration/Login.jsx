@@ -94,36 +94,14 @@ useEffect(() => {
               })}
             />
           </div>
-
-            <div className="mb-4">
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
-              >
-                Login
-              </button>
-            </div>
-
-            <div className="social-login-label relative mt-5 text-center">
-                <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold">
-                  or connect with
-                </span>
-                <div className="absolute top-1/2 left-0 right-0 border-t border-gray-300 mt-0.5"></div>
-              </div>
-
-            <NavLink >
-                <button className="rounded-full w-full font-medium bg-white border border-gray-300 flex items-center justify-center p-3 shadow-sm hover:shadow-md my-5">
-                  <span className="mr-2">
-                    <img
-                      src="../search.png"
-                      alt="google"
-                      className="max-h-6 max-w-8 object-contain"
-                    />
-                  </span>
-                  Continue with Google
-                </button>
-              </NavLink>
-
+          <div className="mb-4">
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+            >
+              Login
+            </button>
+          </div>
         </form>
         <p className="text-center text-gray-600 text-sm">
           Don't have an account? <NavLink className="text-indigo-500" to='/signup'>Signup</NavLink>

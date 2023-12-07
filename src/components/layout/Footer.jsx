@@ -1,7 +1,6 @@
 import React from "react";
 import { BsGithub } from 'react-icons/bs';
 import { FaXTwitter, FaFacebookF, FaLinkedin } from 'react-icons/fa6';
-import { NavLink } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -19,18 +18,30 @@ export default function Footer() {
             <div className="w-full sm:w-1/2 md:w-1/4 px-10 mb-8">
               <h4 className="text-lg font-semibold mb-2">Menu</h4>
               <ul>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to=''>Home</NavLink></li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={'/about'}>About</NavLink></li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={"/contact"}>Contact</NavLink></li>
+                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
+                  Home
+                </li>
+                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
+                  About
+                </li>
+                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
+                  Contact
+                </li>
               </ul>
             </div>
 
             <div className="w-full sm:w-1/2 md:w-1/4 px-10 mb-8">
               <h4 className="text-lg font-semibold mb-2">Blogs</h4>
               <ul>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={'/blogs'}>Food Blog</NavLink></li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={'/blogs'}>Tech Blog</NavLink></li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={'/blogs'}>Traveling Blog</NavLink></li>
+                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
+                  Food Blog
+                </li>
+                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
+                  Tech Blog
+                </li>
+                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
+                  Traveling Blog
+                </li>
               </ul>
             </div>
 
