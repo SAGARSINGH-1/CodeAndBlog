@@ -43,17 +43,16 @@ export default function PostForm({ post }) {
                 console.log("You are not the owner of this post");
             }
                 
-
         } else {
             const file = await appwriteService.uploadFile(data.image[0]);
 
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
-                const dbPost = await appwriteService.createPost({ ...data, userid: userData.$id,name });
-
+                const dbPost = await appwriteService.createPost({ ...data, userid: userData.userData.$id,name });
+                console.log(dbPost);
                 if (dbPost) {
-                    navigate(`/post/${dbPost.$id}`);
+                    navigate(`/post/${dbPost}`);
                 }
             }
         }

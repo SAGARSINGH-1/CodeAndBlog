@@ -36,6 +36,7 @@ export class Service {
             );
             if (result) {
                 this.notify("Post created successfully!");
+                return title;
             }
         } catch (error) {
            this.notifyer(`${error.message}`);
