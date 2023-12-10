@@ -6,6 +6,7 @@ import PostForm from '../../postForm/PostForm'
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import Button from "../layout/Button";
+import Comment from "./addComment";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -40,7 +41,7 @@ export default function Post() {
     };
 
     return post ? (
-        <div className="py-8">
+        <div className="py-8 px-10">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
@@ -65,9 +66,11 @@ export default function Post() {
                 <div className="w-full mb-6">
                     <h1 className="text-2xl font-bold">{post.title}</h1>
                 </div>
-                <div className="browser-css">
+                <div className="browser-css mb-5">
                     {parse(post.content)}
                 </div>
+
+                <Comment/>
             </Container>
         </div>
     ) : null;
