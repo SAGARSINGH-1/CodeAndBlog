@@ -6,7 +6,7 @@ import PostForm from '../../postForm/PostForm'
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import Button from "../layout/Button";
-import Comment from "./addComment";
+import Comment from "./AddComment";
 
 export default function Post() {
     const [post, setPost] = useState(null);
