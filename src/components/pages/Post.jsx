@@ -15,10 +15,15 @@ export default function Post() {
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.auth.userData);
-
+    const [comments, setComments] = useState([]);
     useEffect(() => {
         if (post && userData) {
             setIsAuthor(userData ? post.name === userData.userData.name : false);
+            appwriteService.getComments(post?.postid).then((comments) => {
+                if (comments) {
+                    setComments(comments.documents);
+                }
+            });
         }
     }, [post, userData]);
 
@@ -39,6 +44,7 @@ export default function Post() {
             }
         });
     };
+
 
     return post ? (
         <div className="py-8 px-10">
@@ -70,7 +76,18 @@ export default function Post() {
                     {parse(post.content)}
                 </div>
 
-                <Comment/>
+                <div className="border-2 p-2 mb-5">
+                    <h1 className="text-2xl font-bold">Comments</h1>
+                    {comments?.map((comment) => (
+                        <div className="border-2 p-2" key={comment.$id}>
+                            <h1 className="text-2xl font-bold">{comment.name}</h1>
+                            <p>{comment.comment}</p>
+                            {/* Additional content */}
+                        </div>
+                    ))}
+                </div>
+
+                <Comment postid={post.postid} />
             </Container>
         </div>
     ) : null;
