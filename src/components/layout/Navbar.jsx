@@ -107,7 +107,7 @@ export default function Navbar({ onButtonClick }) {
                   <div className='relative'>
                     <button className={`p-1 md:flex `} onClick={toggleDropdown}><FaUserCircle size="2em" /><MdOutlineArrowDropDown className='mt-[.20rem] text-2xl'/></button>
                     {isDropdownOpen && (
-                      <div className='absolute top-full md:w-[10vw] md:right-[-5vh] sm:right-0 sm:w-[20vw] mt-1 bg-white border border-gray-200 rounded shadow-md text-center'>
+                      <div className='absolute z-10 top-full md:w-[10vw] md:right-[-5vh] sm:right-0 sm:w-[20vw] mt-1 bg-white border border-gray-200 rounded shadow-md text-center'>
                         {/* Your dropdown content */}
                         <NavLink to={`/user/${userData.userData?.name}`} onClick={closeDropdown}><div className='p-3 hover:bg-gray-100'>Account</div></NavLink>
                         <NavLink to={`/my-blogs`}><div className='p-3 hover:bg-gray-100' onClick={closeDropdown}>My Blogs</div></NavLink>
