@@ -8,12 +8,14 @@ import { useSelector } from "react-redux";
 import Button from "../layout/Button";
 import Comment from "./AddComment";
 import { LuRefreshCcw } from "react-icons/lu";
+import { FaUserCircle } from "react-icons/fa";
 
 export default function Post() {
     const [post, setPost] = useState(null);
     const [isAuthor, setIsAuthor] = useState(false);
     const { slug } = useParams();
     const navigate = useNavigate();
+    const [refresh, setRefresh] = useState(false);
 
     const userData = useSelector((state) => state.auth.userData);
     const [comments, setComments] = useState([]);
@@ -43,10 +45,12 @@ export default function Post() {
     };
 
     let refreshcomment = () => {
+        setRefresh(true)
         appwriteService.getComments(post?.postid).then((comments) => {
             if (comments) {
                 setComments(comments.documents);
             }
+            setRefresh(false)
         });
     }
 
@@ -58,7 +62,7 @@ export default function Post() {
                     <div className="flex flex-col mt-5">
                         <div className="flex m-3 ml-5">
                             <div className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
-                                <img src="https://placekitten.com/100/100" alt="User Profile" className="w-full h-full object-cover" />
+                                <FaUserCircle className="w-full h-full object-cover" />
                             </div>
                             <div className="text-2xl font-bold">{post.name}</div>
                         </div>
@@ -98,7 +102,7 @@ export default function Post() {
                     <div className="p-2">
                         <div className="social-login-label relative">
                             <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold text-4xl m-5">Comments</span>
-                                <div className="absolute mt-5 top-0 right-0 mr-3 z-[1] bg-white float-right p-3"><button onClick={refreshcomment}><LuRefreshCcw size="1.5em"/></button></div>
+                                <div className="absolute mt-5 top-0 right-0 mr-3 z-[1] bg-white float-right p-3"><button onClick={refreshcomment}><LuRefreshCcw className={`${refresh?"rotate-180  transition-all ease-out":""}`} size="1.5em"/></button></div>
                                 <div className="absolute top-1/2 left-0 right-0 border-t-2 border-gray-300 mt-0.5"></div>
                         </div>
 
@@ -106,7 +110,7 @@ export default function Post() {
                             {comments?.map((comment) => (
                                 <div className="flex items-start border-2 p-2 pl-5 my-3 rounded-2xl bg-slate-50" key={comment.$id}>
                                     <div className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
-                                        <img src="https://placekitten.com/100/100" alt="User Profile" className="w-full h-full object-cover" />
+                                        <FaUserCircle className="w-full h-full object-cover" />
                                     </div>
 
                                     {/* Comment Content */}
