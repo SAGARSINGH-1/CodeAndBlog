@@ -28,7 +28,7 @@ const Comment = ({ postid, title }) => {
   }
 
   return (
-    <div className="comment h-[40vh] bg-white border border-gray-300 p-6 mb-6 rounded-lg shadow-lg">
+    <div className="comment bg-white border border-gray-300 p-6 mb-6 rounded-lg shadow-lg">
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Comment Title</h3>
       {/* Populate this div with comment content and replies */}
       <div className="mt-4">
@@ -44,8 +44,11 @@ const Comment = ({ postid, title }) => {
           placeholder="Write your reply here..."
           name="comment"
         />
-        
-        <Button type="submit" className="float-right m-3 " > Post Reply </Button>
+     
+     <div className="flex justify-end">
+      <Button type="submit" className="m-3">Post Reply</Button>
+    </div>
+     
       </form>
     </div>
   );
