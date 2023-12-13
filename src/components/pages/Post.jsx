@@ -98,8 +98,8 @@ export default function Post() {
                     <div className="p-2">
                         <div className="social-login-label relative">
                             <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold text-4xl m-5">Comments</span>
-                            <div className="relative mt-5 mr-3 z-10 bg-white float-right p-3"><button onClick={refreshcomment}><LuRefreshCcw size="1.5em" /></button></div>
-                            <div className="absolute top-1/2 left-0 right-0 border-t-2 border-gray-300 mt-0.5"></div>
+                                <div className="absolute mt-5 top-0 right-0 mr-3 z-[1] bg-white float-right p-3"><button onClick={refreshcomment}><LuRefreshCcw size="1.5em"/></button></div>
+                                <div className="absolute top-1/2 left-0 right-0 border-t-2 border-gray-300 mt-0.5"></div>
                         </div>
 
                         <div className=" w-[40vw] h-[90vh] overflow-auto scrollbar-none no-scrollbar">
