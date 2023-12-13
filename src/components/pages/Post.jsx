@@ -66,7 +66,7 @@ export default function Post() {
                             </div>
                             <div className="text-2xl font-bold">{post.name}</div>
                         </div>
-                        
+
                         <div className="pl-5 mt-3">
                             <div className=" mb-6">
                                 <h1 className="text-2xl font-bold">{post.title}</h1>
@@ -75,7 +75,7 @@ export default function Post() {
                                 {parse(post.content)}
                             </div>
                         </div>
-                        
+
                         <div className="w-[50vw] flex justify-center mb-4 relative border rounded-xl p-2 ">
                             <img
                                 src={appwriteService.getFilePreview(post.featuredImage)}
@@ -102,12 +102,12 @@ export default function Post() {
                     <div className="p-2">
                         <div className="social-login-label relative">
                             <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold text-4xl m-5">Comments</span>
-                                <div className="absolute mt-5 top-0 right-0 mr-3 z-[1] bg-white float-right p-3"><button onClick={refreshcomment}><LuRefreshCcw className={`${refresh?"rotate-180  transition-all ease-out":""}`} size="1.5em"/></button></div>
-                                <div className="absolute top-1/2 left-0 right-0 border-t-2 border-gray-300 mt-0.5"></div>
+                            <div className="absolute mt-5 top-0 right-0 mr-3 z-[1] bg-white float-right p-3"><button onClick={refreshcomment}><LuRefreshCcw className={`${refresh ? "rotate-180  transition-all ease-out" : ""}`} size="1.5em" /></button></div>
+                            <div className="absolute top-1/2 left-0 right-0 border-t-2 border-gray-300 mt-0.5"></div>
                         </div>
 
                         <div className=" w-[40vw] h-[90vh] overflow-auto scrollbar-none no-scrollbar">
-                            {comments?.map((comment) => (
+                            {comments.length>0 ? comments.map((comment) => (
                                 <div className="flex items-start border-2 p-2 pl-5 my-3 rounded-2xl bg-slate-50" key={comment.$id}>
                                     <div className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
                                         <FaUserCircle className="w-full h-full object-cover" />
@@ -120,7 +120,11 @@ export default function Post() {
                                         {/* Additional content */}
                                     </div>
                                 </div>
-                            ))}
+                            )) : 
+                                <div className="flex justify-center items-center">
+                                    <p className="text-xl">No Comments yet be First one</p>
+                                </div>
+                            }
                         </div>
 
                     </div>
