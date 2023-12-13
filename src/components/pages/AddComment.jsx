@@ -1,6 +1,7 @@
 import appwriteService from "../../appwrite/config";
 import { useSelector } from "react-redux";
 import React, { useState } from 'react';
+import Button from "../layout/Button";
 
 const Comment = ({ postid, title }) => {
   const userData = useSelector((state) => state.auth.userData);
@@ -27,7 +28,7 @@ const Comment = ({ postid, title }) => {
   }
 
   return (
-    <div className="comment bg-white border border-gray-300 p-6 mb-6 rounded-lg shadow-lg">
+    <div className="comment h-[40vh] bg-white border border-gray-300 p-6 mb-6 rounded-lg shadow-lg">
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Comment Title</h3>
       {/* Populate this div with comment content and replies */}
       <div className="mt-4">
@@ -38,17 +39,13 @@ const Comment = ({ postid, title }) => {
         <textarea
           value={replyText}
           onChange={(e) => setReplyText(e.target.value)}
-          className="w-full border border-gray-300 p-3 rounded-md focus:outline-none"
+          className="w-full border border-gray-300 p-3 rounded-md focus:outline-none resize-none"
           rows="3"
           placeholder="Write your reply here..."
           name="comment"
         />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white rounded-full px-6 py-3 mt-4 hover:bg-blue-700 focus:outline-none"
-        >
-          Post Reply
-        </button>
+        
+        <Button type="submit" className="float-right m-3 " > Post Reply </Button>
       </form>
     </div>
   );
