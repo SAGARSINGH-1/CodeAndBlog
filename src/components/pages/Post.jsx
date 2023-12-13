@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../../appwrite/config";
 import Container from '../container/Container'
 import PostForm from '../../postForm/PostForm'
@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import Button from "../layout/Button";
 import Comment from "./AddComment";
+import { LuRefreshCcw } from "react-icons/lu";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -19,11 +20,7 @@ export default function Post() {
     useEffect(() => {
         if (post && userData) {
             setIsAuthor(userData ? post.name === userData.userData.name : false);
-            appwriteService.getComments(post?.postid).then((comments) => {
-                if (comments) {
-                    setComments(comments.documents);
-                }
-            });
+            refreshcomment();
         }
     }, [post, userData]);
 
@@ -45,46 +42,85 @@ export default function Post() {
         });
     };
 
+    let refreshcomment = () => {
+        appwriteService.getComments(post?.postid).then((comments) => {
+            if (comments) {
+                setComments(comments.documents);
+            }
+        });
+    }
+
 
     return post ? (
         <div className="py-8 px-10">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-                    <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
-                        alt={post.title}
-                        className="rounded-xl"
-                    />
-
-                    {isAuthor && (
-                        <div className="absolute right-6 top-6">
-                            <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
-                                    Edit
-                                </Button>
-                            </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
-                                Delete
-                            </Button>
+                <div className="flex justify-between gap-5">
+                    <div className="flex flex-col mt-5">
+                        <div className="flex m-3 ml-5">
+                            <div className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
+                                <img src="https://placekitten.com/100/100" alt="User Profile" className="w-full h-full object-cover" />
+                            </div>
+                            <div className="text-2xl font-bold">{post.name}</div>
                         </div>
-                    )}
-                </div>
-                <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
-                </div>
-                <div className="browser-css mb-5">
-                    {parse(post.content)}
-                </div>
+                        
+                        
+                        <div className="w-[50vw] flex justify-center mb-4 relative border rounded-xl p-2 ">
+                            <img
+                                src={appwriteService.getFilePreview(post.featuredImage)}
+                                alt={post.title}
+                                className="rounded-xl"
+                            />
 
-                <div className="border-2 p-2 mb-5">
-                    <h1 className="text-2xl font-bold">Comments</h1>
-                    {comments?.map((comment) => (
-                        <div className="border-2 p-2" key={comment.$id}>
-                            <h1 className="text-2xl font-bold">{comment.name}</h1>
-                            <p>{comment.comment}</p>
-                            {/* Additional content */}
+                            {isAuthor && (
+                                <div className="absolute right-6 top-6">
+                                    <Link to={`/edit-post/${post.$id}`}>
+                                        <Button bgColor="bg-green-500" className="mr-3">
+                                            Edit
+                                        </Button>
+                                    </Link>
+                                    <Button bgColor="bg-red-500" onClick={deletePost}>
+                                        Delete
+                                    </Button>
+                                </div>
+                            )}
                         </div>
-                    ))}
+
+                        <div className=" pl-5">
+                            <div className=" mb-6">
+                                <h1 className="text-2xl font-bold">{post.title}</h1>
+                            </div>
+                            <div className="browser-css mb-5">
+                                {parse(post.content)}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="p-2">
+                        <div className="social-login-label relative">
+                            <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold text-4xl m-5">Comments</span>
+                            <div className="relative mt-5 mr-3 z-10 bg-white float-right p-3"><button onClick={refreshcomment}><LuRefreshCcw size="1.5em" /></button></div>
+                            <div className="absolute top-1/2 left-0 right-0 border-t-2 border-gray-300 mt-0.5"></div>
+                        </div>
+
+                        <div className=" w-[40vw] h-[90vh] overflow-auto scrollbar-none no-scrollbar">
+                            {comments?.map((comment) => (
+                                <div className="flex items-start border-2 p-2 pl-5 my-3 rounded-2xl bg-slate-50" key={comment.$id}>
+                                    <div className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
+                                        <img src="https://placekitten.com/100/100" alt="User Profile" className="w-full h-full object-cover" />
+                                    </div>
+
+                                    {/* Comment Content */}
+                                    <div className="ml-3">
+                                        <h1 className="text-lg font-medium">{comment.name}</h1>
+                                        <p className="text-gray-500 text-base">{comment.comment}</p>
+                                        {/* Additional content */}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                    </div>
                 </div>
 
                 <Comment postid={post.postid} />
