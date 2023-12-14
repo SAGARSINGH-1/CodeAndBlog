@@ -36,8 +36,7 @@ function App() {
     setIsActive(isActive);
   };
 
-
-
+  
   // top Loader
   const [isContentLoaded, setContentLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
