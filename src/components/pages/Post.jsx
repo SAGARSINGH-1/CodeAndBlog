@@ -9,6 +9,8 @@ import Button from "../layout/Button";
 import Comment from "./AddComment";
 import { LuRefreshCcw } from "react-icons/lu";
 import { FaUserCircle } from "react-icons/fa";
+import { FaArrowLeftLong } from "react-icons/fa6";
+
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -60,6 +62,7 @@ export default function Post() {
             <Container>
                 <div className="flex justify-between gap-5">
                     <div className="flex flex-col mt-5">
+                        <div className="absolute top-16 left-5 p-3 bg-black rounded-full "><NavLink to = "/blogs"><button className="text-slate-100 p-1"><FaArrowLeftLong size="1em" /></button></NavLink></div>
                         <div className="flex m-3 ml-5">
                             <div className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
                                 <FaUserCircle className="w-full h-full object-cover" />
