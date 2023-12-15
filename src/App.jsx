@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar'
 import {AiOutlineStar, AiFillGithub} from 'react-icons/ai'
+import LoadingComponent from '../src/components/layout/Loader.jsx';
 
 
 
@@ -81,9 +82,9 @@ function App() {
         <CreatePost/>
         <Footer />
       </div>
-      ) : (<LoadingBar color='#ff7c05' progress={progress} height = {3} onLoaderFinished={() => setProgress(0)}/>)}
+      ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
       
-      {!isContentLoaded && <p className="text-center text-gray-500 mt-5 absolute top-[40%]">Loading...</p>}
+      
       <div className='absolute-0 right-0'>
             <ToastContainer />
         </div>

@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import LoadingBar from 'react-top-loading-bar'
 import Button from '../layout/Button';
 import { FcGoogle } from "react-icons/fc";
+import LoadingComponent from '../layout/Loader';
 
 
 
@@ -147,9 +148,8 @@ export default function Signup() {
             <p className="text-center text-gray-600 text-sm"> Have an account? <NavLink className="text-indigo-500" to='/login'>Login</NavLink> </p>
           </div>
         </div>
-      ) : (<LoadingBar color='#ff7c05' progress={progress} height={3} onLoaderFinished={() => setProgress(0)} />)}
+      ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
 
-      {!isContentLoaded && <p className="text-center text-gray-500 mt-5 absolute top-[40%]">Loading...</p>}
     </div>
   );
 }
