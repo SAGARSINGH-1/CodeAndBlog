@@ -8,7 +8,7 @@ const LoadingComponent = ({ isContentLoaded, progress, setProgress }) => {
         ""
       ) : (
         <div>
-            <LoadingBar color='#fe5a1d' progress={progress} height={3} onLoaderFinished={() => setProgress(0)} />
+            <LoadingBar color='#666699 ' progress={progress} height={3} onLoaderFinished={() => setProgress(0)} />
             <p className="text-center text-gray-500 mt-5 absolute top-[40%]">Loading...</p>
         </div>
       
