@@ -61,8 +61,8 @@ export default function Post() {
         <div className="py-8 px-10">
             <Container>
                 <div className="flex justify-between gap-5">
-                    <div className="flex flex-col mt-5">
-                        <div className="absolute top-16 left-5 p-3 bg-[whitesmoke] rounded-full "><NavLink to = "/blogs"><button className="text-black p-1 hover:translate-x-[-3px] transition-all ease-in-out"><FaArrowLeftLong size="1em" /></button></NavLink></div>
+                    <div className="flex flex-col">
+                        <div className="relative h-[55px]"><NavLink to = "/blogs"><button className="absolute text-black bg-[whitesmoke] rounded-full p-4 hover:translate-x-[-3px] transition-all ease-in-out"><FaArrowLeftLong size="1em" /></button></NavLink></div>
                         <div className="flex m-3 ml-5">
                             <div className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
                                 <FaUserCircle className="w-full h-full object-cover" />
