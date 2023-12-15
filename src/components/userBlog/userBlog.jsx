@@ -8,6 +8,7 @@ import Post from './userPost';
 import Container from '../container/Container';
 import appwriteService from "../../appwrite/config";
 import LoadingBar from 'react-top-loading-bar'
+import LoadingComponent from '../layout/Loader';
 
 
 export default function UserBlog() {
@@ -145,9 +146,8 @@ useEffect(() => {
         </div>
 
       </div>
-       ) : (<LoadingBar color='#ff7c05' progress={progress} height = {3} onLoaderFinished={() => setProgress(0)}/>)}
+       ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
 
-       {!isContentLoaded && <p className="text-center text-gray-500 mt-5 absolute top-[40%]">Loading...</p>}
     </div>
   )
 }

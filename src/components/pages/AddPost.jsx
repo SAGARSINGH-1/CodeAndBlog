@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Container from '../container/Container'
 import PostForm from '../../postForm/PostForm'
 import LoadingBar from 'react-top-loading-bar'
+import LoadingComponent from '../layout/Loader';
 
 function AddPost() {
 
@@ -35,9 +36,9 @@ useEffect(() => {
         <Container>
             <PostForm />
         </Container>
-         ) : (<LoadingBar color='#ff7c05' progress={progress} height = {3} onLoaderFinished={() => setProgress(0)}/>)}
+         ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
 
-         {!isContentLoaded && <p className="text-center text-gray-500 mt-5 absolute top-[40%]">Loading...</p>}
+        
     </div>
   )
 }
