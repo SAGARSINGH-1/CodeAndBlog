@@ -37,8 +37,6 @@ useEffect(() => {
             <PostForm />
         </Container>
          ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
-
-        
     </div>
   )
 }

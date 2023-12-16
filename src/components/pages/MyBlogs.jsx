@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Container from '../container/Container';
 import LoadingComponent from '../layout/Loader';
+import { NavLink } from 'react-router-dom';
 
 function MyBlogs() {
     const userData = useSelector((state) => state.auth.userData);
@@ -46,18 +47,24 @@ function MyBlogs() {
         <div>
             {isContentLoaded ? (
                 <div>
-                    <Container>
-                        <div className=' p-3 m-10'>
-                            <div className='posts flex gap-10 flex-wrap'>
-                                {mypost.map((post) => (
-                                    <div className='bg-slate-100 rounded-lg w-[25vw]'>
-                                        <UserPost key={post.id} {...post} />
-                                    </div> 
-                                ))}
-                            </div>
+                    {mypost.length === 0 ? (
+                       <div className='flex justify-center items-center h-[70vh]'>
+                            <p className="text-center font-semibold text-2xl text-gray-500 top-[40%]">You Didn't Post Anything Yet! <NavLink to={'/add-post'}><span className='text-orange-400'>Post Now</span></NavLink> </p>
                         </div>
-                    
-                    </Container>
+                       
+                        ) : (
+                        <Container>
+                            <div className='p-3 m-10'>
+                                <div className='posts grid gap-10 grid-cols-3'>
+                                    {mypost.map((post) => (
+                                        <div key={post.id} className='rounded-lg'>
+                                            <UserPost {...post} />
+                                        </div> 
+                                    ))}
+                                </div>
+                            </div>
+                        </Container>
+                    )}
                 </div>
             ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
         </div>
