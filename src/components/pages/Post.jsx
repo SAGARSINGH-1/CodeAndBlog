@@ -10,6 +10,7 @@ import Comment from "./AddComment";
 import { LuRefreshCcw } from "react-icons/lu";
 import { FaUserCircle } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import LoadingComponent from "../layout/Loader";
 
 
 export default function Post() {
@@ -56,8 +57,34 @@ export default function Post() {
         });
     }
 
+    // top Loader
+  const [isContentLoaded, setContentLoaded] = useState(false);
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setContentLoaded(true);
+    }, 2000);
+
+    const intervalId = setInterval(() => {
+      setProgress((prevProgress) => {
+        const randomIncrement = Math.floor(Math.random() * 50) + 1;
+        const newProgress = Math.min(prevProgress + randomIncrement, 100);
+        return newProgress;
+      });
+    }, 1000);
+
+    // Clean up the timeout and interval when the component unmounts
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
+  }, []);
+
+
 
     return post ? (
+        <div>
+        {isContentLoaded ? (
         <div className="py-8 px-10">
             <Container>
                 <div className="flex justify-between gap-5">
@@ -135,6 +162,8 @@ export default function Post() {
 
                 <Comment postid={post.postid} />
             </Container>
+        </div>
+        ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
         </div>
     ) : null;
 }

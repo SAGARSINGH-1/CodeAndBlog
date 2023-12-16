@@ -44,7 +44,7 @@ function Post({ $id, title, featuredImage, name, content }) {
 
     return (
 
-        <div key={$id} className='Category bg-slate-100 p-3 hover:bg-slate-200 cursor-pointer transition duration-300 mb-3'>
+        <div key={$id} className='Category bg-slate-100 p-3 hover:bg-slate-200 rounded-lg cursor-pointer transition duration-300 mb-3'>
             <Link to={`/post/${$id}`}>
                 <div className='user flex justify-between items-center'>
                     <div className='flex flex-row items-center'>
@@ -77,7 +77,7 @@ function Post({ $id, title, featuredImage, name, content }) {
 
                     </div>
                     <div className='p-5 mx-auto'>
-                        <img className="w-full h-full object-cover rounded-lg bg-white" src={appwriteService.getFilePreview(featuredImage)} alt="img" />
+                        <img className="w-[30vw] h-full object-cover rounded-lg bg-white" src={appwriteService.getFilePreview(featuredImage)} alt="img" />
                     </div>
                 </div>
 
