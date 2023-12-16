@@ -1,4 +1,4 @@
-import React from 'react';
+
 import LoadingBar from 'react-top-loading-bar'
 
 const LoadingComponent = ({ isContentLoaded, progress, setProgress }) => {
