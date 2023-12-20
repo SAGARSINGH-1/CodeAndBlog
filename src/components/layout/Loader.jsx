@@ -1,4 +1,4 @@
-
+import HashLoader from "react-spinners/HashLoader"; 
 import LoadingBar from 'react-top-loading-bar'
 
 const LoadingComponent = ({ isContentLoaded, progress, setProgress }) => {
@@ -10,7 +10,7 @@ const LoadingComponent = ({ isContentLoaded, progress, setProgress }) => {
         <div>
             <LoadingBar color='#666699 ' progress={progress} height={3} onLoaderFinished={() => setProgress(0)} />
             <div className='flex justify-center items-center h-[70vh]'>
-              <p className="font-bold text-center text-gray-500 top-[40%]">Loading...</p>
+              <HashLoader color="#f97316" />
             </div>
         </div>
       
