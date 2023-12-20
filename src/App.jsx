@@ -76,7 +76,7 @@ function App() {
           </div>
         </div>
         <Navbar onButtonClick={handleButtonClick}/>
-        <main>
+        <main className='min-h-screen'>
         <Outlet />
         </main>
         <CreatePost/>
