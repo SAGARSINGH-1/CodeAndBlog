@@ -49,7 +49,7 @@ function MyBlogs() {
                 <div>
                     {mypost.length === 0 ? (
                        <div className='flex justify-center items-center h-[70vh]'>
-                            <p className="text-center font-semibold text-2xl text-gray-500 top-[40%]">You Didn't Post Anything Yet! <NavLink to={'/add-post'}><span className='text-orange-400'>Post Now</span></NavLink> </p>
+                            <p className="text-center font-semibold text-2xl text-gray-500 top-[40%]">You Didn't Post Anything Yet! <NavLink to={'/add-post'}><span className='text-orange-400 underline underline-offset-4'>Post Now</span></NavLink> </p>
                         </div>
                        
                         ) : (
