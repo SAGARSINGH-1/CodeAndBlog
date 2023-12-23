@@ -7,6 +7,7 @@ import { CiEdit } from "react-icons/ci";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import MyBlogs from './MyBlogs';
 
 export default function Profile() {
     const userData = useSelector((state) => state.auth.userData.userData);
@@ -25,6 +26,11 @@ export default function Profile() {
         setIsEditing((prevIsEditing) => !prevIsEditing);
     };
 
+    const [click, setClick] = useState(false);
+    const handleClick = () => {
+        setClick((prevClick) => !prevClick);            // it is used for toggling
+    };
+
     // User Links
     const [Links, setLinks] = useState({
         github: "",
@@ -32,150 +38,212 @@ export default function Profile() {
         facebook: "",
         linkedin: "",
         random: "",
-      });
+    });
 
     const handleSaveClick = () => {
         // Update Links based on input text
         const lowercaseInputText = inputText.toLowerCase();
-      
+
         setLinks((prevLinks) => {
-          const updatedLinks = { ...prevLinks }; // Create a copy of the current state
-          if (lowercaseInputText.includes('github')) {
-            updatedLinks.github = inputText;
-          }
-      
-          else if (lowercaseInputText.includes('twitter')) {
-            updatedLinks.twitter = inputText;
-          }
-      
-          else if (lowercaseInputText.includes('linkedin')) {
-            updatedLinks.linkedin = inputText;
-          }
-      
-          else if (lowercaseInputText.includes('facebook')) {
-            updatedLinks.facebook = inputText;
-          }
-          else {
-            updatedLinks.random = inputText;
-          }
-      
-         
-      
-          return updatedLinks; // Return the updated state
+            const updatedLinks = { ...prevLinks }; // Create a copy of the current state
+            if (lowercaseInputText.includes('github')) {
+                updatedLinks.github = inputText;
+            }
+
+            else if (lowercaseInputText.includes('twitter')) {
+                updatedLinks.twitter = inputText;
+            }
+
+            else if (lowercaseInputText.includes('linkedin')) {
+                updatedLinks.linkedin = inputText;
+            }
+
+            else if (lowercaseInputText.includes('facebook')) {
+                updatedLinks.facebook = inputText;
+            }
+            else {
+                updatedLinks.random = inputText;
+            }
+
+
+
+            return updatedLinks; // Return the updated state
         });
-      
+
         setInputText('');
         setIsEditing(false);
-      };
+    };
 
-      console.log(Links.github)
-   
-    
-  return (
-    <div>
-       <div className='w-[60vw] mx-auto m-10'>
-            <div>
-                <h1 className='text-5xl py-5 font-semibold'>Account Setting</h1>
-            </div>
 
-            <div className='flex justify-evenly my-5 bg-slate-50 p-5'>
-                <div className='img'>
-                    <div className='img h-[15vh] w-[10vw] mt-12 rounded-full border-2 m-5 bg-white'>
-                        <FaUserSecret className='mx-auto mt-4' size="5em" />
-                    </div>
-                    <div>
-                        <h1 className='text-2xl text-center font-semibold'>{name ? name : 'USER'}</h1>
-                    </div>
-                    <div className='flex items-center justify-center'>
-                        <h1 className='text-2xl text-center text-gray-500 font-semibold'>Status</h1><span className={`block w-4 h-4 rounded-full ml-3 mt-1  ${status ? 'bg-green-500' : 'bg-red-500'}`}></span>
-                    </div>
+    return (
+        <div>
+            <div className='w-[70vw] mx-auto m-10 '>
+                <div>
+                    <h1 className='text-4xl py-5 font-semibold'>Account Setting</h1>
+                </div>
 
-                    <div className="cursor-pointer mt-5">
-                        <div className='flex justify-center mb-3'>
-                            <h3 className='text-gray-600 text-lg font-semibold'>Add Links </h3><span onClick={handleEditClick}><CiEdit size="1.3em" className="text-xl ml-2  hover:text-orange-500"/></span>
+                <div className='flex bg-slate-100 p-5 h-[50vh]'>
+                    <div className='flex w-full'>
+
+                        <div className='profile-img '>
+                            <div className='img h-[25vh] w-[13vw] mt-12 rounded-full border-2 m-5 ml-10 bg-white overflow-hidden '>
+                                <FaUserSecret className='mx-auto mt-4' size="9em" />
+                            </div>
+
+                            <div className='flex justify-center m-5 ml-10'>
+                                <Button onClick={handleClick}>Edit Details</Button>
+                            </div>
+
+                            
+                                {click && (
+                                <div className='absolute top-2/3 shadow-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-5'>
+                                    <div className='fields p-4 flex flex-col gap-y-5'>
+                                        <div className='mb-4 flex items-center'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='email'>Email</label>
+                                            <input type='email' id='email' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={email ? email : 'Enter your email'} />
+                                        </div>
+
+                                        <div className='mb-4 flex items-center gap-10'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='name'>Name</label>
+                                            <input type='text' id='name' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={name ? name : 'Enter your name'} />
+                                        </div>
+
+                                        <div className='mb-4 flex items-center gap-10'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='username'>Username</label>
+                                            <input type='text' id='username' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={name ? name : 'Enter your username'} />
+                                        </div>
+
+                                        <div className='mb-4 flex items-center gap-10'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='contact'>Contact</label>
+                                            <input type='tel' id='contact' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={phone ? phone : 'Enter your contact no.'} />
+                                        </div>
+
+                                        <div className='mb-4 flex items-center gap-10'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='password'>Password</label>
+                                            <input type='password' id='password' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={password ? password : 'Enter passcode'} />
+                                        </div>
+
+                                        <div className='mx-auto'>
+                                            <Button>Save Changes</Button>
+                                        </div>
+                                    </div>
+                                </div>
+                                )}
+                            
+
                         </div>
-                        {isEditing && (
-                            <div className="absolute top-[40vh] p-3 flex flex-col">
-                                <input type="text"  className="p-3 w-[40vw] m-3 rounded-xl border-2 border-orange-400 focus:outline-none" value={inputText} onChange={(e) => setInputText(e.target.value)}/>
-                                <button className="bg-orange-500 hover:bg-orange-400 text-white w-[7vw] p-3 text-lg font-semibold mx-auto rounded-md" onClick={handleSaveClick}>Save</button>
+
+                        <div className='flex flex-col user-content  w-full'>
+                            <div className='content flex justify-around  h-full'>
+
+                                <div className='details flex flex-col my-auto gap-3'>
+                                    <div>
+                                        <h1 className='text-5xl text-center font-semibold'>{name ? name : 'USER'}</h1>
+                                    </div>
+                                    <div className='flex items-center justify-center'>
+                                        <h1 className='text-2xl text-center text-gray-500 font-semibold'>Status</h1><span className={`block w-4 h-4 rounded-full ml-3 mt-1  ${status ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                                    </div>
+                                    <div className='position'>
+                                        <h3 className='text-sm text-center text-gray-500 font-semibold'>Founder of Loveense</h3>
+                                    </div>
+                                    <div className='location'>
+                                        <h3 className='text-sm text-center text-gray-500 font-semibold'>Mirjapur, Bihar (U.P.)</h3>
+                                    </div>
+                                </div>
+
+                                <div className='links my-auto'>
+                                    <div className="mt-5">
+
+                                        {isEditing && (
+                                            <div className="absolute w-[30vw] shadow-lg bg-white top-[40vh] left-1/2 transform -translate-x-1/2 p-5 flex flex-col">
+                                                <div className='flex'>
+                                                    <span className='bg-slate-100 p-3 mb-3 rounded-l-md'>
+                                                        <FaLink size="1.3em" className="text-xl" />
+                                                    </span>
+                                                    <input
+                                                        type='text'
+                                                        placeholder='Enter your link'
+                                                        value={inputText}
+                                                        onChange={(e) => setInputText(e.target.value)}
+                                                        className='border p-2 mb-3 w-full focus:outline-none'
+                                                    />
+                                                </div>
+
+                                                <div className='flex justify-end'>
+                                                    <button className='mr-3 px-4 py-2 bg-orange-500 text-white rounded-md' onClick={handleSaveClick}>
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div className="flex space-x-2">
+                                            {Links.github && (
+                                                <NavLink to={Links.github} target="_blank" rel="noopener noreferrer">
+                                                    <li className="block" >
+                                                        <BsGithub size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
+                                                    </li>
+                                                </NavLink>
+                                            )}
+
+                                            {Links.twitter && (
+                                                <NavLink to={Links.twitter} target="_blank" rel="noopener noreferrer">
+                                                    <li className="block">
+                                                        <FaXTwitter size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
+                                                    </li>
+                                                </NavLink>
+                                            )}
+
+                                            {Links.facebook && (
+                                                <NavLink to={Links.facebook} target="_blank" rel="noopener noreferrer">
+                                                    <li className="block">
+                                                        <FaFacebookF size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
+                                                    </li>
+                                                </NavLink>
+                                            )}
+
+                                            {Links.linkedin && (
+                                                <NavLink to={Links.linkedin} target="_blank" rel="noopener noreferrer">
+                                                    <li className="block">
+                                                        <FaLinkedin size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
+                                                    </li>
+                                                </NavLink>
+                                            )}
+
+                                            {Links.random && (
+                                                <NavLink to={Links.random} target="_blank" rel="noopener noreferrer">
+                                                    <li className="block">
+                                                        <FaLink size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
+                                                    </li>
+                                                </NavLink>
+                                            )}
+                                        </div>
+
+                                        <div className='flex justify-center mt-5'>
+                                            <Button onClick={handleEditClick}>Add Links</Button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                        )}
-                            <div className="flex space-x-2">
-                                {Links.github && (
-                                     <NavLink to={Links.github} target="_blank" rel="noopener noreferrer">
-                                        <li className="block" >
-                                            <BsGithub size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
-                                        </li>
-                                    </NavLink>
-                                )}
 
-                                {Links.twitter && (
-                                    <NavLink to={Links.twitter} target="_blank" rel="noopener noreferrer">
-                                        <li className="block">
-                                            <FaXTwitter size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
-                                        </li>
-                                    </NavLink>
-                                )}
+                            <div className='buttons flex p-4 justify-center '>
+                                <div className='flex text-lg font-semibold gap-5 bg-white px-5 '>
+                                    <h1 className='p-3 border-r-2'>48 Followers</h1>
+                                    <h1 className='p-3'>166 Following</h1>
+                                </div>
 
-                                {Links.facebook && (
-                                    <NavLink to={Links.facebook} target="_blank" rel="noopener noreferrer">
-                                        <li className="block">
-                                            <FaFacebookF size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
-                                        </li>
-                                    </NavLink>
-                                )}
-
-                                {Links.linkedin && (
-                                    <NavLink to={Links.linkedin} target="_blank" rel="noopener noreferrer">
-                                        <li className="block">
-                                            <FaLinkedin size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
-                                        </li>
-                                    </NavLink>
-                                )}
-
-                                {Links.random && (
-                                    <NavLink to={Links.random} target="_blank" rel="noopener noreferrer">
-                                        <li className="block">
-                                            <FaLink size="1.3em" className="text-xl mr-3 hover:text-orange-500" />
-                                        </li>
-                                    </NavLink>
-                                )}
+                                <Button className='rounded-none px-11'>Follow +</Button>
                             </div>
+                        </div>
                     </div>
                 </div>
 
-                <div className='fields p-4 flex flex-col gap-y-5'>
-                    <div className='mb-4 flex items-center'>
-                        <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='email'>Email</label>
-                        <input type='email' id='email' className='border-b-2 bg-slate-50 p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={email ? email : 'Enter your email'}/>
-                    </div>
-
-                    <div className='mb-4 flex items-center gap-10'>
-                        <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='name'>Name</label>
-                        <input type='text' id='name'  className='border-b-2 bg-slate-50 p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={name ? name : 'Enter your name'}/>
-                    </div>
-                    
-                    <div className='mb-4 flex items-center gap-10'>
-                        <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='username'>Username</label>
-                        <input type='text' id='username'  className='border-b-2 bg-slate-50 p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={name ? name : 'Enter your username'}/>
-                    </div>
-
-                    <div className='mb-4 flex items-center gap-10'>
-                        <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='contact'>Contact</label>
-                        <input type='tel' id='contact'  className='border-b-2 bg-slate-50 p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={phone ? phone : 'Enter your contact no.'}/>
-                    </div>
-
-                    <div className='mb-4 flex items-center gap-10'>
-                        <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='password'>Password</label>
-                        <input type='password' id='password'  className='border-b-2 bg-slate-50 p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={password ? password : 'Enter passcode'}/>
-                    </div>
-
-                    <div className='mx-auto'>
-                        <Button>Save Changes</Button>
-                    </div>
+                <div className='bg-slate-50'>
+                    <MyBlogs />
                 </div>
             </div>
-       </div>
-    </div>
-  )
+
+        </div>
+    )
 }
+

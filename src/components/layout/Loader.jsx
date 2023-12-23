@@ -8,8 +8,7 @@ const LoadingComponent = ({ isContentLoaded, progress, setProgress }) => {
         ""
       ) : (
         <div>
-            <LoadingBar color='white ' progress={progress} height={3} onLoaderFinished={() => setProgress(0)} />
-            <div className='flex justify-center items-center h-[70vh]'>
+            <div className='flex justify-center items-center h-[90vh]'>
               <HashLoader color="#f97316" />
             </div>
         </div>
