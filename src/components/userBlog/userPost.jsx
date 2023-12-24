@@ -44,7 +44,7 @@ function Post({ $id, title, featuredImage, name, content }) {
 
     return (
 
-        <div key={$id} className='Category bg-slate-100 p-3 hover:bg-slate-200 rounded-lg cursor-pointer transition duration-300 mb-3'>
+        <div key={$id} className='Category bg-slate-100 p-3 hover:bg-slate-200 rounded-lg cursor-pointer transition duration-300 mb-5'>
             <Link to={`/post/${$id}`}>
                 <div className='user flex justify-between items-center'>
                     <div className='flex flex-row items-center'>
@@ -67,7 +67,7 @@ function Post({ $id, title, featuredImage, name, content }) {
                 </div>
 
                 <div className='content'>
-                    <div className='px-5 py-3 '>
+                    <div className='px-10 py-3 '>
                         <div className="text-xl font-semibold text-black pb-2">
                             <h1>{title}</h1>
                         </div>
@@ -76,8 +76,8 @@ function Post({ $id, title, featuredImage, name, content }) {
                         </div>
 
                     </div>
-                    <div className='p-5 mx-auto'>
-                        <img className="w-[30vw] h-full object-cover rounded-lg bg-white" src={appwriteService.getFilePreview(featuredImage)} alt="img" />
+                    <div className='p-5'>
+                        <img className="w-[40rem] mx-auto h-full object-cover rounded-lg bg-white" src={appwriteService.getFilePreview(featuredImage)} alt="img" />
                     </div>
                 </div>
 
@@ -87,9 +87,13 @@ function Post({ $id, title, featuredImage, name, content }) {
                 <div onClick={handleClick} className='flex cursor-pointer hover:text-orange-500'>
                     {isHeartFilled ? (<FaHeart color='#FF5733' size="1.1em" className='mt-0.5' />) : (<AiOutlineHeart size="1.2em" className='mt-0.5' />)} <p className='text-gray-500 ml-1.5'>{randomNumber}</p>
                 </div>
-                <div className='flex cursor-pointer hover:text-orange-500'>
-                    <FiMessageSquare size="1.2em" className='mt-0.5 ' /><p className='text-gray-500 ml-1'>{randomComment + 1}</p>
-                </div>
+
+                <Link to={`/post/${$id}`}>
+                    <div className='flex cursor-pointer hover:text-orange-500'>
+                    <FiMessageSquare size="1.2em" className='mt-0.5 '/><p className='text-gray-500 ml-1'>{randomComment + 1}</p>
+                    </div>
+                </Link>
+
                 <div className='cursor-pointer hover:text-orange-500'>
                     <FiShare2 size="1.1em" className='mt-0.5' />
                 </div>
