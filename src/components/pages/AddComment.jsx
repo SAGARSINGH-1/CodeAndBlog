@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import React, { useState } from 'react';
 import Button from "../layout/Button";
 
-const Comment = ({ postid, title }) => {
+const Comment = ({ postid, title,refreshcomment }) => {
   const userData = useSelector((state) => state.auth.userData);
   const [replyText, setReplyText] = useState('');
 
   function handleAddReply(e) {
     e.preventDefault();
-
+    
     // Check if userData is available before accessing its properties
     if (userData && userData.userData) {
       const commentData = {
@@ -18,12 +18,15 @@ const Comment = ({ postid, title }) => {
         comment: replyText,
         postid: postid, // Assuming the text of the reply is stored in the 'comment' property
       };
-
+      
       console.log(commentData);
       appwriteService.createComment(commentData);
-
+      
       // Reset the textarea after submitting the reply
       setReplyText('');
+      setTimeout(() => {
+        refreshcomment();
+      }, 100);
     }
   }
 

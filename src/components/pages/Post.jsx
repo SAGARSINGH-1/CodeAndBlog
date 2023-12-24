@@ -160,7 +160,7 @@ export default function Post() {
                     </div>
                 </div>
 
-                <Comment postid={post.postid} />
+                <Comment postid={post.postid} refreshcomment={refreshcomment} />
             </Container>
         </div>
         ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
