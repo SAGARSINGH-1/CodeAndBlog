@@ -32,42 +32,38 @@ export default function Profile() {
     };
 
     // User Links
-    const [Links, setLinks] = useState({
-        github: "",
-        twitter: "",
-        facebook: "",
-        linkedin: "",
-        random: "",
-    });
+    const [Links, setLinks] = useState([
+        { type: 'github', url: '' },
+        { type: 'twitter', url: '' },
+        { type: 'facebook', url: '' },
+        { type: 'linkedin', url: '' },
+        { type: 'random', url: '' },
+    ]);
 
     const handleSaveClick = () => {
-        // Update Links based on input text
         const lowercaseInputText = inputText.toLowerCase();
 
         setLinks((prevLinks) => {
-            const updatedLinks = { ...prevLinks }; // Create a copy of the current state
-            if (lowercaseInputText.includes('github')) {
-                updatedLinks.github = inputText;
+            const updatedLinks = prevLinks.map((link) => ({ ...link }));
+
+            switch (true) {
+                case lowercaseInputText.includes('github'):
+                    updatedLinks[0].url = inputText;
+                    break;
+                case lowercaseInputText.includes('twitter'):
+                    updatedLinks[1].url = inputText;
+                    break;
+                case lowercaseInputText.includes('facebook'):
+                    updatedLinks[2].url = inputText;
+                    break;
+                case lowercaseInputText.includes('linkedin'):
+                    updatedLinks[3].url = inputText;
+                    break;
+                default:
+                    updatedLinks[4].url = inputText;
             }
 
-            else if (lowercaseInputText.includes('twitter')) {
-                updatedLinks.twitter = inputText;
-            }
-
-            else if (lowercaseInputText.includes('linkedin')) {
-                updatedLinks.linkedin = inputText;
-            }
-
-            else if (lowercaseInputText.includes('facebook')) {
-                updatedLinks.facebook = inputText;
-            }
-            else {
-                updatedLinks.random = inputText;
-            }
-
-
-
-            return updatedLinks; // Return the updated state
+            return updatedLinks;
         });
 
         setInputText('');
@@ -134,46 +130,21 @@ export default function Profile() {
                                                 </div>
                                             </div>
                                         )}
+
                                         <div className="flex space-x-2">
-                                            {Links.github && (
-                                                <NavLink to={Links.github} target="_blank" rel="noopener noreferrer">
-                                                    <li className="block" >
-                                                        <BsGithub size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
-                                                    </li>
-                                                </NavLink>
-                                            )}
-
-                                            {Links.twitter && (
-                                                <NavLink to={Links.twitter} target="_blank" rel="noopener noreferrer">
-                                                    <li className="block">
-                                                        <FaXTwitter size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
-                                                    </li>
-                                                </NavLink>
-                                            )}
-
-                                            {Links.facebook && (
-                                                <NavLink to={Links.facebook} target="_blank" rel="noopener noreferrer">
-                                                    <li className="block">
-                                                        <FaFacebookF size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
-                                                    </li>
-                                                </NavLink>
-                                            )}
-
-                                            {Links.linkedin && (
-                                                <NavLink to={Links.linkedin} target="_blank" rel="noopener noreferrer">
-                                                    <li className="block">
-                                                        <FaLinkedin size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
-                                                    </li>
-                                                </NavLink>
-                                            )}
-
-                                            {Links.random && (
-                                                <NavLink to={Links.random} target="_blank" rel="noopener noreferrer">
-                                                    <li className="block">
-                                                        <FaLink size="1.5em" className="text-xl mr-3 hover:text-orange-500" />
-                                                    </li>
-                                                </NavLink>
-                                            )}
+                                            {Links.map((link) => (
+                                                link.url && (
+                                                    <NavLink key={link.type} to={link.url} target="_blank" rel="noopener noreferrer">
+                                                        <li className="block">
+                                                            {link.type === 'github' && <BsGithub size="1.5em" className="text-xl mr-3 hover:text-orange-500" />}
+                                                            {link.type === 'twitter' && <FaXTwitter size="1.5em" className="text-xl mr-3 hover:text-orange-500" />}
+                                                            {link.type === 'facebook' && <FaFacebookF size="1.5em" className="text-xl mr-3 hover:text-orange-500" />}
+                                                            {link.type === 'linkedin' && <FaLinkedin size="1.5em" className="text-xl mr-3 hover:text-orange-500" />}
+                                                            {link.type === 'random' && <FaLink size="1.5em" className="text-xl mr-3 hover:text-orange-500" />}
+                                                        </li>
+                                                    </NavLink>
+                                                )
+                                            ))}
                                         </div>
 
                                         <div className='flex justify-center mt-5'>
@@ -190,48 +161,48 @@ export default function Profile() {
                                     <h1 className='p-3'>166 Following</h1>
                                 </div>
 
-                                {name == name ? <Button className='rounded-none' onClick={handleClick}>Edit Details</Button> : <Button className='rounded-none px-11'>Follow +</Button> }
+                                {name == name ? <Button className='rounded-none' onClick={handleClick}>Edit Details</Button> : <Button className='rounded-none px-11'>Follow +</Button>}
 
                                 {click && (
-                                <div className='absolute top-2/3 shadow-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-5'>
-                                    <div className='fields p-4 flex flex-col gap-y-5'>
-                                        <div className='mb-4 flex items-center'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='email'>Email</label>
-                                            <input type='email' id='email' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={email ? email : 'Enter your email'} />
-                                        </div>
+                                    <div className='absolute top-2/3 shadow-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-5'>
+                                        <div className='fields p-4 flex flex-col gap-y-5'>
+                                            <div className='mb-4 flex items-center'>
+                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='email'>Email</label>
+                                                <input type='email' id='email' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={email ? email : 'Enter your email'} />
+                                            </div>
 
-                                        <div className='mb-4 flex items-center gap-10'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='name'>Name</label>
-                                            <input type='text' id='name' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={name ? name : 'Enter your name'} />
-                                        </div>
+                                            <div className='mb-4 flex items-center gap-10'>
+                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='name'>Name</label>
+                                                <input type='text' id='name' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={name ? name : 'Enter your name'} />
+                                            </div>
 
-                                        <div className='mb-4 flex items-center gap-10'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='username'>Username</label>
-                                            <input type='text' id='username' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={name ? name : 'Enter your username'} />
-                                        </div>
+                                            <div className='mb-4 flex items-center gap-10'>
+                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='username'>Username</label>
+                                                <input type='text' id='username' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={name ? name : 'Enter your username'} />
+                                            </div>
 
-                                        <div className='mb-4 flex items-center gap-10'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='contact'>Contact</label>
-                                            <input type='tel' id='contact' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={phone ? phone : 'Enter your contact no.'} />
-                                        </div>
+                                            <div className='mb-4 flex items-center gap-10'>
+                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='contact'>Contact</label>
+                                                <input type='tel' id='contact' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={phone ? phone : 'Enter your contact no.'} />
+                                            </div>
 
-                                        <div className='mb-4 flex items-center gap-10'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='password'>Password</label>
-                                            <input type='password' id='password' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={password ? password : 'Enter passcode'} />
-                                        </div>
+                                            <div className='mb-4 flex items-center gap-10'>
+                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='password'>Password</label>
+                                                <input type='password' id='password' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={password ? password : 'Enter passcode'} />
+                                            </div>
 
-                                        <div className='mx-auto'>
-                                            <Button>Save Changes</Button>
+                                            <div className='mx-auto'>
+                                                <Button>Save Changes</Button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className='bg-slate-50'>
+                <div className='bg-slate-50 p-5'>
                     <MyBlogs />
                 </div>
             </div>
