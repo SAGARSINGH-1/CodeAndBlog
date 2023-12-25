@@ -89,48 +89,6 @@ export default function Profile() {
                             <div className='img h-[25vh] w-[13vw] mt-12 rounded-full border-2 m-5 ml-10 bg-white overflow-hidden '>
                                 <FaUserSecret className='mx-auto mt-4' size="9em" />
                             </div>
-
-                            <div className='flex justify-center m-5 ml-10'>
-                                <Button onClick={handleClick}>Edit Details</Button>
-                            </div>
-
-                            
-                                {click && (
-                                <div className='absolute top-2/3 shadow-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-5'>
-                                    <div className='fields p-4 flex flex-col gap-y-5'>
-                                        <div className='mb-4 flex items-center'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='email'>Email</label>
-                                            <input type='email' id='email' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={email ? email : 'Enter your email'} />
-                                        </div>
-
-                                        <div className='mb-4 flex items-center gap-10'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='name'>Name</label>
-                                            <input type='text' id='name' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={name ? name : 'Enter your name'} />
-                                        </div>
-
-                                        <div className='mb-4 flex items-center gap-10'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='username'>Username</label>
-                                            <input type='text' id='username' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={name ? name : 'Enter your username'} />
-                                        </div>
-
-                                        <div className='mb-4 flex items-center gap-10'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='contact'>Contact</label>
-                                            <input type='tel' id='contact' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={phone ? phone : 'Enter your contact no.'} />
-                                        </div>
-
-                                        <div className='mb-4 flex items-center gap-10'>
-                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='password'>Password</label>
-                                            <input type='password' id='password' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={password ? password : 'Enter passcode'} />
-                                        </div>
-
-                                        <div className='mx-auto'>
-                                            <Button>Save Changes</Button>
-                                        </div>
-                                    </div>
-                                </div>
-                                )}
-                            
-
                         </div>
 
                         <div className='flex flex-col user-content  w-full'>
@@ -232,7 +190,42 @@ export default function Profile() {
                                     <h1 className='p-3'>166 Following</h1>
                                 </div>
 
-                                <Button className='rounded-none px-11'>Follow +</Button>
+                                {name == name ? <Button className='rounded-none' onClick={handleClick}>Edit Details</Button> : <Button className='rounded-none px-11'>Follow +</Button> }
+
+                                {click && (
+                                <div className='absolute top-2/3 shadow-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-5'>
+                                    <div className='fields p-4 flex flex-col gap-y-5'>
+                                        <div className='mb-4 flex items-center'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='email'>Email</label>
+                                            <input type='email' id='email' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={email ? email : 'Enter your email'} />
+                                        </div>
+
+                                        <div className='mb-4 flex items-center gap-10'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='name'>Name</label>
+                                            <input type='text' id='name' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={name ? name : 'Enter your name'} />
+                                        </div>
+
+                                        <div className='mb-4 flex items-center gap-10'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='username'>Username</label>
+                                            <input type='text' id='username' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={name ? name : 'Enter your username'} />
+                                        </div>
+
+                                        <div className='mb-4 flex items-center gap-10'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='contact'>Contact</label>
+                                            <input type='tel' id='contact' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={phone ? phone : 'Enter your contact no.'} />
+                                        </div>
+
+                                        <div className='mb-4 flex items-center gap-10'>
+                                            <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='password'>Password</label>
+                                            <input type='password' id='password' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={password ? password : 'Enter passcode'} />
+                                        </div>
+
+                                        <div className='mx-auto'>
+                                            <Button>Save Changes</Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                             </div>
                         </div>
                     </div>

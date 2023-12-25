@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import React, { useState } from 'react';
 import Button from "../layout/Button";
 
-const Comment = ({ postid, title,refreshcomment }) => {
+const Comment = ({ postid, title, refreshcomment }) => {
   const userData = useSelector((state) => state.auth.userData);
   const [replyText, setReplyText] = useState('');
 
@@ -19,14 +19,11 @@ const Comment = ({ postid, title,refreshcomment }) => {
         postid: postid, // Assuming the text of the reply is stored in the 'comment' property
       };
       
-      console.log(commentData);
+      //console.log(commentData);
       appwriteService.createComment(commentData);
       
       // Reset the textarea after submitting the reply
       setReplyText('');
-      setTimeout(() => {
-        refreshcomment();
-      }, 100);
     }
   }
 
@@ -49,7 +46,7 @@ const Comment = ({ postid, title,refreshcomment }) => {
         />
      
      <div className="flex justify-end">
-      <Button type="submit" className="m-3">Post Reply</Button>
+      <Button type="submit" onClick={refreshcomment()} className="m-3">Post Reply</Button>
     </div>
      
       </form>
