@@ -121,9 +121,7 @@ const router = createBrowserRouter([
             {
                 path: "/password-reset",
                 element:(
-                    <AuthLayout authentication={false}>
                         <ResetPassword />
-                    </AuthLayout>
                 )
             },
             {
