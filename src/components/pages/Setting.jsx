@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { MdOutlineSettings } from "react-icons/md";
+import Button from '../layout/Button';
+import { Link } from 'react-router-dom';
 
 const Settings = () => {
   const [theme, setTheme] = useState('light');
   const [fontSize, setFontSize] = useState('medium');
-  const [selectedNavItem, setSelectedNavItem] = useState('general');
+  const [selectedNavItem, setSelectedNavItem] = useState('Account');
 
   const handleThemeChange = (selectedTheme) => {
     setTheme(selectedTheme);
@@ -21,11 +23,19 @@ const Settings = () => {
   };
 
   return (
-    <div className="flex h-[500px] bg-gray-100">
+    <div className="flex h-[100vh] my-5 bg-gray-100 ">
       {/* Sidebar */}
       <div className="w-64 bg-gray-800 text-white p-4">
         <h2 className="text-2xl font-semibold mb-6"><MdOutlineSettings className='inline mb-2 text-3xl mr-2'/>Settings</h2>
         <ul>
+          <li
+            className={`cursor-pointer py-2 px-4 mb-2 rounded ${
+              selectedNavItem === 'Account' ? 'bg-orange-500' : 'hover:bg-gray-700'
+            }`}
+            onClick={() => handleNavItemClick('Account')}
+          >
+            Account
+          </li>
           <li
             className={`cursor-pointer py-2 px-4 mb-2 rounded ${
               selectedNavItem === 'general' ? 'bg-orange-500' : 'hover:bg-gray-700'
@@ -54,7 +64,47 @@ const Settings = () => {
       </div>
 
       {/* Right Content Area */}
-      <div className="flex-1 p-8">
+      <div className="flex-1 p-8 overflow-scroll no-scrollbar">
+        {selectedNavItem === 'Account' && (
+          <div className="bg-gray-200 p-5 rounded-md shadow-md">
+            <div className='mb-10'>
+              <h2 className="text-2xl font-semibold mb-4">Change Username</h2>
+              <hr className="my-4 border-t border-gray-500"/>
+              <p className="mb-5 text-gray-600">Changing username from "username"</p>
+              <Button>Change Username</Button>
+            </div>
+            
+            <div className='mb-10'>
+              <h2 className="text-2xl font-semibold mb-4">Change Email</h2>
+              <hr className="my-4 border-t border-gray-500"/>
+              <p className="mb-5 text-gray-600">Change Email link to your Account</p>
+              <Button>Change Email</Button>
+            </div>
+           
+            <div className='mb-10'>
+              <h2 className="text-2xl font-semibold mb-4">Change Password</h2>
+              <hr className="my-4 border-t border-gray-500"/>
+              <p className="mb-5 text-gray-600">Change Password of your Account</p>
+              <Link to={'/password-reset'}><Button>Change Password</Button></Link>
+            </div>
+
+            <div className='mb-10'>
+              <h2 className="text-2xl font-semibold mb-4">Change Phone Number</h2>
+              <hr className="my-4 border-t border-gray-500"/>
+              <p className="mb-5 text-gray-600">Change Phone Number Link to your Account</p>
+              <Button>Change Phone No.</Button>
+            </div>
+
+            <div className='mb-10'>
+              <h2 className="text-2xl font-semibold mb-4">Delete Your Account</h2>
+              <hr className="my-4 border-t border-gray-500"/>
+              <p className="mb-5 text-gray-600">Delete Your Account and Data</p>
+              <Button className='bg-red-600 hover:bg-red-500'>Delete Account</Button>
+            </div>
+          </div>
+        )}
+
+
         {selectedNavItem === 'general' && (
           <div>
             <h2 className="text-2xl font-semibold mb-6">General Settings</h2>

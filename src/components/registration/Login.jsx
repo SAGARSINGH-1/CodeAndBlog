@@ -99,6 +99,9 @@ export default function Login() {
                   required: true,
                 })}
               />
+              <p className=" text-gray-600 text-sm font-semibold m-3 text-end">
+                Forget <Link className="text-indigo-500 cursor-pointer" to={'/password-reset'}>password?</Link>
+              </p>
             </div>
 
             <div className="mb-4">
@@ -124,9 +127,7 @@ export default function Login() {
               </button>
             </NavLink>
           </form>
-          <p className="text-center text-gray-600 text-sm">
-            Forget <Link className="text-indigo-500 cursor-pointer" to={'/password-reset'}>password</Link>
-          </p>
+          
           <p className="text-center text-gray-600 text-sm">
             Don't have an account? <NavLink className="text-indigo-500" to='/signup'>Signup</NavLink>
           </p>
