@@ -97,10 +97,12 @@ export class AuthService {
         }
     }
 
-    async ResetPassword(userId, secret, password) {
-        const passwordAgain = password;
+    async ResetPassword(userId, secret, password, passwordAgain ) {
+        
         try {
-            console.log("The password is :",password);
+          //  console.log("The password is :",password);
+          //  console.log("The password is :",passwordAgain);
+
             const result = await this.account.updateRecovery(secret, userId, password, passwordAgain);
             if (result) {
                 this.notify("Password Reset Successfully!");
