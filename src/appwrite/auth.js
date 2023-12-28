@@ -1,6 +1,5 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-
 import conf from '../conf/conf.js'
 import { Client, Account, ID } from 'appwrite'
 
@@ -84,6 +83,34 @@ export class AuthService {
             throw error;
         }
     }
+
+    async PasswordRecovery(email) {
+        try {
+            const result = await this.account.createRecovery(email, "http://localhost:5173/password-reset", "http://localhost:5173/password-reset");
+            if (result) {
+                this.notify("Reset Password Link Sent to your Email!");
+            }
+            return result;
+        } catch (error) {
+            this.notifyer(`${error.message}`);
+            throw error;
+        }
+    }
+
+    async ResetPassword(userId, secret, password) {
+        const passwordAgain = password;
+        try {
+            console.log("The password is :",password);
+            const result = await this.account.updateRecovery(secret, userId, password, passwordAgain);
+            if (result) {
+                this.notify("Password Reset Successfully!");
+            }
+        } catch (error) {
+            this.notifyer(`${error.message}`);
+            throw error;
+        }
+    }
+    
 }
 
 const authService = new AuthService();

@@ -54,6 +54,10 @@ export default function Login() {
     };
   }, []);
 
+  function PasswordReset() {
+    navigate("/password-reset")
+  }
+
   return (
     <div className="flex items-center justify-center bg-gray-100 m-5 p-5">
       {isContentLoaded ? (
@@ -120,6 +124,9 @@ export default function Login() {
               </button>
             </NavLink>
           </form>
+          <p className="text-center text-gray-600 text-sm">
+            Forget <Link className="text-indigo-500 cursor-pointer" to={'/password-reset'}>password</Link>
+          </p>
           <p className="text-center text-gray-600 text-sm">
             Don't have an account? <NavLink className="text-indigo-500" to='/signup'>Signup</NavLink>
           </p>

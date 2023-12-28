@@ -18,6 +18,7 @@ import Post from './components/pages/Post.jsx'
 import MyBlogs from './components/pages/MyBlogs.jsx'
 import Profile from './components/pages/userProfile.jsx'
 import Setting from './components/pages/Setting.jsx'
+import ResetPassword from './components/registration/ResetPassword.jsx'
 
 
 const router = createBrowserRouter([
@@ -114,6 +115,14 @@ const router = createBrowserRouter([
                 element:(
                     <AuthLayout authentication>
                         <Setting />
+                    </AuthLayout>
+                )
+            },
+            {
+                path: "/password-reset",
+                element:(
+                    <AuthLayout authentication={false}>
+                        <ResetPassword />
                     </AuthLayout>
                 )
             },
