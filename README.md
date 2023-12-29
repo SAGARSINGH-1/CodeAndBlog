@@ -74,7 +74,7 @@ Feel free to open an issue if you find a bug or want to suggest a feature.
   React Router (Client-side routing)
 - Build and Package Management:
   npm (Node Package Manager)
--Backend-Appwrite(Open source Backend service)
+- Backend-Appwrite(Open source Backend service)
 
 ## Contributors
 
