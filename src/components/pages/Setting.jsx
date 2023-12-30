@@ -113,7 +113,7 @@ const Settings = () => {
               <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Verify Email link to your Account to Explore more features</p>
               <p className="mb-5 text-black">{userData.userData.email}{userData.userData.emailVerification?<MdVerified className='inline ml-1' />:""}</p>
-              <Button onClick={VerifyEmail}>{userData.userData.emailVerification ? "Verified" : "Verify"}</Button>
+              <Button className={`${userData.userData.emailVerification?"cursor-not-allowed":""}`} disabled={userData.userData.emailVerification} onClick={VerifyEmail}>{userData.userData.emailVerification ? "Verified" : "Verify"}</Button>
             </div>
 
             <div className='mb-10'>
