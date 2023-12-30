@@ -46,7 +46,7 @@ const Comment = ({ postid, title, refreshcomment }) => {
         />
      
      <div className="flex justify-end">
-      <Button type="submit" onClick={refreshcomment()} className="m-3">Post Reply</Button>
+      <Button type="submit" onClick={refreshcomment} className="m-3">Post Reply</Button>
     </div>
      
       </form>

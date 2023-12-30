@@ -2,11 +2,23 @@ import React, { useState } from 'react';
 import { MdOutlineSettings } from "react-icons/md";
 import Button from '../layout/Button';
 import { Link } from 'react-router-dom';
+import authService from '../../appwrite/auth';
+import { useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import { MdVerified } from "react-icons/md";
+
 
 const Settings = () => {
   const [theme, setTheme] = useState('light');
   const [fontSize, setFontSize] = useState('medium');
   const [selectedNavItem, setSelectedNavItem] = useState('Account');
+  const userData = useSelector((state) => state.auth.userData);
+  const notify = (message) => {
+    toast.success(message, { position: 'bottom-right', autoClose: 2000 });
+  };
+
+
 
   const handleThemeChange = (selectedTheme) => {
     setTheme(selectedTheme);
@@ -22,40 +34,55 @@ const Settings = () => {
     setSelectedNavItem(item);
   };
 
+  // TODO: Implement this and next function
+  const VerifyEmail = async () => {
+    if (userData.userData.emailVerification) {
+      notify("Email Already Verified");
+      return;
+    }
+    await authService.createVerification();
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const secret = urlParams.get('secret');
+  const userId = urlParams.get('userId');
+
+  useEffect(() => {
+    if (secret && userId) {
+      authService.updateVerification(secret, userId);
+    }
+  }, [secret, userId])
+
   return (
     <div className="flex h-[100vh] my-5 bg-gray-100 ">
       {/* Sidebar */}
       <div className="w-64 bg-gray-800 text-white p-4">
-        <h2 className="text-2xl font-semibold mb-6"><MdOutlineSettings className='inline mb-2 text-3xl mr-2'/>Settings</h2>
+        <h2 className="text-2xl font-semibold mb-6"><MdOutlineSettings className='inline mb-2 text-3xl mr-2' />Settings</h2>
         <ul>
           <li
-            className={`cursor-pointer py-2 px-4 mb-2 rounded ${
-              selectedNavItem === 'Account' ? 'bg-orange-500' : 'hover:bg-gray-700'
-            }`}
+            className={`cursor-pointer py-2 px-4 mb-2 rounded ${selectedNavItem === 'Account' ? 'bg-orange-500' : 'hover:bg-gray-700'
+              }`}
             onClick={() => handleNavItemClick('Account')}
           >
             Account
           </li>
           <li
-            className={`cursor-pointer py-2 px-4 mb-2 rounded ${
-              selectedNavItem === 'general' ? 'bg-orange-500' : 'hover:bg-gray-700'
-            }`}
+            className={`cursor-pointer py-2 px-4 mb-2 rounded ${selectedNavItem === 'general' ? 'bg-orange-500' : 'hover:bg-gray-700'
+              }`}
             onClick={() => handleNavItemClick('general')}
           >
             General
           </li>
           <li
-            className={`cursor-pointer py-2 px-4 mb-2 rounded ${
-              selectedNavItem === 'theme' ? 'bg-orange-500' : 'hover:bg-gray-700'
-            }`}
+            className={`cursor-pointer py-2 px-4 mb-2 rounded ${selectedNavItem === 'theme' ? 'bg-orange-500' : 'hover:bg-gray-700'
+              }`}
             onClick={() => handleNavItemClick('theme')}
           >
             Theme
           </li>
           <li
-            className={`cursor-pointer py-2 px-4 mb-2 rounded ${
-              selectedNavItem === 'font' ? 'bg-orange-500' : 'hover:bg-gray-700'
-            }`}
+            className={`cursor-pointer py-2 px-4 mb-2 rounded ${selectedNavItem === 'font' ? 'bg-orange-500' : 'hover:bg-gray-700'
+              }`}
             onClick={() => handleNavItemClick('font')}
           >
             Font
@@ -69,35 +96,43 @@ const Settings = () => {
           <div className="bg-gray-200 p-5 rounded-md shadow-md">
             <div className='mb-10'>
               <h2 className="text-2xl font-semibold mb-4">Change Username</h2>
-              <hr className="my-4 border-t border-gray-500"/>
+              <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Changing username from "username"</p>
               <Button>Change Username</Button>
             </div>
-            
+
             <div className='mb-10'>
               <h2 className="text-2xl font-semibold mb-4">Change Email</h2>
-              <hr className="my-4 border-t border-gray-500"/>
+              <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Change Email link to your Account</p>
               <Button>Change Email</Button>
             </div>
-           
+
+            <div className='mb-10'>
+              <h2 className="text-2xl font-semibold mb-4">Verify Email</h2>
+              <hr className="my-4 border-t border-gray-500" />
+              <p className="mb-5 text-gray-600">Verify Email link to your Account to Explore more features</p>
+              <p className="mb-5 text-black">{userData.userData.email}{userData.userData.emailVerification?<MdVerified className='inline ml-1' />:""}</p>
+              <Button onClick={VerifyEmail}>{userData.userData.emailVerification ? "Verified" : "Verify"}</Button>
+            </div>
+
             <div className='mb-10'>
               <h2 className="text-2xl font-semibold mb-4">Change Password</h2>
-              <hr className="my-4 border-t border-gray-500"/>
+              <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Change Password of your Account</p>
               <Link to={'/password-reset'}><Button>Change Password</Button></Link>
             </div>
 
             <div className='mb-10'>
               <h2 className="text-2xl font-semibold mb-4">Change Phone Number</h2>
-              <hr className="my-4 border-t border-gray-500"/>
+              <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Change Phone Number Link to your Account</p>
               <Button>Change Phone No.</Button>
             </div>
 
             <div className='mb-10'>
               <h2 className="text-2xl font-semibold mb-4">Delete Your Account</h2>
-              <hr className="my-4 border-t border-gray-500"/>
+              <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Delete Your Account and Data</p>
               <Button className='bg-red-600 hover:bg-red-500'>Delete Account</Button>
             </div>
