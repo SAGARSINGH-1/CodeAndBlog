@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { features } from "../Data";
 import Carousels from "./Carousel";
 import Blogs from "./Blogs";
-import LoadingBar from 'react-top-loading-bar'
 import LoadingComponent from "../layout/Loader";
 
 export default function Home() {
