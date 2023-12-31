@@ -1,6 +1,6 @@
 import React from 'react';
 import appwriteService from "../../appwrite/config";
-import UserPost from "../userBlog/UserPost";
+import UserPost from "../Blog/UserPost";
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Container from '../container/Container';
