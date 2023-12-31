@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Category, Posts, TrendBlogs } from './BlogData'
+import { Category, Posts, TrendBlogs } from '../Blog/BlogData'
 import { CiSearch } from 'react-icons/ci';
 import 'emoji-picker-element';
 import { NavLink } from 'react-router-dom';
 import Button from '../layout/Button';
-import UserPost from './UserPost';
+import UserPost from '../layout/UserPost';
 import Container from '../container/Container';
 import appwriteService from "../../appwrite/config";
 import LoadingBar from 'react-top-loading-bar'

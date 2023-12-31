@@ -1,11 +1,9 @@
-import React from 'react'
+import React,{ useState,useEffect } from 'react'
 import Button from '../layout/Button'
 import { useSelector } from 'react-redux';
 import { FaFacebookF, FaLinkedin, FaUserSecret, FaXTwitter, FaLink } from "react-icons/fa6";
 import { BsGithub } from 'react-icons/bs';
 import { CiEdit } from "react-icons/ci";
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import MyBlogs from './MyBlogs';
 
