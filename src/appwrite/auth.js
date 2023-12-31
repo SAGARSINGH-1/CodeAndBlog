@@ -119,7 +119,7 @@ export class AuthService {
     }
 
 
-    // TODO: Implement Email Verification
+    // Implement Email Verification and send email
     async createVerification() {
         try {
             const result = await this.account.createVerification("http://localhost:5173/setting", "http://localhost:5173/setting");
@@ -132,6 +132,7 @@ export class AuthService {
         }
     }
 
+    // Verify Email Verification 
     async updateVerification(userId, secret) {
         try {
             const result = await this.account.updateVerification(secret, userId, "http://localhost:5173/setting");

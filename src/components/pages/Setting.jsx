@@ -34,7 +34,8 @@ const Settings = () => {
     setSelectedNavItem(item);
   };
 
-  // TODO: Implement this and next function
+  // TODO: Email aready verifies not working
+  // Email verification link Send for verification of email
   const VerifyEmail = async () => {
     if (userData.userData.emailVerification) {
       notify("Email Already Verified");
@@ -49,6 +50,7 @@ const Settings = () => {
 
   useEffect(() => {
     if (secret && userId) {
+      // Verification of email with secret and userId
       authService.updateVerification(secret, userId);
     }
   }, [secret, userId])

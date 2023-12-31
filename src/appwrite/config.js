@@ -7,10 +7,12 @@ export class Service {
     databases;
     bucket;
 
+    // 
     notify = (message) => { toast.success(message, { position: "bottom-right", autoClose: 2000, }); }
     notifywar = (message) => { toast.console.warn(); (message, { position: "bottom-right", autoClose: 2000, }); }
     notifyer = (message) => { toast.error(message, { position: "bottom-right", autoClose: 2000, }); }
 
+    // EndPoints to connect to the right Appwrite server and project.
     constructor() {
         this.client
             .setEndpoint(conf.appwriteUrl)
@@ -21,6 +23,7 @@ export class Service {
 
 
 
+    // Create a new user post/blog
     async createPost({ title, slug, content, featuredImage, status, userid, name }) {
         function generateUniqueID() {
             const timestamp = Date.now().toString(36); // Convert timestamp to base36
@@ -56,6 +59,7 @@ export class Service {
         }
     }
 
+    // Update a user post/blog which is already created
     async updatePost(slug, { title, content, featuredImage, status }) {
         try {
             const result = await this.databases.updateDocument(
@@ -79,6 +83,7 @@ export class Service {
     }
 
 
+    // Delete a user post/blog which is already created
     async deletePost(slug) {
         try {
             const result = await this.databases.deleteDocument(
@@ -97,6 +102,7 @@ export class Service {
         }
     }
 
+    // Get a user post/blog which is already created
     async getPost(slug) {
         try {
             return await this.databases.getDocument(
@@ -109,6 +115,7 @@ export class Service {
         }
     }
 
+    // Get all user post/blog which is already created and having an status active
     async getPosts(quries = [Query.equal('status', 'active')]) {
         try {
             return await this.databases.listDocuments(
@@ -123,8 +130,7 @@ export class Service {
     }
 
 
-    // Upload files 
-
+    // Upload files to the Appwrite storage
     async uploadFile(file) {
         try {
             return await this.bucket.createFile(
@@ -137,6 +143,7 @@ export class Service {
         }
     }
 
+    // Delete files from the Appwrite storage
     async deleteFile(fileId) {
         try {
             await this.bucket.deleteFile(
@@ -149,6 +156,7 @@ export class Service {
         }
     }
 
+    // Get file preview from the Appwrite storage
     getFilePreview(fileId) {
         return this.bucket.getFilePreview(
             conf.appwriteBucketId,
@@ -156,6 +164,7 @@ export class Service {
         );
     }
 
+    //  Create a comment on the post with its id
     async createComment({ name, postid, userid, comment }) {
         try {
             const documentID = ID.unique();
@@ -180,6 +189,7 @@ export class Service {
     }
 
 
+    // Get all comments on the post with its id
     async getComments(postid, queries = [Query.equal('postid', postid)]) {
         try {
             return await this.databases.listDocuments(
