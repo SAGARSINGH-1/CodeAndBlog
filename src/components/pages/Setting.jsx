@@ -100,6 +100,8 @@ const Settings = () => {
               <h2 className="text-2xl font-semibold mb-4">Change Username</h2>
               <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Changing username from "username"</p>
+              <p className="mb-5 text-black">{userData.userData.name}</p>
+
               <Button>Change Username</Button>
             </div>
 
@@ -107,6 +109,7 @@ const Settings = () => {
               <h2 className="text-2xl font-semibold mb-4">Change Email</h2>
               <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Change Email link to your Account</p>
+              <p className="mb-5 text-black">{userData.userData.email}{userData.userData.emailVerification ? <MdVerified className='inline ml-1' /> : ""}</p>
               <Button>Change Email</Button>
             </div>
 
@@ -129,6 +132,7 @@ const Settings = () => {
               <h2 className="text-2xl font-semibold mb-4">Change Phone Number</h2>
               <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Change Phone Number Link to your Account</p>
+              <p className="mb-5 text-gray-600">{userData.userData.phone}</p>
               <Button>Change Phone No.</Button>
             </div>
 
@@ -136,6 +140,7 @@ const Settings = () => {
               <h2 className="text-2xl font-semibold mb-4">Delete Your Account</h2>
               <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Delete Your Account and Data</p>
+              <p className="mb-5 text-gray-600">{userData.userData.name}</p>
               <Button className='bg-red-600 hover:bg-red-500'>Delete Account</Button>
             </div>
           </div>

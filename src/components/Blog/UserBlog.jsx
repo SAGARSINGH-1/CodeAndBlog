@@ -4,7 +4,7 @@ import { CiSearch } from 'react-icons/ci';
 import 'emoji-picker-element';
 import { NavLink } from 'react-router-dom';
 import Button from '../layout/Button';
-import Post from './userPost';
+import UserPost from './UserPost';
 import Container from '../container/Container';
 import appwriteService from "../../appwrite/config";
 import LoadingBar from 'react-top-loading-bar'
@@ -110,9 +110,9 @@ export default function UserBlog() {
                             </div>
 
                             <div className='mr-5'>
-                                <div class="flex items-center justify-center">
-                                    <select class="p-3 border border-gray-300 rounded-lg focus:outline-none">
-                                        <option value="" disabled selected>Filter Search</option>
+                                <div className="flex items-center justify-center">
+                                    <select className="p-3 border border-gray-300 rounded-lg focus:outline-none">
+                                        <option value="" disabled defaultValue>Filter Search</option>
                                         <option value="Username">Username</option>
                                         <option value="Blog">Blog</option>
                                         <option value="Comments">Comments</option>
@@ -127,7 +127,7 @@ export default function UserBlog() {
                             <Container>
                                 <div className='posts'>
                                     {post.slice().reverse().map((item) => (
-                                        <Post key={item.id}  {...item} />
+                                        <UserPost key={item.id}  {...item} />
                                     ))}
                                 </div>
                             </Container>

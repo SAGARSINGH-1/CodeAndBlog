@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../container/Container'
-import PostForm from '../../postForm/PostForm'
+import PostForm from '../layout/PostForm'
 import LoadingBar from 'react-top-loading-bar'
 import LoadingComponent from '../layout/Loader';
 

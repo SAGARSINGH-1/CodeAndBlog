@@ -10,7 +10,7 @@ import parse from "html-react-parser";
 import { CiEdit } from "react-icons/ci";
 
 
-function Post({ $id, title, featuredImage, name, content }) {
+function UserPost({ $id, title, featuredImage, name, content }) {
 
     const [showMoreMap, setShowMoreMap] = useState({});
 
@@ -103,4 +103,4 @@ function Post({ $id, title, featuredImage, name, content }) {
     )
 }
 
-export default Post;
+export default UserPost;

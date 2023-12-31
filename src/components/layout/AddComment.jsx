@@ -1,7 +1,7 @@
 import appwriteService from "../../appwrite/config";
 import { useSelector } from "react-redux";
 import React, { useState } from 'react';
-import Button from "../layout/Button";
+import Button from "./Button";
 
 const Comment = ({ postid, title, refreshcomment }) => {
   const userData = useSelector((state) => state.auth.userData);

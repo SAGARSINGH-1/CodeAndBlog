@@ -8,9 +8,8 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Home from './components/Home/Home.jsx'
 import Login from './components/registration/Login.jsx'
 import Signup from './components/registration/Signup.jsx'
-import UserBlog from './components/userBlog/userBlog.jsx'
+import UserBlog from './components/Blog/UserBlog.jsx'
 import Error from './components/pages/Error.jsx'
-import AllPosts from './components/pages/AllPost.jsx'
 import AuthLayout from './AuthLayout.jsx'
 import AddPost from './components/pages/AddPost.jsx'
 import EditPost from './components/pages/EditPost.jsx'
@@ -47,15 +46,6 @@ const router = createBrowserRouter([
                 element: (
                     <AuthLayout authentication={false}>
                         <Signup />
-                    </AuthLayout>
-                ),
-            },
-            {
-                path: "/all-posts",
-                element: (
-                    <AuthLayout authentication>
-                        {" "}
-                        <AllPosts />
                     </AuthLayout>
                 ),
             },
