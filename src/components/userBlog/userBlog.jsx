@@ -110,8 +110,8 @@ export default function UserBlog() {
                             </div>
 
                             <div className='mr-5'>
-                                <div class="flex items-center justify-center">
-                                    <select class="p-3 border border-gray-300 rounded-lg focus:outline-none">
+                                <div className="flex items-center justify-center">
+                                    <select className="p-3 border border-gray-300 rounded-lg focus:outline-none">
                                         <option value="" disabled selected>Filter Search</option>
                                         <option value="Username">Username</option>
                                         <option value="Blog">Blog</option>
