@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../../appwrite/config";
 import Container from '../container/Container'
-import PostForm from '../../postForm/PostForm'
+import PostForm from '../layout/PostForm'
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import Button from "../layout/Button";
-import Comment from "./AddComment";
+import Comment from "../layout/AddComment";
 import { LuRefreshCcw } from "react-icons/lu";
 import { FaUserCircle } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";

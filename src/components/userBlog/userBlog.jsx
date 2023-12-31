@@ -4,7 +4,7 @@ import { CiSearch } from 'react-icons/ci';
 import 'emoji-picker-element';
 import { NavLink } from 'react-router-dom';
 import Button from '../layout/Button';
-import Post from './userPost';
+import UserPost from './UserPost';
 import Container from '../container/Container';
 import appwriteService from "../../appwrite/config";
 import LoadingBar from 'react-top-loading-bar'
@@ -127,7 +127,7 @@ export default function UserBlog() {
                             <Container>
                                 <div className='posts'>
                                     {post.slice().reverse().map((item) => (
-                                        <Post key={item.id}  {...item} />
+                                        <UserPost key={item.id}  {...item} />
                                     ))}
                                 </div>
                             </Container>
