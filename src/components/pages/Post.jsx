@@ -12,6 +12,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import LoadingComponent from "../layout/Loader";
 import Profile from "./userProfile";
+import Otheruser from "./Otheruser";
 
 
 export default function Post() {
@@ -97,16 +98,19 @@ export default function Post() {
                             <div className="flex flex-col">
                                 <div className="relative h-[55px]"><NavLink to="/blogs"><button className="absolute text-black bg-[whitesmoke] rounded-full p-4 hover:translate-x-[-3px] transition-all ease-in-out"><FaArrowLeftLong size="1em" /></button></NavLink></div>
                                 <div className="flex m-3 ml-5">
-                                    <div onClick={toggleProfile} className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
+                                    <div onClick={toggleProfile} className="rounded-full  bg-gray-300 w-12 h-12 mr-3">
                                         <FaUserCircle className="w-full h-full object-cover" />
                                     </div>
 
-                                    {profile && (
-                                        <div className="absolute top-12 left-[18%] z-[20]">
-                                            <Profile />
-                                        </div>
-                                    )}
-                                    
+                                    <div className="absolute top-1/3 left-[25%] shadow-xl border-2">
+                                        {profile && (
+                                            <div className="fixed z-[20]">
+                                                <Otheruser />
+                                            </div>
+                                        )}
+                                    </div>
+
+
                                     <div className="text-2xl font-bold">{post.name}</div>
                                 </div>
 
