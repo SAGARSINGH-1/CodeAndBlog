@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '../layout/Button'
 import { useSelector } from 'react-redux';
 import { FaFacebookF, FaLinkedin, FaUserSecret, FaXTwitter, FaLink } from "react-icons/fa6";
@@ -6,6 +6,7 @@ import { BsGithub } from 'react-icons/bs';
 import { CiEdit } from "react-icons/ci";
 import { NavLink } from 'react-router-dom';
 import MyBlogs from './MyBlogs';
+import authService from '../../appwrite/auth';
 
 export default function Profile() {
     const userData = useSelector((state) => state.auth.userData.userData);
@@ -15,6 +16,23 @@ export default function Profile() {
     let phone = userData.phone;
     let password = userData.password;
     let status = userData.status;
+
+    const [avatar, setAvatar] = useState(null);
+    const [location, setLocation] = useState(null);
+
+    // TODO: Fetch avatar from appwrite according to the user
+    useEffect(() => {
+        const LocationData = authService.getLocale().then((location) => {
+            if (location) {
+                setLocation(location)
+                const ImageData = authService.getAvtar(location.countryCode).then((img) => {
+                    setAvatar(img.href);
+                });
+            }
+        });
+
+    }, []);
+
 
 
     const [isEditing, setIsEditing] = useState(false);
@@ -81,7 +99,7 @@ export default function Profile() {
 
                         <div className='profile-img '>
                             <div className='img h-[25vh] w-[13vw] mt-12 rounded-full border-2 m-5 ml-10 bg-white overflow-hidden '>
-                                <FaUserSecret className='mx-auto mt-4' size="9em" />
+                                {avatar ? <img src={avatar} alt="profile" className='w-full h-full object-cover' /> : <FaUserSecret size="5em" className='text-black' />}
                             </div>
                         </div>
 
@@ -98,8 +116,10 @@ export default function Profile() {
                                     <div className='position'>
                                         <h3 className='text-sm text-center text-gray-500 font-semibold'>Founder of Loveense</h3>
                                     </div>
-                                    <div className='location'>
-                                        <h3 className='text-sm text-center text-gray-500 font-semibold'>Mirjapur, Bihar (U.P.)</h3>
+                                    <div className='location flex justify-center gap-2'>
+                                        <h3 className='text-sm text-center text-gray-500 font-semibold inline'>{location ? location.country : "Mirzapur"}
+                                        </h3>
+                                        <img className='rounded-full inline h-[20px]' src={`${avatar}`} alt="" srcset="" />
                                     </div>
                                 </div>
 

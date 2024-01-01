@@ -1,11 +1,13 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import conf from '../conf/conf.js'
-import { Client, Account, ID } from 'appwrite'
+import { Client, Account, ID, Query,Avatars,Locale } from 'appwrite'
 
 export class AuthService {
     client = new Client();
     account;
+    avatars;
+    Locale;
 
     notify = (message) => { toast.success(message, { position: "bottom-right", autoClose: 2000, }); }
     notifywar = (message) => { toast.console.warn(); (message, { position: "bottom-right", autoClose: 2000, }); }
@@ -17,7 +19,9 @@ export class AuthService {
         this.client
             .setEndpoint(conf.appwriteUrl)
             .setProject(conf.appwriteProjectId)
+        this.avatars = new Avatars(this.client);
         this.account = new Account(this.client)
+        this.Locale = new Locale(this.client)
     }
 
     // Create a new user account
@@ -141,6 +145,42 @@ export class AuthService {
             }
         } catch (error) {
             this.notifyer(`Error verifying email: ${error.message}`);
+            throw error;
+        }
+    }
+
+    // TODO: Implement to get othe Users Details
+    // async getOtherUserDetails(userid) {
+    //     try {
+    //         const users = await this.account.get([
+    //             Query.equal('userid', userid)
+    //         ]);
+    //         if (users) {
+    //             return users;
+    //         }
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }
+
+    async getAvtar(countryCode) {
+        try {
+            const avtar = await this.avatars.getFlag(countryCode);
+            if (avtar) {
+                return avtar;
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+    
+    async getLocale() {
+        try {
+            const locale = await this.Locale.get();
+            if (locale) {
+                return locale;
+            }
+        } catch (error) {
             throw error;
         }
     }

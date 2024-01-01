@@ -1,11 +1,26 @@
-import React from 'react'
-
+import React, {useEffect,useState} from 'react'
+import appwriteService from "../../appwrite/auth";
 import Button from '../layout/Button'
 import { FaFacebookF, FaLinkedin, FaUserSecret, FaXTwitter, FaLink } from "react-icons/fa6";
 import { BsGithub } from 'react-icons/bs';
 
 
-export default function Otheruser() {
+export default function Otheruser(userid) {
+
+    const [name, setName] = useState('')
+    console.log(userid);
+
+    // TODO: Get other user details
+    // useEffect(() => {
+    //     appwriteService.getOtherUserDetails(userid).then((user) => {
+    //         if (user) {
+    //             setName(user.name)
+    //             console.log(user);
+    //         }
+    //     })
+    // }, [])
+
+
     return (
         <div>
             <div className='flex bg-slate-100 p-5 h-[50vh]'>

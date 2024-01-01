@@ -12,7 +12,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import LoadingComponent from "../layout/Loader";
 import Profile from "./userProfile";
-import Otheruser from "./Otheruser";
+import Otheruser from "../layout/Otheruser";
 
 
 export default function Post() {
@@ -105,7 +105,7 @@ export default function Post() {
                                     <div className="absolute top-1/3 left-[25%] shadow-xl border-2">
                                         {profile && (
                                             <div className="fixed z-[20]">
-                                                <Otheruser />
+                                                <Otheruser userid={post.userid} />
                                             </div>
                                         )}
                                     </div>
