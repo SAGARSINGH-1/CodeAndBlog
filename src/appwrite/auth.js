@@ -2,6 +2,7 @@ import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import conf from '../conf/conf.js'
 import { Client, Account, ID, Query,Avatars,Locale } from 'appwrite'
+import Service from './config';
 
 export class AuthService {
     client = new Client();
@@ -29,6 +30,7 @@ export class AuthService {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
             if (userAccount) {
+                await Service.createUser(userAccount.$id, name,email);
                 this.notify("Account created successfully!");
                 return this.login({ email, password });
             } else {
@@ -149,19 +151,6 @@ export class AuthService {
         }
     }
 
-    // TODO: Implement to get othe Users Details
-    // async getOtherUserDetails(userid) {
-    //     try {
-    //         const users = await this.account.get([
-    //             Query.equal('userid', userid)
-    //         ]);
-    //         if (users) {
-    //             return users;
-    //         }
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // }
 
     async getAvtar(countryCode) {
         try {
@@ -173,7 +162,7 @@ export class AuthService {
             throw error;
         }
     }
-    
+
     async getLocale() {
         try {
             const locale = await this.Locale.get();

@@ -1,26 +1,22 @@
 import React, {useEffect,useState} from 'react'
-import appwriteService from "../../appwrite/auth";
+import appwriteService from "../../appwrite/config";
 import Button from '../layout/Button'
 import { FaFacebookF, FaLinkedin, FaUserSecret, FaXTwitter, FaLink } from "react-icons/fa6";
 import { BsGithub } from 'react-icons/bs';
 
 
-export default function Otheruser(userid) {
+export default function Otheruser(props) {
+    const userid = props.userid
 
     const [name, setName] = useState('')
-    console.log(userid);
+    // console.log(data);
 
-    // TODO: Get other user details
-    // useEffect(() => {
-    //     appwriteService.getOtherUserDetails(userid).then((user) => {
-    //         if (user) {
-    //             setName(user.name)
-    //             console.log(user);
-    //         }
-    //     })
-    // }, [])
-
-
+    // Get other user details
+    useEffect(() => {
+        const data = appwriteService.getUser(userid).then((data) => {
+            setName(data.name)
+        })
+    }, [userid])
     return (
         <div>
             <div className='flex bg-slate-100 p-5 h-[50vh]'>

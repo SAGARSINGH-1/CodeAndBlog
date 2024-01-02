@@ -34,7 +34,6 @@ export class Service {
 
         try {
             const postid = generateUniqueID();
-            console.log(postid);
             const result = await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId_1,
@@ -168,7 +167,6 @@ export class Service {
     async createComment({ name, postid, userid, comment }) {
         try {
             const documentID = ID.unique();
-            console.log(documentID);
             const result = this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId_2,
@@ -202,6 +200,46 @@ export class Service {
             throw error;
         }
     }
+
+
+    // Create a user account document in the database
+    async createUser(userid, name, email) {
+        try {
+            const result = await this.databases.createDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId_3,
+                userid,
+                {
+                    userid,
+                    name,
+                    email,
+                }
+            );
+            if (result) {
+                this.notify("User added");
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    // Get a user account document from the database
+    async getUser(userid) {
+        try {
+            const data= await this.databases.getDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId_3,
+                userid,
+            );
+            if(data){
+                return data;
+            }
+        } catch (error) {
+            this.notifyer(`${error.message}`);
+        }
+    }
+    
+
 
 
 }
