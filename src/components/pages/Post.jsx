@@ -102,7 +102,7 @@ export default function Post() {
                                         <FaUserCircle className="w-full h-full object-cover" />
                                     </div>
 
-                                    <div className="absolute top-1/3 left-[25%] shadow-xl border-2">
+                                    <div className="absolute top-1/4 left-[22%] shadow-xl border-2">
                                         {profile && (
                                             <div className="fixed z-[20]">
                                                 <Otheruser userid={post.userid} />
