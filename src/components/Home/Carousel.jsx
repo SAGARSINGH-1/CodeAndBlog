@@ -15,14 +15,14 @@ export default function Carousels() {
         showThumbs={false}
         >
        
-            <div className="flex border-2 bg-slate-100 rounded-lg p-4 shadow-md h-[58vh] w-[70vw]">
-                <div className="img w-[150rem] h-[25rem]">
+            <div className="flex bg-gray-50 p-4 h-[65vh] w-[70vw]">
+                <div className="img w-[150vw] h-[30vw] my-auto">
                     <img src="./Exersise.jpg" className="w-full h-full object-cover rounded-lg" alt="Exercise" />
                 </div>
                 <div className="p-4 border-spacing-2 border-black text-left">
-                    <h2 className="text-xl font-semibold m-2 text-gray-400">Sports and Life</h2>
-                    <h1 className="text-3xl font-bold mb-5">Sports and Life: Lessons Beyond the Game</h1>
-                    <p className="text-base text-gray-600 font-Rosarivo">
+                    <h2 className="text-lg font-semibold m-2 text-gray-400">Sports and Life</h2>
+                    <h1 className="text-2xl font-bold mb-5">Sports and Life: Lessons Beyond the Game</h1>
+                    <p className="text-sm text-gray-600 font-Rosarivo">
                         Sports and life are intertwined in countless ways. Beyond physical health, sports teach teamwork, discipline, and resilience.
                         They mirror life's challenges, victories, and the pursuit of excellence, offering valuable life lessons through the arena of competition.
                     </p>
@@ -33,14 +33,14 @@ export default function Carousels() {
                 </div>
             </div>
 
-            <div className="flex border-2  bg-slate-100 rounded-lg p-4 shadow-md h-[58vh] w-[70vw]">
-                <div className="img w-[150rem] h-[25rem]">
+            <div className="flex bg-gray-50  p-4 h-[65vh] w-[70vw]">
+                <div className="img w-[150vw] h-[30vw] my-auto">
                     <img src="./Health.jpg" className="w-full h-full object-cover rounded-lg" alt="Exercise" />
                 </div>
                 <div className="p-4 border-spacing-2 border-black text-left">
-                    <h2 className="text-xl font-semibold m-2 text-gray-400">Healthy Life and Food</h2>
-                    <h1 className="text-3xl font-bold mb-5">Health: Nutrition for Vibrant Living</h1>
-                    <p className="text-base text-gray-600 font-Rosarivo">
+                    <h2 className="text-lg font-semibold m-2 text-gray-400">Healthy Life and Food</h2>
+                    <h1 className="text-2xl font-bold mb-5">Health: Nutrition for Vibrant Living</h1>
+                    <p className="text-sm text-gray-600 font-Rosarivo">
                     In the pursuit of a healthy life, the role of nutrition is paramount. A diet rich in whole foods, balanced with exercise, and a positive mindset, 
                     can transform your life. Discover the power of mindful eating and its impact on overall well-being.
                     </p>
@@ -51,14 +51,14 @@ export default function Carousels() {
                 </div>
             </div>
 
-            <div className="flex border-2  bg-slate-100 rounded-lg p-4 shadow-md h-[58vh] w-[70vw]">
-                <div className="img w-[150rem] h-[25rem]">
+            <div className="flex bg-gray-50 p-4 h-[65vh] w-[70vw]">
+                <div className="img w-[150vw] h-[30vw] my-auto">
                     <img src="./Tech-2.jpg" className="w-full h-full object-cover rounded-lg" alt="Exercise" />
                 </div>
                 <div className="p-4 border-spacing-2 border-black text-left">
-                    <h2 className="text-xl font-semibold m-2 text-gray-400">Technology</h2>
-                    <h1 className="text-3xl font-bold mb-5">Technology and AI: Shaping Tomorrow</h1>
-                    <p className="text-base text-gray-600 font-Rosarivo">
+                    <h2 className="text-lg font-semibold m-2 text-gray-400">Technology</h2>
+                    <h1 className="text-2xl font-bold mb-5">Technology and AI: Shaping Tomorrow</h1>
+                    <p className="text-sm text-gray-600 font-Rosarivo">
                     In the realm of technology, artificial intelligence stands as a beacon of innovation. Its far-reaching influence touches every facet of our lives, 
                     from automation and data analysis to healthcare and self-driving cars. Discover how AI is revolutionizing the future
                     </p>
