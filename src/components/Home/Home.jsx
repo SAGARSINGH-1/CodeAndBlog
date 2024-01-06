@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Button from "../layout/Button";
 import LoadingComponent from "../layout/Loader";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import Carousels from "./Carousel";
 
 export default function Home() {
 
@@ -40,21 +41,19 @@ export default function Home() {
             </div>
 
             <div className="mx-auto max-w-2xl pt-16 md:py-11">
-              <div className="mb-2 flex justify-center">
+            <div className="mb-2 flex justify-center">
                 <div className="relative rounded-full px-3 py-1 text-[12px] md:text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                  Announcing our next round of funding.
-                  <a href="#" className="font-semibold text-indigo-600">
-                    <span className="absolute inset-0" aria-hidden="true"></span>Read more <span aria-hidden="true">&rarr;</span>
-                  </a>
+                  Announcing our next round of funding. 
+                  <NavLink className="font-semibold text-orange-500">
+                    <span className="absolute inset-0" aria-hidden="true"></span> Read more <span aria-hidden="true">&rarr;</span>
+                  </NavLink>
                 </div>
               </div>
-
               <div className="text-center">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Data to enrich your online business</h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Discover, Learn, and Inspire Us Today</h1>
+                <p className="mt-6 text-lg leading-8 text-gray-600">Dive into our world of stories and wisdom, where every scroll unveils a new chapter of inspiration and discovery</p>
                 <div className="mt-10 flex items-center justify-center gap-x-6">
-                  <Button href="#" className="py-2.5 text-sm font-semibold px-3.5">Get started</Button>
-                  <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
+                  <NavLink to={`/blogs`}><Button className="py-2.5 text-sm font-semibold px-3.5">Get started</Button></NavLink>
                 </div>
               </div>
 
@@ -69,38 +68,43 @@ export default function Home() {
           <div className="bg-white md:py-12 py-12">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto max-w-2xl sm:text-center">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Simple no-tricks pricing</h2>
-                <p className="mt-6 text-lg leading-8 text-gray-600">Distinctio et nulla eum soluta et neque labore quibusdam. Saepe et quasi iusto modi velit ut non voluptas in. Explicabo id ut laborum.</p>
+                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Journey, Your Destination</h2>
+                <p className="mt-6 text-lg leading-8 text-gray-600">Welcome to <span className="text-orange-500 font-medium">CODEANDBLOG</span>, where passion meets purpose we are a passionate team sharing insights, stories, and knowledge to inspire and accompany you on your exploration of diverse topics.</p>
+              </div>
+              <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+                <div className="w-[70vw] h-[58vh] mx-auto shadow-ld my-5 rounded-sm">
+                  <Carousels />
+                </div>
               </div>
               <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
                 <div className="p-8 sm:p-10 lg:flex-auto">
                   <h3 className="text-2xl font-bold tracking-tight text-gray-900">Lifetime membership</h3>
-                  <p className="mt-6 text-base leading-7 text-gray-600">Lorem ipsum dolor sit amet consect etur adipisicing elit. Itaque amet indis perferendis blanditiis repellendus etur quidem assumenda.</p>
+                  <p className="mt-6 text-base leading-7 text-gray-600">Embrace a lifelong learning journey with our exclusive lifetime membership. Experience continuous growth and exploration with us.</p>
                   <div className="mt-10 flex items-center gap-x-4">
-                    <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">What’s included</h4>
+                    <h4 className="flex-none text-sm font-semibold leading-6 text-orange-500">What’s included</h4>
                     <div className="h-px flex-auto bg-gray-100"></div>
                   </div>
                   <ul role="list" className="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6">
                     <li className="flex gap-x-3">
-                      <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <svg className="h-6 w-5 flex-none text-orange-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
                       </svg>
                       Private forum access
                     </li>
                     <li className="flex gap-x-3">
-                      <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <svg className="h-6 w-5 flex-none text-orange-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
                       </svg>
                       Member resources
                     </li>
                     <li className="flex gap-x-3">
-                      <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <svg className="h-6 w-5 flex-none text-orange-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
                       </svg>
                       Entry to annual conference
                     </li>
                     <li className="flex gap-x-3">
-                      <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <svg className="h-6 w-5 flex-none text-orange-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
                       </svg>
                       Official member t-shirt
@@ -115,7 +119,7 @@ export default function Home() {
                         <span className="text-5xl font-bold tracking-tight text-gray-900">$0</span>
                         <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
                       </p>
-                      <Button to="/blogs" className="mt-10 block px-3 py-2 text-sm">Get access</Button>
+                      <Button to="/blogs" className="mt-10 block px-3 py-2 text-sm mx-auto">Get access</Button>
                       <p className="mt-6 text-xs leading-5 text-gray-600">Invoices and receipts available for easy company reimbursement</p>
                     </div>
                   </div>
@@ -133,7 +137,7 @@ export default function Home() {
               <img class="mx-auto h-12" src="../../../public/Logo d.png" alt="" />
               <figure class="mt-10">
                 <blockquote class="text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
-                  <p>“Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias molestiae. Numquam corrupti in laborum sed rerum et corporis.”</p>
+                  <p><span className="text-4xl text-orange-500">“</span>Explore exciting stories and learn new things with us! Dive into a world of discovery and inspiration. Join our community where we love to share cool stuff. Start your adventure now!<span className="text-4xl text-orange-500">”</span></p>
                 </blockquote>
                 <div className="flex flex-wrap justify-center gap-10">
                   <figcaption class="mt-10">
@@ -167,8 +171,8 @@ export default function Home() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
                 <div className="max-w-xl lg:max-w-lg">
-                  <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Subscribe to our newsletter.</h2>
-                  <p className="mt-4 text-lg leading-8 text-gray-300">Nostrud amet eu ullamco nisi aute in ad minim nostrud adipisicing velit quis. Duis tempor incididunt dolore.</p>
+                  <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Subscribe to our blogs</h2>
+                  <p className="mt-4 text-lg leading-8 text-gray-300">Subscribe to our blog for captivating stories, expert tips, and inspiration delivered straight to your inbox.</p>
                   <div className="mt-6 flex max-w-md gap-x-4">
                     <label for="email-address" className="sr-only">Email address</label>
                     <input id="email-address" name="email" type="email" autocomplete="email" required className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" placeholder="Enter your email" />
@@ -182,8 +186,8 @@ export default function Home() {
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                       </svg>
                     </div>
-                    <dt className="mt-4 font-semibold text-white">Weekly articles</dt>
-                    <dd className="mt-2 leading-7 text-gray-400">Non laboris consequat cupidatat laborum magna. Eiusmod non irure cupidatat duis commodo amet.</dd>
+                    <dt className="mt-4 font-semibold text-white">Weekly Blogs</dt>
+                    <dd className="mt-2 leading-7 text-gray-400">Embark on a weekly journey. Explore new ideas in our blogs.</dd>
                   </div>
                   <div className="flex flex-col items-start">
                     <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
@@ -192,7 +196,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <dt className="mt-4 font-semibold text-white">No spam</dt>
-                    <dd className="mt-2 leading-7 text-gray-400">Officia excepteur ullamco ut sint duis proident non adipisicing. Voluptate incididunt anim.</dd>
+                    <dd className="mt-2 leading-7 text-gray-400">Expect excellence, not spam. Join us for insightful, spam-free updates.</dd>
                   </div>
                 </dl>
               </div>
