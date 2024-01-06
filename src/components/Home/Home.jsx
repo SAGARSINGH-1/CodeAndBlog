@@ -71,12 +71,12 @@ export default function Home() {
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Journey, Your Destination</h2>
                 <p className="mt-6 text-lg leading-8 text-gray-600">Welcome to <span className="text-orange-500 font-medium">CODEANDBLOG</span>, where passion meets purpose we are a passionate team sharing insights, stories, and knowledge to inspire and accompany you on your exploration of diverse topics.</p>
               </div>
-              <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
-                <div className="w-[70vw] h-[58vh] mx-auto shadow-ld my-5 rounded-sm">
+              <div className="mx-auto md:mt-16 max-w-2xl mt-20 lg:mx-0 lg:flex lg:max-w-none">
+                <div className="w-[90vw] max-h-max md:w-[70vw] md:h-[58vh] mx-auto shadow-ld my-5 rounded-sm">
                   <Carousels />
                 </div>
               </div>
-              <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+              <div className="mx-auto  mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
                 <div className="p-8 sm:p-10 lg:flex-auto">
                   <h3 className="text-2xl font-bold tracking-tight text-gray-900">Lifetime membership</h3>
                   <p className="mt-6 text-base leading-7 text-gray-600">Embrace a lifelong learning journey with our exclusive lifetime membership. Experience continuous growth and exploration with us.</p>
@@ -119,8 +119,8 @@ export default function Home() {
                         <span className="text-5xl font-bold tracking-tight text-gray-900">$0</span>
                         <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
                       </p>
-                      <Button to="/blogs" className="mt-10 block px-3 py-2 text-sm mx-auto">Get access</Button>
-                      <p className="mt-6 text-xs leading-5 text-gray-600">Invoices and receipts available for easy company reimbursement</p>
+                      <Button to="/blogs" className="mt-10 block px-3 py-2 text-sm mx-auto">All features are Free</Button>
+                      <p className="mt-6 text-xs leading-5 text-gray-600">Invoices and receipts not available for any type of purchase.</p>
                     </div>
                   </div>
                 </div>

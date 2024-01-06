@@ -15,8 +15,8 @@ export default function Carousels() {
         showThumbs={false}
         >
        
-            <div className="flex bg-gray-50 p-4 h-[65vh] w-[70vw]">
-                <div className="img w-[150vw] h-[30vw] my-auto">
+            <div className=" md:flex bg-gray-50 p-10 max-h-max max-w-max md:h-[70vh] md:w-[70vw]">
+                <div className="img md:w-[150vw] md:h-[30vw] my-auto">
                     <img src="./Exersise.jpg" className="w-full h-full object-cover rounded-lg" alt="Exercise" />
                 </div>
                 <div className="p-4 border-spacing-2 border-black text-left">
@@ -33,8 +33,8 @@ export default function Carousels() {
                 </div>
             </div>
 
-            <div className="flex bg-gray-50  p-4 h-[65vh] w-[70vw]">
-                <div className="img w-[150vw] h-[30vw] my-auto">
+            <div className="md:flex bg-gray-50 md:h-[65vh] md:w-[70vw]  p-4 max-h-max max-w-max">
+                <div className="img md:w-[150vw] md:h-[30vw] my-auto">
                     <img src="./Health.jpg" className="w-full h-full object-cover rounded-lg" alt="Exercise" />
                 </div>
                 <div className="p-4 border-spacing-2 border-black text-left">
@@ -51,8 +51,8 @@ export default function Carousels() {
                 </div>
             </div>
 
-            <div className="flex bg-gray-50 p-4 h-[65vh] w-[70vw]">
-                <div className="img w-[150vw] h-[30vw] my-auto">
+            <div className="md:flex bg-gray-50 p-4 max-h-max max-w-max md:h-[65vh] md:w-[70vw]">
+                <div className="img md:w-[150vw] md:h-[30vw] my-auto">
                     <img src="./Tech-2.jpg" className="w-full h-full object-cover rounded-lg" alt="Exercise" />
                 </div>
                 <div className="p-4 border-spacing-2 border-black text-left">
