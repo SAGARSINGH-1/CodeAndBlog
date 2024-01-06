@@ -67,10 +67,10 @@ function App() {
         <div className={`${isActive ? 'bg-black text-gray-500' : 'bg-white'}`}>
           <div className="bg-orange-400 text-white p-2 ">
             <div className='max-w-7xl flex justify-between items-center mx-auto px-3'>
-              <p className="text-base font-semibold">Star on GitHub, Make any contributions help us to improve this website!</p>
-              <div className='social'>
-                <NavLink target='_blank' to={'https://github.com/SAGARSINGH-1/CodeAndBlog'} className='cursor-pointer hover:text-black inline font-semibold border p-[5px] rounded-md hover:border-black'>
-                  <span className='transition-all duration-300 hover:text-yellow-200'><AiOutlineStar className='inline mb-1 text-xl mx-1' /></span><span className='transition-all duration-300 hover:text-black'>Star on <AiFillGithub className='h-6 w-6 inline mb-1' /></span>
+              <p className="text-[10px] md:text-base font-semibold">Star on GitHub, Make any contributions help us to improve this website!</p>
+              <div className='github-icon social w-[25%] md:w-auto'>
+                <NavLink target='_blank' to={'https://github.com/SAGARSINGH-1/CodeAndBlog'} className='text-sm p-[3px] cursor-pointer hover:text-black inline font-semibold border md:p-[5px] rounded-md hover:border-black'>
+                  <span className='text-[10px] md:text-lg transition-all duration-300 hover:text-black'>Star on <AiFillGithub className='h-4 w-4 md:h-6 md:w-6 inline mb-1' /></span>
                 </NavLink>
               </div>
             </div>

@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 export default function Footer() {
   return (
     <div>
-      <footer className="bg-gray-800 text-white py-4">
+      <footer className="bg-gray-900 text-white py-20">
         <div className="container mx-auto flex flex-wrap justify-between">
           {/* Footer Top Section */}
           <div className="w-full sm:w-1/2 md:w-1/4 px-4 mb-4">

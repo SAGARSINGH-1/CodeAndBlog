@@ -33,8 +33,7 @@ export const topBlog = [
     {
         id: 1,
         icon: "./Blogs/Politics-2.jpg",
-        title: "Protest On The Streets ",
-        author: "Andrew Malik",
+        title: "Protest On The Streets ",        author: "Andrew Malik",
         date: "05 Jun 24", 
     },
 
