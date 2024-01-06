@@ -76,7 +76,7 @@ function App() {
             </div>
           </div>
           <Navbar onButtonClick={handleButtonClick} />
-          <main className='min-h-screen'>
+          <main className='max-h-max'>
             <Outlet />
           </main>
           <CreatePost />

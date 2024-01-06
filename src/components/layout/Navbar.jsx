@@ -70,7 +70,7 @@ export default function Navbar({ onButtonClick }) {
 
   return (
     <div>
-      <nav className={`relative p-3 w-[100vw] z-10`}>
+      <nav className={`relative p-3 w-[100vw] z-10 border-b`}>
         <div className=' flex flex-col justify-between md:flex-row md:justify-between md:max-w-6xl md:mx-auto'>
           <div className='img flex items-center'>
             <img className='h-7 max-w-max' src={isActive ? "../Logo.png" : "../Logo d.png"} alt="logo" />
