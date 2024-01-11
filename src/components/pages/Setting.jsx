@@ -56,12 +56,15 @@ const Settings = () => {
   }, [secret, userId])
 
   return (
-    <div className="flex h-[100vh] my-5 bg-gray-100 ">
+    <div className="flex flex-col md:flex-row md:h-[100vh]">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-800 text-white p-4">
-        <h2 className="text-2xl font-semibold mb-6"><MdOutlineSettings className='inline mb-2 text-3xl mr-2' />Settings</h2>
+      <div className="w-full md:w-64 bg-gray-800 text-white p-4">
+        <h2 className="text-2xl font-semibold mb-6">
+          <MdOutlineSettings className="inline mb-2 text-3xl mr-2" />
+          Settings
+        </h2>
         <ul>
-          <li
+        <li
             className={`cursor-pointer py-2 px-4 mb-2 rounded ${selectedNavItem === 'Account' ? 'bg-orange-500' : 'hover:bg-gray-700'
               }`}
             onClick={() => handleNavItemClick('Account')}
@@ -93,10 +96,10 @@ const Settings = () => {
       </div>
 
       {/* Right Content Area */}
-      <div className="flex-1 p-8 overflow-scroll no-scrollbar">
+      <div className="flex-1 p-4 md:p-8 overflow-scroll no-scrollbar">
         {selectedNavItem === 'Account' && (
           <div className="bg-gray-200 p-5 rounded-md shadow-md">
-            <div className='mb-10'>
+           <div className='mb-10'>
               <h2 className="text-2xl font-semibold mb-4">Change Username</h2>
               <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Changing username from "username"</p>
@@ -145,7 +148,6 @@ const Settings = () => {
             </div>
           </div>
         )}
-
 
         {selectedNavItem === 'general' && (
           <div>
