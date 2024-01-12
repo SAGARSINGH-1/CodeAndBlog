@@ -122,7 +122,7 @@ export default function UserBlog() {
                         </div>
 
 
-
+                        {/* To Diplay all other users blog which is in active state */}
                         <div className='h-[95vh] m-3 overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
                             <Container>
                                 <div className='posts'>

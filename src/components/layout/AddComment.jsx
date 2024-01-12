@@ -28,7 +28,7 @@ const Comment = ({ postid, title, refreshcomment }) => {
   }
 
   return (
-    <div className="comment bg-white border border-gray-300 p-6 mb-6 rounded-lg shadow-lg">
+    <div className="comment mx-2 bg-white border border-gray-300 p-6 mb-6 rounded-lg shadow-lg">
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Comment Title</h3>
       {/* Populate this div with comment content and replies */}
       <div className="mt-4">

@@ -92,9 +92,9 @@ export default function Post() {
     return post ? (
         <div>
             {isContentLoaded ? (
-                <div className="py-8 px-10">
+                <div className="md:py-8 md:px-10">
                     <Container>
-                        <div className="flex justify-between gap-5">
+                        <div className="md:flex justify-between md:gap-5">
                             <div className="flex flex-col">
                                 <div className="relative h-[55px]"><NavLink to="/blogs"><button className="absolute text-black bg-[whitesmoke] rounded-full p-4 hover:translate-x-[-3px] transition-all ease-in-out"><FaArrowLeftLong size="1em" /></button></NavLink></div>
                                 <div className="flex m-3 ml-5">
@@ -123,7 +123,7 @@ export default function Post() {
                                     </div>
                                 </div>
 
-                                <div className="w-[50vw] flex justify-center mb-4 relative border rounded-xl p-2 ">
+                                <div className="md:w-[50vw] flex justify-center mb-4 relative border rounded-xl p-2 ">
                                     <img
                                         src={appwriteService.getFilePreview(post.featuredImage)}
                                         alt={post.title}
@@ -153,11 +153,11 @@ export default function Post() {
                                     <div className="absolute top-1/2 left-0 right-0 border-t-2 border-gray-300 mt-0.5"></div>
                                 </div>
 
-                                <div className=" w-[40vw] h-[90vh] overflow-auto scrollbar-none no-scrollbar">
+                                <div className=" md:w-[40vw] md:h-[90vh] overflow-auto scrollbar-none no-scrollbar">
                                     {comments.length > 0 ? comments.map((comment) => (
                                         <div className="flex items-start border-2 p-2 pl-5 my-3 rounded-2xl bg-slate-50" key={comment.$id}>
                                             <div onClick={toggleProfile} className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
-                                                <FaUserCircle className="w-full h-full object-cover" />
+                                                <FaUserCircle className="w-full h-full object-cover " />
                                             </div>
 
                                             {/* Comment Content */}

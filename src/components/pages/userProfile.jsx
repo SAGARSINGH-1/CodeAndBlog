@@ -89,34 +89,39 @@ export default function Profile() {
 
     return (
         <div>
-            <div className='w-[70vw] mx-auto m-10 '>
+            <div className='md:w-[70vw] w-[100vw] md:mx-auto p-2 md:m-10'>
                 <div>
-                    <h1 className='text-4xl py-5 font-semibold'>Account Setting</h1>
+                    <h1 className='text-2xl md:text-4xl md:py-5 font-semibold'>Account Setting</h1>
                 </div>
 
-                <div className='flex bg-slate-100 p-5 h-[50vh]'>
-                    <div className='flex w-full'>
+                <div className='md:flex bg-slate-100 mt-3 md:mt-0 p-5 rounded-md md:h-[50vh]'>
+                    <div className='md:flex w-full'>
 
-                        <div className='profile-img '>
-                            <div className='img h-[25vh] w-[13vw] mt-12 rounded-full border-2 m-5 ml-10 bg-white overflow-hidden '>
+                        <div className='profile-img flex justify-center items-center gap-3'>
+                            <div className='img h-[100px] w-[100px] md:h-[25vh] md:w-[13vw] md:mt-12 rounded-full border-2 md:m-5 md:ml-10 bg-white overflow-hidden '>
                                 {avatar ? <img src={avatar} alt="profile" className='w-full h-full object-cover' /> : <FaUserSecret size="5em" className='text-black' />}
                             </div>
+                                <div className='flex flex-col gap-0 '>
+                                <h1 className='text-2xl md:hidden md:text-5xl text-center font-semibold'>{name ? name : 'USER'}</h1>
+                                <h1 className='text-lg border md:hidden text-center text-gray-500 font-semibold'>Status :<span className={`inline rounded-full ml-1 mt-1  ${status ? 'text-green-500' : 'text-red-500'}`}>{status?"Active":"Inactive"}</span></h1>
+                                </div>
+
                         </div>
 
                         <div className='flex flex-col user-content  w-full'>
-                            <div className='content flex justify-around  h-full'>
+                            <div className='content md:flex justify-around  h-full'>
 
-                                <div className='details flex flex-col my-auto gap-3'>
+                                <div className='details md:flex flex-col my-auto gap-3'>
                                     <div>
-                                        <h1 className='text-5xl text-center font-semibold'>{name ? name : 'USER'}</h1>
+                                        <h1 className='hidden md:block text-2xl md:text-5xl text-center font-semibold'>{name ? name : 'USER'}</h1>
                                     </div>
                                     <div className='flex items-center justify-center'>
-                                        <h1 className='text-2xl text-center text-gray-500 font-semibold'>Status</h1><span className={`block w-4 h-4 rounded-full ml-3 mt-1  ${status ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                                        <h1 className='text-2xl hidden md:block text-center text-gray-500 font-semibold'>Status</h1><span className={`w-4 h-4 rounded-full ml-3 mt-1 hidden md:block  ${status ? 'bg-green-500' : 'bg-red-500'}`}></span>
                                     </div>
-                                    <div className='position'>
+                                    <div className='position mt-5 md:mt-0'>
                                         <h3 className='text-sm text-center text-gray-500 font-semibold'>Founder of Loveense</h3>
                                     </div>
-                                    <div className='location flex justify-center gap-2'>
+                                    <div className='location flex justify-center gap-2 mt-1 md:mt-0'>
                                         <h3 className='text-sm text-center text-gray-500 font-semibold inline'>{location ? location.country : "Mirzapur"}
                                         </h3>
                                         <img className='rounded-full inline h-[20px]' src={`${avatar}`} alt="" srcset="" />
@@ -124,7 +129,7 @@ export default function Profile() {
                                 </div>
 
                                 <div className='links my-auto'>
-                                    <div className="mt-5">
+                                    <div className="md:mt-5">
 
                                         {isEditing && (
                                             <div className="absolute w-[30vw] shadow-lg bg-white top-[40vh] left-1/2 transform -translate-x-1/2 p-5 flex flex-col">
@@ -173,13 +178,13 @@ export default function Profile() {
 
                             </div>
 
-                            <div className='buttons flex p-4 justify-center '>
+                            <div className='buttons md:flex p-4 justify-center '>
                                 <div className='flex text-lg font-semibold gap-5 bg-white px-5 '>
-                                    <h1 className='p-3 border-r-2'>48 Followers</h1>
-                                    <h1 className='p-3'>166 Following</h1>
+                                    <h1 className='md:p-3 py-1 border-r-2'>48 Followers</h1>
+                                    <h1 className='md:p-3 py-1'>166 Following</h1>
                                 </div>
 
-                                {name == name ? <Button className='rounded-none' onClick={handleClick}>Edit Details</Button> : <Button className='rounded-none px-11'>Follow +</Button>}
+                                {name == name ? <Button className='rounded-sm mt-4 md:mt-0' onClick={handleClick}>Edit Details</Button> : <Button className='rounded-none px-11'>Follow +</Button>}
 
                                 {click && (
                                     <div className='absolute top-2/3 shadow-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-5'>
