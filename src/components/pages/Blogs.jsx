@@ -97,7 +97,7 @@ export default function UserBlog() {
                     {/* Block-2 */}
                     <div className='md:w-[80vw]'>
 
-                        <div className='flex md:justify-between justify-around gap-2 w-[100vw] md:w-auto'>
+                        <div className='flex md:justify-between pt-4 w-[100vw] md:w-auto'>
                             <div className="bg-white mb-5 md:p-2 p-1 mx-2 md:ml-10 rounded-full w-[30rem] flex border-2 border-gray-400" >
                                 <div className='md:mt-1.5 md:mr-1'>
                                     <CiSearch size="2em" className='text-[.7rem] mt-[3px] mr-1 md:text-xl md:ml-3' />
@@ -109,7 +109,7 @@ export default function UserBlog() {
                                 />
                             </div>
 
-                            <div className='mr-5'>
+                            <div className='mr-5 hidden md:block'>
                                 <div className="flex items-center justify-center">
                                     <select className="p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none">
                                         <option value="" disabled defaultValue>Filter Search</option>
