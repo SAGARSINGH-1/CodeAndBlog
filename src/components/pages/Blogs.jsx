@@ -72,7 +72,7 @@ export default function UserBlog() {
                 <div className='flex m-5 p-5 gap-5'>
 
                     {/* Block-1 */}
-                    <div className=' w-[30vw]'>
+                    <div className=' w-[30vw] hidden md:block'>
                         <div className='bg-black text-white mb-5'>
                             <h2 className="font-Montserrat font-semibold p-3 ml-3">Categories</h2>
                         </div>
@@ -97,25 +97,25 @@ export default function UserBlog() {
                     {/* Block-2 */}
                     <div className='w-[80vw]'>
 
-                        <div className='flex justify-between'>
-                            <div className="bg-white mb-5 p-2 ml-10 rounded-full w-[30rem] flex border-2 border-gray-400" >
-                                <div className='mt-1.5 mr-1'>
-                                    <CiSearch size="2em" className='ml-3' />
+                        <div className='flex md:justify-between justify-around gap-2'>
+                            <div className="bg-white mb-5 md:p-2 p-1 ml-10 rounded-full w-[30rem] flex border-2 border-gray-400" >
+                                <div className='md:mt-1.5 md:mr-1'>
+                                    <CiSearch size="2em" className='text-[.7rem] mt-[3px] mr-1 md:text-xl md:ml-3' />
                                 </div>
                                 <input
                                     type="text"
                                     placeholder="Search..."
-                                    className="w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-500"
+                                    className="md:w-full md:px-4 md:py-2 rounded-md focus:outline-none focus:border-blue-500"
                                 />
                             </div>
 
                             <div className='mr-5'>
                                 <div className="flex items-center justify-center">
-                                    <select className="p-3 border border-gray-300 rounded-lg focus:outline-none">
+                                    <select className="p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none">
                                         <option value="" disabled defaultValue>Filter Search</option>
                                         <option value="Username">Username</option>
                                         <option value="Blog">Blog</option>
-                                        <option value="Comments">Comments</option>
+                                        <option value="Comments">Tags</option>
                                     </select>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@ export default function UserBlog() {
 
 
 
-                        <div className=' h-[95vh] overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
+                        <div className='h-[95vh] overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
                             <Container>
                                 <div className='posts'>
                                     {post.slice().reverse().map((item) => (

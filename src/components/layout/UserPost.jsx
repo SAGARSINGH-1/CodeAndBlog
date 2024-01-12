@@ -44,7 +44,7 @@ function UserPost({ $id, title, featuredImage, name, content }) {
 
     return (
 
-        <div key={$id} className='Category bg-slate-100 p-3 hover:bg-slate-200 rounded-lg cursor-pointer transition duration-300 mb-5'>
+        <div key={$id} className='Category bg-slate-100 p-2 md:p-3 hover:bg-slate-200 rounded-lg cursor-pointer transition duration-300 mb-5'>
             <Link to={`/post/${$id}`}>
                 <div className='user flex justify-between items-center'>
                     <div className='flex flex-row items-center'>
