@@ -69,7 +69,7 @@ export default function UserBlog() {
     return (
         <div className='max-w-6xl mx-auto'>
             {isContentLoaded ? (
-                <div className='flex m-5 p-5 gap-5'>
+                <div className='flex md:m-5 md:p-5 md:gap-5'>
 
                     {/* Block-1 */}
                     <div className=' w-[30vw] hidden md:block'>
@@ -95,10 +95,10 @@ export default function UserBlog() {
                     </div>
 
                     {/* Block-2 */}
-                    <div className='w-[80vw]'>
+                    <div className='md:w-[80vw]'>
 
-                        <div className='flex md:justify-between justify-around gap-2'>
-                            <div className="bg-white mb-5 md:p-2 p-1 ml-10 rounded-full w-[30rem] flex border-2 border-gray-400" >
+                        <div className='flex md:justify-between justify-around gap-2 w-[100vw] md:w-auto'>
+                            <div className="bg-white mb-5 md:p-2 p-1 mx-2 md:ml-10 rounded-full w-[30rem] flex border-2 border-gray-400" >
                                 <div className='md:mt-1.5 md:mr-1'>
                                     <CiSearch size="2em" className='text-[.7rem] mt-[3px] mr-1 md:text-xl md:ml-3' />
                                 </div>
@@ -123,7 +123,7 @@ export default function UserBlog() {
 
 
 
-                        <div className='h-[95vh] overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
+                        <div className='h-[95vh] m-3 overflow-y-scroll overflow-x-hidden scrollbar-none no-scrollbar'>
                             <Container>
                                 <div className='posts'>
                                     {post.slice().reverse().map((item) => (
