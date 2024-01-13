@@ -11,7 +11,7 @@ function CreatePost() {
             <div className='fixed bottom-[30px] right-[30px]'>
               <NavLink to='/add-post'>
                 <Button className="rounded-2xl w-full z-[50]">
-                  <IoCreateOutline className='mb-[.32rem] inline text-2xl z-50'/><spna className="hidden md:inline">Create Post</spna>
+                  <IoCreateOutline className='mb-[.32rem] inline text-2xl z-50'/><span className="hidden md:inline">Create Post</span>
                 </Button>
               </NavLink>
             </div>

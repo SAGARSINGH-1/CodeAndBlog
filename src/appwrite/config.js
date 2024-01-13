@@ -23,7 +23,7 @@ export class Service {
 
 
 
-    // Create a new user post/blog
+    // **Create a new user post/blog
     async createPost({ title, slug, content, featuredImage, status, userid, name }) {
         function generateUniqueID() {
             const timestamp = Date.now().toString(36); // Convert timestamp to base36
@@ -58,7 +58,7 @@ export class Service {
         }
     }
 
-    // Update a user post/blog which is already created
+    // **Update a user post/blog which is already created
     async updatePost(slug, { title, content, featuredImage, status }) {
         try {
             const result = await this.databases.updateDocument(
@@ -82,7 +82,7 @@ export class Service {
     }
 
 
-    // Delete a user post/blog which is already created
+    // **Delete a user post/blog which is already created
     async deletePost(slug) {
         try {
             const result = await this.databases.deleteDocument(
@@ -101,7 +101,7 @@ export class Service {
         }
     }
 
-    // Get a user post/blog which is already created
+    // **Get a user post/blog which is already created
     async getPost(slug) {
         try {
             return await this.databases.getDocument(
@@ -114,7 +114,7 @@ export class Service {
         }
     }
 
-    // Get all user post/blog which is already created and having an status active
+    // **Get all user post/blog which is already created and having an status active
     async getPosts(quries = [Query.equal('status', 'active')]) {
         try {
             return await this.databases.listDocuments(
@@ -129,7 +129,7 @@ export class Service {
     }
 
 
-    // Upload files to the Appwrite storage
+    // **Upload files to the Appwrite storage
     async uploadFile(file) {
         try {
             return await this.bucket.createFile(
@@ -142,7 +142,7 @@ export class Service {
         }
     }
 
-    // Delete files from the Appwrite storage
+    // **Delete files from the Appwrite storage
     async deleteFile(fileId) {
         try {
             await this.bucket.deleteFile(
@@ -155,7 +155,7 @@ export class Service {
         }
     }
 
-    // Get file preview from the Appwrite storage
+    // **Get file preview from the Appwrite storage
     getFilePreview(fileId) {
         return this.bucket.getFilePreview(
             conf.appwriteBucketId,
@@ -163,7 +163,7 @@ export class Service {
         );
     }
 
-    //  Create a comment on the post with its id
+    //  **Create a comment on the post with its id
     async createComment({ name, postid, userid, comment }) {
         try {
             const documentID = ID.unique();
@@ -187,7 +187,7 @@ export class Service {
     }
 
 
-    // Get all comments on the post with its id
+    // **Get all comments on the post with its id
     async getComments(postid, queries = [Query.equal('postid', postid)]) {
         try {
             return await this.databases.listDocuments(
@@ -202,7 +202,7 @@ export class Service {
     }
 
 
-    // Create a user account document in the database
+    // **Create a user account document in the database
     async createUser(userid, name, email) {
         try {
             const result = await this.databases.createDocument(
@@ -223,7 +223,26 @@ export class Service {
         }
     }
 
-    // Get a user account document from the database
+    // **Delete a user account document from the database
+    async deleteUser(userid) {
+        try {
+            const result = await this.databases.deleteDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId_3,
+                userid,
+            );
+            if (result) {
+                this.notify("User deleted from database");
+            }
+            return result;
+        } catch (error) {
+            this.notifyer(`${error.message}`);
+            throw error;
+        }
+    }
+
+
+    // **Get a user account document from the database
     async getUser(userid) {
         try {
             const data= await this.databases.getDocument(

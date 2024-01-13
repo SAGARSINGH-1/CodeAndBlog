@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { MdVerified } from "react-icons/md";
+import Deactivate from '../layout/Deactivate';
 
 
 const Settings = () => {
@@ -22,12 +23,12 @@ const Settings = () => {
 
   const handleThemeChange = (selectedTheme) => {
     setTheme(selectedTheme);
-    // You can save the theme preference to user settings here
+    // **You can save the theme preference to user settings here
   };
 
   const handleFontSizeChange = (selectedFontSize) => {
     setFontSize(selectedFontSize);
-    // You can save the font size preference to user settings here
+    // **You can save the font size preference to user settings here
   };
 
   const handleNavItemClick = (item) => {
@@ -35,7 +36,7 @@ const Settings = () => {
   };
 
   // TODO: Email aready verifies not working
-  // Email verification link Send for verification of email
+  // **Email verification link Send for verification of email
   const VerifyEmail = async () => {
     if (userData.userData.emailVerification) {
       notify("Email Already Verified");
@@ -50,21 +51,30 @@ const Settings = () => {
 
   useEffect(() => {
     if (secret && userId) {
-      // Verification of email with secret and userId
+      // **Verification of email with secret and userId
       authService.updateVerification(secret, userId);
     }
   }, [secret, userId])
 
+  // **Function to show or hide Deactivate Account Modal
+  const [open, setOpen] = useState(false)
+  const cancelButtonRef = React.useRef(null)
+  const DeactivateHandler = () => {
+    setOpen(true)
+  }
+
   return (
     <div className="flex flex-col md:flex-row md:h-[100vh]">
-      {/* Sidebar */}
+      {
+      //** Sidebar Area
+      }
       <div className="w-full md:w-64 bg-gray-800 text-white p-4">
         <h2 className="text-2xl font-semibold mb-6">
           <MdOutlineSettings className="inline mb-2 text-3xl mr-2" />
           Settings
         </h2>
         <ul>
-        <li
+          <li
             className={`cursor-pointer py-2 px-4 mb-2 rounded ${selectedNavItem === 'Account' ? 'bg-orange-500' : 'hover:bg-gray-700'
               }`}
             onClick={() => handleNavItemClick('Account')}
@@ -95,11 +105,13 @@ const Settings = () => {
         </ul>
       </div>
 
-      {/* Right Content Area */}
+      {
+      //** Right Content Area
+      }
       <div className="flex-1 p-4 md:p-8 overflow-scroll no-scrollbar">
         {selectedNavItem === 'Account' && (
           <div className="bg-gray-200 p-5 rounded-md shadow-md">
-           <div className='mb-10'>
+            <div className='mb-10'>
               <h2 className="text-2xl font-semibold mb-4">Change Username</h2>
               <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Changing username from "username"</p>
@@ -144,7 +156,7 @@ const Settings = () => {
               <hr className="my-4 border-t border-gray-500" />
               <p className="mb-5 text-gray-600">Delete Your Account and Data</p>
               <p className="mb-5 text-gray-600">{userData.userData.name}</p>
-              <Button className='bg-red-600 hover:bg-red-500'>Delete Account</Button>
+              <Button  onClick={DeactivateHandler} className='bg-red-600 hover:bg-red-500'>Delete Account</Button>
             </div>
           </div>
         )}
@@ -152,14 +164,18 @@ const Settings = () => {
         {selectedNavItem === 'general' && (
           <div>
             <h2 className="text-2xl font-semibold mb-6">General Settings</h2>
-            {/* General settings content */}
+            {
+            // ** General settings content
+            }
           </div>
         )}
 
         {selectedNavItem === 'theme' && (
           <div>
             <h2 className="text-2xl font-semibold mb-6">Theme Settings</h2>
-            {/* Theme settings content */}
+            {
+            // **Theme settings content 
+          }
             <div className="mb-4">
               <h3 className="text-lg font-medium mb-2">Theme</h3>
               <select
@@ -177,7 +193,9 @@ const Settings = () => {
         {selectedNavItem === 'font' && (
           <div>
             <h2 className="text-2xl font-semibold mb-6">Font Settings</h2>
-            {/* Font settings content */}
+            { 
+            //**Font settings content
+            }
             <div className="mb-6">
               <h3 className="text-lg font-medium mb-2">Font Size</h3>
               <select
@@ -193,6 +211,10 @@ const Settings = () => {
           </div>
         )}
       </div>
+      {
+      // ** Deactivate Account Modal
+      <Deactivate show={open} setOpen={setOpen} userId={userData.userData.$id} cancelButtonRef={cancelButtonRef} />
+      }
     </div>
   );
 };

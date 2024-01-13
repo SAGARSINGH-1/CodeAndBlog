@@ -15,7 +15,7 @@ export class AuthService {
     notifyer = (message) => { toast.error(message, { position: "bottom-right", autoClose: 2000, }); }
 
 
-    // EndPoints to connect to the right Appwrite server and project.
+    // **EndPoints to connect to the right Appwrite server and project.
     constructor() {
         this.client
             .setEndpoint(conf.appwriteUrl)
@@ -25,7 +25,7 @@ export class AuthService {
         this.Locale = new Locale(this.client)
     }
 
-    // Create a new user account
+    // **Create a new user account
     async createAccount({ email, password, name }) {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
@@ -43,7 +43,25 @@ export class AuthService {
         }
     }
 
-    // Create a login session
+
+    //** Delete a user account
+
+    async deleteAccount(userid) {
+        try {
+            const result = await this.account.updateStatus(userid);
+            if (result) {
+                // await Service.deleteUser(userid);
+                this.notify("Account deleted successfully!");
+            }
+            return result;
+        } catch (error) {
+            this.notifyer(`${error.message}`);
+            throw error;
+        }
+    }
+
+
+    // **Create a login session
     async login({ email, password }) {
         try {
             const result = await this.account.createEmailSession(email, password);
@@ -57,7 +75,7 @@ export class AuthService {
         }
     }
 
-    // Get the current user
+    // **Get the current user
     async getCurrentUser() {
         try {
             return await this.account.get();
@@ -67,7 +85,7 @@ export class AuthService {
         return null;
     }
 
-    // Logout the current user
+    // **Logout the current user
     async logout() {
         try {
             const result = await this.account.deleteSessions();
@@ -81,7 +99,7 @@ export class AuthService {
         }
     }
 
-    // Login with Google
+    // **Login with Google
     async googleauth() {
         try {
             const result = this.account.createOAuth2Session('google', "https://localhost:5173", "https://localhost:5173");
@@ -96,7 +114,7 @@ export class AuthService {
         }
     }
 
-    // Used to recover password and Send Verification Link to the user's email
+    // **Used to recover password and Send Verification Link to the user's email
     async PasswordRecovery(email) {
         try {
             const result = await this.account.createRecovery(email, "http://localhost:5173/password-reset", "http://localhost:5173/password-reset");
@@ -110,7 +128,7 @@ export class AuthService {
         }
     }
 
-    // Used to reset password
+    // **Used to reset password
     async ResetPassword(userId, secret, password, passwordAgain) {
 
         try {
@@ -125,7 +143,7 @@ export class AuthService {
     }
 
 
-    // Implement Email Verification and send email
+    // **Implement Email Verification and send email
     async createVerification() {
         try {
             const result = await this.account.createVerification("http://localhost:5173/setting", "http://localhost:5173/setting");
@@ -138,7 +156,7 @@ export class AuthService {
         }
     }
 
-    // Verify Email Verification 
+    // **Verify Email Verification 
     async updateVerification(userId, secret) {
         try {
             const result = await this.account.updateVerification(secret, userId, "http://localhost:5173/setting");
@@ -152,9 +170,10 @@ export class AuthService {
     }
 
 
+    // **To get user awatar
     async getAvtar(countryCode) {
         try {
-            const avtar = await this.avatars.getFlag(countryCode);
+            const avtar = this.avatars.getFlag(countryCode);
             if (avtar) {
                 return avtar;
             }
@@ -163,6 +182,7 @@ export class AuthService {
         }
     }
 
+    // **To get user locale Address
     async getLocale() {
         try {
             const locale = await this.Locale.get();
