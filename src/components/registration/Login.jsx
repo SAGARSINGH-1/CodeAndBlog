@@ -61,18 +61,18 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center my-4 py-4 md:m-5 md:p-5">
       {isContentLoaded ? (
-        <div className="bg-white p-8 rounded shadow-xl min-w-min md:w-96">
+        <div className="bg-white dark:bg-gray-900 p-8 rounded shadow-xl min-w-min md:w-96">
         <h2 className="text-2xl font-semibold text-center mb-4">Login</h2>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
         <form onSubmit={handleSubmit(login)}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-600 text-sm font-medium mb-2">
+            <label htmlFor="email" className="block text-gray-600 text-sm dark:text-gray-300 font-medium mb-2">
               Email
             </label>
             <input
               type="email"
               id="email"
-              className="w-full border rounded-md py-2 px-3 focus:outline-none focus:border-blue-400"
+              className="w-full border rounded-md py-2 px-3 dark:bg-gray-900 focus:outline-none focus:border-blue-400"
               placeholder="Email"
               required
               {...register("email", {
@@ -85,13 +85,13 @@ export default function Login() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-600 text-sm font-medium mb-2">
+            <label htmlFor="password" className="block text-gray-600 text-sm dark:text-gray-300 font-medium mb-2">
               Password
             </label>
             <input
               type="password"
               id="password"
-              className="w-full border rounded-md py-2 px-3 focus:outline-none focus:border-blue-400"
+              className="w-full border rounded-md py-2 px-3 dark:bg-gray-900 focus:outline-none focus:border-blue-400"
               placeholder="Password"
               required
               autoComplete='on'
@@ -99,36 +99,36 @@ export default function Login() {
                 required: true,
               })}
             />
-            <p className=" text-gray-600 text-sm font-semibold m-3 text-end">
-              Forget <Link className="text-indigo-500 cursor-pointer" to={'/password-reset'}>password?</Link>
+            <p className=" text-gray-600 text-sm dark:text-gray-300 font-semibold m-3 text-end">
+              Forget <Link className="text-orange-500 cursor-pointer" to={'/password-reset'}>password?</Link>
             </p>
           </div>
 
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+              className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300"
             >
               Login
             </button>
           </div>
 
           <div className="social-login-label relative mt-4 text-center">
-            <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold">
+            <span className="label-text relative z-10 inline-block px-2 bg-white dark:bg-gray-900 dark:text-gray-200 text-gray-500 font-semibold">
               or connect with
             </span>
             <div className="absolute top-1/2 left-0 right-0 border-t border-gray-300 mt-0.5"></div>
           </div>
 
           <NavLink>
-            <button className="rounded-full w-full bg-white border border-gray-300 flex items-center justify-center p-3 shadow-sm hover:shadow-md my-3 font-semibold">
+            <button className="rounded-full w-full bg-white dark:bg-gray-900 border border-gray-300 flex items-center justify-center p-3 shadow-sm hover:shadow-md my-3 font-semibold">
               <span className="mr-2"><FcGoogle size="1.5em" /></span>
               Continue with Google
             </button>
           </NavLink>
         </form>
         
-        <p className="text-center text-gray-600 text-sm">
+        <p className="text-center text-gray-600 text-sm dark:text-gray-300">
           Don't have an account? <NavLink className="text-indigo-500" to='/signup'>Signup</NavLink>
         </p>
       </div>

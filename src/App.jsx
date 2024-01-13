@@ -30,14 +30,6 @@ function App() {
       .finally(() => setLoading(false))
   }, [])
 
-  // Toggle Dark Mode
-  const [isActive, setIsActive] = useState(false);
-
-  const handleButtonClick = (isActive) => {
-    setIsActive(isActive);
-  };
-
-
   // top Loader
   const [isContentLoaded, setContentLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -62,9 +54,9 @@ function App() {
   }, []);
 
   return !loading ? (
-    <div className="flex justify-center overflow-hidden">
+    <div className="flex justify-center overflow-hidden dark:bg-black dark:text-white"> 
       {isContentLoaded ? (
-        <div className={`${isActive ? 'bg-black text-gray-500' : 'bg-white'}`}>
+        <div className="">
           <div className="bg-orange-400 text-white p-2 ">
             <div className='max-w-7xl flex justify-between items-center mx-auto px-3'>
               <p className="text-[10px] md:text-base font-semibold">Star on GitHub, Make any contributions help us to improve this website!</p>
@@ -75,7 +67,7 @@ function App() {
               </div>
             </div>
           </div>
-          <Navbar onButtonClick={handleButtonClick} />
+          <Navbar />
           <main className='max-h-max'>
             <Outlet />
           </main>

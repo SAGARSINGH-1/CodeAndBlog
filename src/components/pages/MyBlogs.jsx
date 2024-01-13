@@ -69,9 +69,9 @@ function MyBlogs() {
                     )}
                 </div>
             ) : (
-                <div className='flex flex-col gap-10 md:m-3 h-[70vh] overflow-visible'>
+                <div className='flex flex-row gap-10 md:m-3 h-[70vh] overflow-visible'>
                     {mypost.slice(0, 3).map((post) => (
-                        <div key={post.id} className='max-w-max bg-gray-200 p-5'>
+                        <div key={post.id} className='max-w-max bg-gray-200 p-5 dark:bg-gray-800'>
                             <div className='flex gap-3 py-3'>
                                 <Skeleton variant="circular" width={40} height={40} />
                                 <Skeleton variant="text" width={210} height={35} sx={{ fontSize: '1rem' }} />

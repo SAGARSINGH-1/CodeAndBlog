@@ -28,18 +28,18 @@ const Comment = ({ postid, title, refreshcomment }) => {
   }
 
   return (
-    <div className="comment mx-2 bg-white border border-gray-300 p-6 mb-6 rounded-lg shadow-lg">
-      <h3 className="text-xl font-semibold mb-4 text-gray-800">Comment Title</h3>
+    <div className="comment mx-2 bg-white border dark:text-white dark:bg-black border-gray-300 p-6 mb-6 rounded-lg shadow-lg">
+      <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Comment Title</h3>
       {/* Populate this div with comment content and replies */}
       <div className="mt-4">
         {/* Content goes here */}
       </div>
       <form className="mt-6" onSubmit={(e) => handleAddReply(e)}>
-        <label className="block text-gray-700 font-semibold mb-2">Add Reply:</label>
+        <label className="block text-gray-700 font-semibold mb-2 dark:text-white">Add Reply:</label>
         <textarea
           value={replyText}
           onChange={(e) => setReplyText(e.target.value)}
-          className="w-full border border-gray-300 p-3 rounded-md focus:outline-none resize-none"
+          className="w-full border border-gray-300 dark:bg-black p-3 rounded-md focus:outline-none resize-none"
           rows="3"
           placeholder="Write your reply here..."
           name="comment"

@@ -5,6 +5,8 @@ import {Controller } from 'react-hook-form';
 
 export default function RTE({name, control, label, defaultValue =""}) {
   return (
+
+    // TODO: Make this Editor to be compatible in both light and dark mode
     <div className='w-full'> 
     {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
 

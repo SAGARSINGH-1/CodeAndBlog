@@ -70,18 +70,18 @@ export default function Signup() {
     <div>
       {isContentLoaded ? (
         <div className="flex items-center justify-center my-4 py-4 md:m-5 md:p-5">
-          <div className="bg-white p-8 rounded shadow-xl min-h-min md:w-96">
+          <div className="bg-white dark:bg-gray-900 p-8 rounded shadow-xl min-h-min md:w-96">
             <h2 className="text-2xl font-semibold text-center mb-4">Sign Up</h2>
             {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
             <form onSubmit={handleSubmit(create)}>
               <div className="mb-4">
-                <label htmlFor="name" className="block text-gray-600 text-sm font-medium mb-2">
+                <label htmlFor="name" className="block dark:text-gray-200 text-gray-600 text-sm font-medium mb-2">
                   Full Name
                 </label>
                 <input
                   type="text"
                   id="name"
-                  className="w-full border rounded-md py-2 px-3 focus:outline-none focus:border-blue-400"
+                  className="w-full border rounded-md py-2 px-3 focus:outline-none dark:bg-gray-900 focus:border-blue-400"
                   placeholder="Name"
                   required
                   {...register("name", {
@@ -90,13 +90,13 @@ export default function Signup() {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-600 text-sm font-medium mb-2">
+                <label htmlFor="email" className="block dark:text-gray-200 text-gray-600 text-sm font-medium mb-2">
                   Email
                 </label>
                 <input
                   type="email"
                   id="email"
-                  className="w-full border rounded-md py-2 px-3 focus:outline-none focus-border-blue-400"
+                  className="w-full border rounded-md py-2 px-3 focus:outline-none dark:bg-gray-900 focus-border-blue-400"
                   placeholder="Email"
                   required
                   {...register("email", {
@@ -109,13 +109,13 @@ export default function Signup() {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="password" className="block text-gray-600 text-sm font-medium mb-2">
+                <label htmlFor="password" className="block dark:text-gray-200 text-gray-600 text-sm font-medium mb-2">
                   Password
                 </label>
                 <input
                   type="password"
                   id="password"
-                  className="w-full border rounded-md py-2 px-3 focus:outline-none focus-border-blue-400"
+                  className="w-full border rounded-md py-2 px-3 focus:outline-none dark:bg-gray-900 focus-border-blue-400"
                   placeholder="Password"
                   required
                   {...register("password", {
@@ -125,11 +125,11 @@ export default function Signup() {
               </div>
 
               <div className="mb-4">
-                <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">Sign Up</button>
+                <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300">Sign Up</button>
               </div>
 
               <div className="social-login-label relative mt-4 text-center">
-                <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold">
+                <span className="label-text relative z-10 inline-block px-2 bg-white dark:bg-gray-900 dark:text-gray-100 text-gray-500 font-semibold">
                   or connect with
                 </span>
                 <div className="absolute top-1/2 left-0 right-0 border-t border-gray-300 mt-0.5"></div>
@@ -137,7 +137,7 @@ export default function Signup() {
 
           
               <NavLink onClick={googleauth}>
-                <button className="rounded-full w-full bg-white border border-gray-300 flex items-center justify-center p-3 shadow-sm hover:shadow-md my-3 font-semibold">
+                <button className="rounded-full w-full bg-white dark:bg-gray-900 border border-gray-300 flex items-center justify-center p-3 shadow-sm hover:shadow-md my-3 font-semibold">
                   <span className="mr-2"><FcGoogle size="1.5em"/></span>
                   Continue with Google
                 </button>
@@ -145,7 +145,7 @@ export default function Signup() {
               
             </form>
 
-            <p className="text-center text-gray-600 text-sm"> Have an account? <NavLink className="text-indigo-500" to='/login'>Login</NavLink> </p>
+            <p className="text-center dark:text-gray-200 text-gray-600 text-sm"> Have an account? <NavLink className="text-indigo-500" to='/login'>Login</NavLink> </p>
           </div>
         </div>
       ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}

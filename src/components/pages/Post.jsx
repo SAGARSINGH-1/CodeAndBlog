@@ -96,10 +96,10 @@ export default function Post() {
                     <Container>
                         <div className="md:flex justify-between md:gap-5">
                             <div className="flex flex-col">
-                                <div className="relative h-[55px]"><NavLink to="/blogs"><button className="absolute text-black bg-[whitesmoke] rounded-full p-4 hover:translate-x-[-3px] transition-all ease-in-out"><FaArrowLeftLong size="1em" /></button></NavLink></div>
+                                <div className="relative h-[55px]"><NavLink to="/blogs"><button className="absolute text-black bg-[whitesmoke] dark:bg-white rounded-full p-4 hover:translate-x-[-3px] transition-all ease-in-out"><FaArrowLeftLong size="1em" /></button></NavLink></div>
                                 <div className="flex m-3 ml-5">
-                                    <div onClick={toggleProfile} className="rounded-full  bg-gray-300 w-12 h-12 mr-3">
-                                        <FaUserCircle className="w-full h-full object-cover" />
+                                    <div onClick={toggleProfile} className="rounded-full  bg-gray-300 dark:bg-white w-12 h-12 mr-3">
+                                        <FaUserCircle className="w-full h-full object-cover dark:text-black" />
                                     </div>
 
                                     <div className="absolute top-1/4 left-[22%] shadow-xl border-2">
@@ -109,7 +109,6 @@ export default function Post() {
                                             </div>
                                         )}
                                     </div>
-
 
                                     <div className="text-2xl font-bold">{post.name}</div>
                                 </div>
@@ -148,22 +147,22 @@ export default function Post() {
 
                             <div className="p-2">
                                 <div className="social-login-label relative">
-                                    <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 font-semibold text-4xl m-5">Comments</span>
-                                    <div className="absolute mt-5 top-0 right-0 mr-3 z-[1] bg-white float-right p-3"><button onClick={refreshcomment}><LuRefreshCcw className={`${refresh ? "rotate-180  transition-all ease-out" : ""}`} size="1.5em" /></button></div>
+                                    <span className="label-text relative z-10 inline-block px-2 bg-white text-gray-500 dark:text-white dark:bg-black font-semibold text-4xl m-5">Comments</span>
+                                    <div className="absolute mt-5 top-0 right-0 mr-3 z-[1] bg-white float-right p-3 dark:text-white dark:bg-black"><button onClick={refreshcomment}><LuRefreshCcw className={`${refresh ? "rotate-180  transition-all ease-out" : ""}`} size="1.5em" /></button></div>
                                     <div className="absolute top-1/2 left-0 right-0 border-t-2 border-gray-300 mt-0.5"></div>
                                 </div>
 
-                                <div className=" md:w-[40vw] md:h-[90vh] overflow-auto scrollbar-none no-scrollbar">
+                                <div className=" md:w-[40vw] md:h-[90vh] overflow-auto scrollbar-none no-scrollbar dark:bg-black">
                                     {comments.length > 0 ? comments.map((comment) => (
-                                        <div className="flex items-start border-2 p-2 pl-5 my-3 rounded-2xl bg-slate-50" key={comment.$id}>
-                                            <div onClick={toggleProfile} className="rounded-full overflow-hidden bg-gray-300 w-12 h-12 mr-3">
+                                        <div className="flex items-start border-2 p-2 pl-5 my-3 rounded-2xl bg-slate-50 dark:bg-black" key={comment.$id}>
+                                            <div onClick={toggleProfile} className="rounded-full overflow-hidden bg-gray-300 dark:text-white dark:bg-black w-12 h-12 mr-3">
                                                 <FaUserCircle className="w-full h-full object-cover " />
                                             </div>
 
                                             {/* Comment Content */}
                                             <div className="ml-3">
-                                                <h1 className="text-lg font-medium">{comment.name}</h1>
-                                                <p className="text-gray-500 text-base">{comment.comment}</p>
+                                                <h1 className="text-lg font-medium dark:text-white">{comment.name}</h1>
+                                                <p className="text-gray-500 text-base ">{comment.comment}</p>
                                                 {/* Additional content */}
                                             </div>
                                         </div>

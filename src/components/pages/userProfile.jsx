@@ -94,7 +94,7 @@ export default function Profile() {
                     <h1 className='text-2xl md:text-4xl md:py-5 font-semibold'>Account Setting</h1>
                 </div>
 
-                <div className='md:flex bg-slate-100 mt-3 md:mt-0 p-5 rounded-md md:h-[50vh]'>
+                <div className='md:flex bg-slate-100 dark:bg-gray-900 mt-3 md:mt-0 p-5 rounded-md md:h-[50vh]'>
                     <div className='md:flex w-full'>
 
                         <div className='profile-img flex justify-center items-center gap-3'>
@@ -132,9 +132,9 @@ export default function Profile() {
                                     <div className="md:mt-5">
 
                                         {isEditing && (
-                                            <div className="absolute w-[30vw] shadow-lg bg-white top-[40vh] left-1/2 transform -translate-x-1/2 p-5 flex flex-col">
+                                            <div className="absolute w-[30vw] shadow-lg bg-white dark:bg-gray-800 top-[40vh] left-1/2 transform -translate-x-1/2 p-5 flex flex-col">
                                                 <div className='flex'>
-                                                    <span className='bg-slate-100 p-3 mb-3 rounded-l-md'>
+                                                    <span className='bg-slate-100 dark:bg-gray-600 p-3 mb-3 rounded-l-md'>
                                                         <FaLink size="1.3em" className="text-xl" />
                                                     </span>
                                                     <input
@@ -142,7 +142,7 @@ export default function Profile() {
                                                         placeholder='Enter your link'
                                                         value={inputText}
                                                         onChange={(e) => setInputText(e.target.value)}
-                                                        className='border p-2 mb-3 w-full focus:outline-none'
+                                                        className='border p-2 mb-3 w-full dark:border-l-0 focus:outline-none dark:bg-gray-800'
                                                     />
                                                 </div>
 
@@ -179,39 +179,39 @@ export default function Profile() {
                             </div>
 
                             <div className='buttons md:flex p-4 justify-center '>
-                                <div className='flex text-lg font-semibold gap-5 bg-white px-5 '>
-                                    <h1 className='md:p-3 py-1 border-r-2'>48 Followers</h1>
+                                <div className='flex text-lg font-semibold gap-5 bg-white dark:text-black px-5 '>
+                                    <h1 className='md:p-3 py-1 border-r-2 dark:border-gray-600'>48 Followers</h1>
                                     <h1 className='md:p-3 py-1'>166 Following</h1>
                                 </div>
 
                                 {name == name ? <Button className='rounded-sm mt-4 md:mt-0' onClick={handleClick}>Edit Details</Button> : <Button className='rounded-none px-11'>Follow +</Button>}
 
                                 {click && (
-                                    <div className='absolute top-2/3 shadow-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-5'>
+                                    <div className='absolute top-2/3 shadow-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-900 p-5'>
                                         <div className='fields p-4 flex flex-col gap-y-5'>
                                             <div className='mb-4 flex items-center'>
-                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='email'>Email</label>
-                                                <input type='email' id='email' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={email ? email : 'Enter your email'} />
+                                                <label className='inline-block text-gray-600 dark:text-gray-300 text-lg font-semibold' htmlFor='email'>Email</label>
+                                                <input type='email' id='email' className='border-b-2 bg-white dark:bg-gray-800 p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={email ? email : 'Enter your email'} />
                                             </div>
 
                                             <div className='mb-4 flex items-center gap-10'>
-                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='name'>Name</label>
-                                                <input type='text' id='name' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={name ? name : 'Enter your name'} />
+                                                <label className='inline-block text-gray-600 dark:text-gray-300 text-lg font-semibold' htmlFor='name'>Name</label>
+                                                <input type='text' id='name' className='border-b-2 bg-white dark:bg-gray-800 p-2 focus:outline-none focus:border-orange-400 ml-auto' placeholder={name ? name : 'Enter your name'} />
                                             </div>
 
                                             <div className='mb-4 flex items-center gap-10'>
-                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='username'>Username</label>
-                                                <input type='text' id='username' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={name ? name : 'Enter your username'} />
+                                                <label className='inline-block text-gray-600 dark:text-gray-300 text-lg font-semibold' htmlFor='username'>Username</label>
+                                                <input type='text' id='username' className='border-b-2 bg-white dark:bg-gray-800 p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={name ? name : 'Enter your username'} />
                                             </div>
 
                                             <div className='mb-4 flex items-center gap-10'>
-                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='contact'>Contact</label>
-                                                <input type='tel' id='contact' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={phone ? phone : 'Enter your contact no.'} />
+                                                <label className='inline-block text-gray-600 dark:text-gray-300 text-lg font-semibold' htmlFor='contact'>Contact</label>
+                                                <input type='tel' id='contact' className='border-b-2 bg-white dark:bg-gray-800 p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={phone ? phone : 'Enter your contact no.'} />
                                             </div>
 
                                             <div className='mb-4 flex items-center gap-10'>
-                                                <label className='inline-block text-gray-600 text-lg font-semibold' htmlFor='password'>Password</label>
-                                                <input type='password' id='password' className='border-b-2 bg-white p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={password ? password : 'Enter passcode'} />
+                                                <label className='inline-block text-gray-600 dark:text-gray-300 text-lg font-semibold' htmlFor='password'>Password</label>
+                                                <input type='password' id='password' className='border-b-2 bg-white dark:bg-gray-800 p-2 focus:outline-none focus:border-orange-400  ml-auto' placeholder={password ? password : 'Enter passcode'} />
                                             </div>
 
                                             <div className='mx-auto'>
@@ -225,7 +225,7 @@ export default function Profile() {
                     </div>
                 </div>
 
-                <div className='bg-slate-50 p-5'>
+                <div className='bg-slate-50 dark:bg-gray-800 p-5'>
                     <MyBlogs />
                 </div>
             </div>

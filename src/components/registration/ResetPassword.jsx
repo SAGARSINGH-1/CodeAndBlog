@@ -43,7 +43,7 @@ function ResetPassword() {
 
     return (
         <>
-            <div className='flex justify-center gap-10 bg-gray-50 h-[90vh] items-center'>
+            <div className='flex justify-center gap-10 bg-gray-50 dark:bg-gray-900 h-[90vh] items-center'>
                 <div className='p-3'>
                     <img className='h-[60vh]' src="./reset.svg" alt="" srcset="" />
                 </div>
@@ -55,7 +55,7 @@ function ResetPassword() {
                             type='password'
                             value={password}
                             onChange={handlePasswordChange}
-                            className='bg-gray-100 rounded-lg my-3 px-3 py-2 border border-gray-300 outline-none w-[90%]'
+                            className='bg-gray-100 dark:bg-gray-900 rounded-lg my-3 px-3 py-2 border border-gray-300 outline-none w-[90%]'
                             placeholder='Password'
                         />
                         
@@ -64,7 +64,7 @@ function ResetPassword() {
                             type='password'
                             value={passwordAgain}
                             onChange={handleConfirmPassword}
-                            className='bg-gray-100 rounded-lg mb-5 px-3 py-2 border border-gray-300 outline-none w-[90%]'
+                            className='bg-gray-100 rounded-lg mb-5 px-3 py-2 border dark:bg-gray-900 border-gray-300 outline-none w-[90%]'
                             placeholder='Confirm Password'
                         />
 
@@ -81,7 +81,7 @@ function ResetPassword() {
                                 type='email'
                                 value={email}
                                 onChange={handleInputChange}
-                                className='bg-gray-100 rounded-lg mt-5 mb-3 px-3 py-2 border border-gray-300 outline-none w-[90%]'
+                                className='bg-gray-100 rounded-lg mt-5 mb-3 px-3 py-2 border dark:bg-gray-900 border-gray-300 outline-none w-[90%]'
                                 autoComplete='on'
                                 placeholder='Email...'
                             />

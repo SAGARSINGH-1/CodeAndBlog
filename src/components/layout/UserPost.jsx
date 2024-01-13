@@ -44,12 +44,12 @@ function UserPost({ $id, title, featuredImage, name, content }) {
 
     return (
 
-        <div key={$id} className='Category bg-slate-100 p-2 md:p-3 hover:bg-slate-200 rounded-lg cursor-pointer transition duration-300 mb-5'>
+        <div key={$id} className='Category bg-slate-100 dark:bg-gray-900 p-2 md:p-3 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition duration-300 mb-5'>
             <Link to={`/post/${$id}`}>
                 <div className='user flex justify-between items-center'>
                     <div className='flex flex-row items-center'>
-                        <div className='flex-shrink-0 w-10 h-10 rounded-full bg-gray-300 flex justify-center items-center'>
-                            <FaUserSecret size="1.5em" />
+                        <div className='flex-shrink-0 w-10 h-10 rounded-full bg-gray-300 dark:bg-white flex justify-center items-center'>
+                            <FaUserSecret className='dark:text-black' size="1.5em" />
                         </div>
                         <div>
                             <h2 className='ml-3 font-medium'>{name ? name : 'Xavier'}</h2>
@@ -68,7 +68,7 @@ function UserPost({ $id, title, featuredImage, name, content }) {
 
                 <div className='content'>
                     <div className='px-10 py-3 '>
-                        <div className="text-xl font-semibold text-black pb-2">
+                        <div className="text-xl font-semibold dark:text-white text-black pb-2">
                             <h1>{title}</h1>
                         </div>
                         <div className='text-gray-500 text-sm'>

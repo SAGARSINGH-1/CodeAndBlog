@@ -3,13 +3,27 @@ import Button from "../layout/Button";
 import LoadingComponent from "../layout/Loader";
 import { Link, NavLink } from "react-router-dom";
 import Carousels from "./Carousel";
+import logoLight from '../../../public/Logo.png';
+import logoDark from '../../../public/Logo d.png';
+
 
 export default function Home() {
+
+  // **Dark light check
+  const userTheme = localStorage.getItem("theme");
+  const [theme,setTheme]=useState(false);
 
   // top Loader
   const [isContentLoaded, setContentLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
   useEffect(() => {
+
+    if (userTheme==="dark") {
+      setTheme(true)
+    }else{
+      setTheme(false)
+    }
+
     const timeoutId = setTimeout(() => {
       setContentLoaded(true);
     }, 1000);
@@ -30,7 +44,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="">
       {isContentLoaded ? (
         <>
 
@@ -42,7 +56,7 @@ export default function Home() {
 
             <div className="mx-auto max-w-2xl pt-16 md:py-11">
             <div className="mb-2 flex justify-center">
-                <div className="relative rounded-full px-3 py-1 text-[12px] md:text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                <div className="relative rounded-full px-3 py-1 text-[12px] md:text-sm leading-6 text-gray-600 dark:text-gray-50 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                   Announcing our next round of funding. 
                   <NavLink className="font-semibold text-orange-500">
                     <span className="absolute inset-0" aria-hidden="true"></span> Read more <span aria-hidden="true">&rarr;</span>
@@ -50,8 +64,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="text-center">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Discover, Learn, and Inspire Us Today</h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600">Dive into our world of stories and wisdom, where every scroll unveils a new chapter of inspiration and discovery</p>
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-6xl">Discover, Learn, and Inspire Us Today</h1>
+                <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-white">Dive into our world of stories and wisdom, where every scroll unveils a new chapter of inspiration and discovery</p>
                 <div className="mt-10 flex items-center justify-center gap-x-6">
                   <NavLink to={`/blogs`}><Button className="py-2.5 text-sm font-semibold px-3.5">Get started</Button></NavLink>
                 </div>
@@ -65,26 +79,26 @@ export default function Home() {
 
           {/* Second section */}
 
-          <div className="bg-white md:py-12 py-12">
+          <div className="bg-white md:py-12 py-12 dark:bg-black dark:text-white">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto max-w-2xl sm:text-center">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Journey, Your Destination</h2>
-                <p className="mt-6 text-lg leading-8 text-gray-600">Welcome to <span className="text-orange-500 font-medium">CODEANDBLOG</span>, where passion meets purpose we are a passionate team sharing insights, stories, and knowledge to inspire and accompany you on your exploration of diverse topics.</p>
+                <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Our Journey, Your Destination</h2>
+                <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-white">Welcome to <span className="text-orange-500 font-medium">CODEANDBLOG</span>, where passion meets purpose we are a passionate team sharing insights, stories, and knowledge to inspire and accompany you on your exploration of diverse topics.</p>
               </div>
               <div className="mx-auto md:mt-16 max-w-2xl mt-20 lg:mx-0 lg:flex lg:max-w-none">
                 <div className="w-[90vw] max-h-max md:w-[70vw] md:h-[58vh] mx-auto shadow-ld my-5 rounded-sm">
                   <Carousels />
                 </div>
               </div>
-              <div className="mx-auto  mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+              <div className="mx-auto mt-16 md:mt-20 max-w-2xl rounded-3xl ring-1 ring-gray-200 lg:mx-0 lg:flex lg:max-w-none">
                 <div className="p-8 sm:p-10 lg:flex-auto">
-                  <h3 className="text-2xl font-bold tracking-tight text-gray-900">Lifetime membership</h3>
-                  <p className="mt-6 text-base leading-7 text-gray-600">Embrace a lifelong learning journey with our exclusive lifetime membership. Experience continuous growth and exploration with us.</p>
+                  <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Lifetime membership</h3>
+                  <p className="mt-6 text-base leading-7 text-gray-600 dark:text-white">Embrace a lifelong learning journey with our exclusive lifetime membership. Experience continuous growth and exploration with us.</p>
                   <div className="mt-10 flex items-center gap-x-4">
                     <h4 className="flex-none text-sm font-semibold leading-6 text-orange-500">What’s included</h4>
-                    <div className="h-px flex-auto bg-gray-100"></div>
+                    <div className="h-px flex-auto bg-gray-100 dark:text-white"></div>
                   </div>
-                  <ul role="list" className="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6">
+                  <ul role="list" className="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 dark:text-white sm:grid-cols-2 sm:gap-6">
                     <li className="flex gap-x-3">
                       <svg className="h-6 w-5 flex-none text-orange-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
@@ -112,15 +126,15 @@ export default function Home() {
                   </ul>
                 </div>
                 <div className="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
-                  <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
+                  <div className="rounded-2xl bg-gray-50 dark:bg-black  py-10 text-center ring-1 ring-inset ring-gray-900/5 dark:ring-white lg:flex lg:flex-col lg:justify-center lg:py-16">
                     <div className="mx-auto max-w-xs px-8">
-                      <p className="text-base font-semibold text-gray-600">Don't Pay, own it forever</p>
+                      <p className="text-base font-semibold text-gray-600 dark:text-white">Don't Pay, own it forever</p>
                       <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                        <span className="text-5xl font-bold tracking-tight text-gray-900">$0</span>
-                        <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
+                        <span className="text-5xl font-bold tracking-tight text-gray-900 dark:text-white">$0</span>
+                        <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-white">USD</span>
                       </p>
                       <Button to="/blogs" className="mt-10 block px-3 py-2 text-sm mx-auto">All features are Free</Button>
-                      <p className="mt-6 text-xs leading-5 text-gray-600">Invoices and receipts not available for any type of purchase.</p>
+                      <p className="mt-6 text-xs leading-5 text-gray-600 dark:text-white">Invoices and receipts not available for any type of purchase.</p>
                     </div>
                   </div>
                 </div>
@@ -130,34 +144,37 @@ export default function Home() {
 
           {/* Section 3 */}
 
-          <section class="relative isolate overflow-hidden bg-white px-6 pb-24 pt-12  lg:px-8">
-            <div class="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)] opacity-20"></div>
-            <div class="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center"></div>
+          <section class="relative isolate overflow-hidden bg-white dark:bg-black px-6 pb-24 pt-12  lg:px-8">
+            <div class="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)] dark:bg-black dark:opacity-0 opacity-20"></div>
+            <div class="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white dark:bg-black shadow-xl dark:shadow-black shadow-indigo-600/10 ring-1 ring-indigo-50 dark:ring-black sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center"></div>
             <div class="mx-auto max-w-2xl lg:max-w-4xl">
-              <img class="mx-auto h-12" src="../../../public/Logo d.png" alt="" />
+              {
+              //  TODO: Logo is not changing when switching to dark or light mode
+              }
+              <img class="mx-auto h-12" src={`${theme?"../../../public/Logo.png":"../../../public/Logo d.png"}`} alt="" />
               <figure class="mt-10">
-                <blockquote class="text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
+                <blockquote class="text-center text-xl font-semibold leading-8 text-gray-900 dark:text-white sm:text-2xl sm:leading-9">
                   <p><span className="text-4xl text-orange-500">“</span>Explore exciting stories and learn new things with us! Dive into a world of discovery and inspiration. Join our community where we love to share cool stuff. Start your adventure now!<span className="text-4xl text-orange-500">”</span></p>
                 </blockquote>
                 <div className="flex flex-wrap justify-center gap-10">
                   <figcaption class="mt-10">
                     <img class="mx-auto h-10 w-10 rounded-full" src="https://avatars.githubusercontent.com/u/81561733?s=400&u=f79ed79220505ff06754e9c5097a3608b77c8574&v=4" alt="" />
                     <div class="mt-4 flex items-center justify-center space-x-3 text-base">
-                      <div class="font-semibold text-gray-900">Sagar Singh</div>
-                      <svg viewBox="0 0 2 2" width="3" height="3" aria-hidden="true" class="fill-gray-900">
+                      <div class="font-semibold text-gray-900 dark:text-white">Sagar Singh</div>
+                      <svg viewBox="0 0 2 2" width="3" height="3" aria-hidden="true" class="fill-gray-900 dark:fill-white">
                         <circle cx="1" cy="1" r="1" />
                       </svg>
-                      <div class="text-gray-600">CEO of CodeAndBlog</div>
+                      <div class="text-gray-600 dark:text-gray-400">CEO of CodeAndBlog</div>
                     </div>
                   </figcaption>
                   <figcaption class="mt-10">
                     <img class="mx-auto h-10 w-10 rounded-full" src="https://avatars.githubusercontent.com/u/142565220?v=4" alt="" />
                     <div class="mt-4 flex items-center justify-center space-x-3 text-base">
-                      <div class="font-semibold text-gray-900">Manendra Verma</div>
-                      <svg viewBox="0 0 2 2" width="3" height="3" aria-hidden="true" class="fill-gray-900">
+                      <div class="font-semibold text-gray-900 dark:text-white">Manendra Verma</div>
+                      <svg viewBox="0 0 2 2" width="3" height="3" aria-hidden="true" class="fill-gray-900 dark:fill-white">
                         <circle cx="1" cy="1" r="1" />
                       </svg>
-                      <div class="text-gray-600">CEO of CodeAndBlog</div>
+                      <div class="text-gray-600 dark:text-gray-400">CEO of CodeAndBlog</div>
                     </div>
                   </figcaption>
                 </div>
