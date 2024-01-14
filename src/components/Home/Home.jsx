@@ -11,18 +11,11 @@ export default function Home() {
 
   // **Dark light check
   const userTheme = localStorage.getItem("theme");
-  const [theme,setTheme]=useState(false);
-
+  
   // top Loader
   const [isContentLoaded, setContentLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
   useEffect(() => {
-
-    if (userTheme==="dark") {
-      setTheme(true)
-    }else{
-      setTheme(false)
-    }
 
     const timeoutId = setTimeout(() => {
       setContentLoaded(true);
@@ -149,9 +142,9 @@ export default function Home() {
             <div class="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white dark:bg-black shadow-xl dark:shadow-black shadow-indigo-600/10 ring-1 ring-indigo-50 dark:ring-black sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center"></div>
             <div class="mx-auto max-w-2xl lg:max-w-4xl">
               {
-              //  TODO: Logo is not changing when switching to dark or light mode
+              //  TODO: Logo is not changing when switching to dark or light mode instantly but when you take a refresh of your browser it will change according to dark or light theme
               }
-              <img class="mx-auto h-12" src={`${theme?"../../../public/Logo.png":"../../../public/Logo d.png"}`} alt="" />
+              <img class="mx-auto h-12" src={`${userTheme==="dark"?"../../../public/Logo.png":"../../../public/Logo d.png"}`} alt="" />
               <figure class="mt-10">
                 <blockquote class="text-center text-xl font-semibold leading-8 text-gray-900 dark:text-white sm:text-2xl sm:leading-9">
                   <p><span className="text-4xl text-orange-500">“</span>Explore exciting stories and learn new things with us! Dive into a world of discovery and inspiration. Join our community where we love to share cool stuff. Start your adventure now!<span className="text-4xl text-orange-500">”</span></p>

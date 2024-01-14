@@ -93,7 +93,9 @@ export default function Navbar() {
       <nav className={`relative p-3 w-[100vw] z-10 border-b border-gray-500`}>
         <div className=' flex flex-col justify-between md:flex-row md:justify-between md:max-w-6xl md:mx-auto'>
           <div className='img flex items-center'>
-            <img className='h-7 max-w-max' src={isActive ? "../Logo.png" : "../Logo d.png"} alt="logo" />
+            <NavLink to={"/"}>
+              <img className='h-7 max-w-max' src={userTheme === "dark" ? "../Logo.png" : "../Logo d.png"} alt="logo" />
+            </NavLink>
           </div>
 
           <div className={`link md:flex justify-center items-center w-[100%] ${ShowNav ? 'hidden' : 'flex'} `}>
@@ -109,9 +111,9 @@ export default function Navbar() {
           <div className='flex items-center md:static'>
             {/* Dark mode toggle button */}
             <div className='absolute top-2 right-14 md:static inline-block mt-1 mr-3 md:right-[12rem]'>
-              <div className={`relative inline-block w-10 h-6 ${isActive ? 'bg-gray-400' : 'bg-gray-800'} rounded-full cursor-pointer`} onClick={handleButtonClick}>
+              <div className={`relative inline-block w-10 h-6 ${isActive ? 'bg-gray-500' : 'bg-gray-500'} rounded-full cursor-pointer`} onClick={handleButtonClick}>
                 {/* Thumb */}
-                <div className={`absolute top-0 left-[-3px] w-6 h-6 bg-white rounded-full shadow-lg transform transition-transform ${isActive ? 'translate-x-full' : 'translate-x-0'}`}> {isActive ? <BsFillMoonStarsFill size="0.9rem" className='mt-1 ml-1.5 text-black' /> : <BsSunFill size="0.9rem" className='mt-1 ml-1.5' />}</div>
+                <div className={`absolute top-0 left-[-3px] w-6 h-6 bg-white rounded-full shadow-lg transform transition-transform ${isActive ? 'translate-x-full' : 'translate-x-0'}`}> {isActive ? <BsFillMoonStarsFill size="0.9rem" className='mt-1 ml-1.5 text-black' /> : <BsSunFill size="0.9rem" className='mt-1 ml-1.5 text-black' />}</div>
                 {/* Input */}
                 <input type="checkbox" className="absolute w-full h-full opacity-0 cursor-pointer" checked={isActive} onChange={() => { }} aria-label="Dark mode toggle" />
               </div>
@@ -140,7 +142,7 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <div className='flex justify-center w-[100vw] mt-1 md:mt-0 md:w-auto md:block'>
-                    <NavLink to='signup' className={`flex justify-center  ${ShowNav ? "hidden" : ""}`}><Button type="submit" className="w-full">
+                    <NavLink to='signup' className={`flex justify-center  ${ShowNav ? "hidden md:block" : ""}`}><Button type="submit" className="w-full">
                       Signup
                     </Button></NavLink>
                   </div>
