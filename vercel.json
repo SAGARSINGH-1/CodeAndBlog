@@ -7,6 +7,34 @@
         {
             "src": "/login",
             "dest": "/"
+        },
+        {
+            "src": "/signup",
+            "dest": "/"
+        },
+        {
+            "src": "/add-post",
+            "dest": "/"
+        },
+        {
+            "src": "/blogs",
+            "dest": "/"
+        },
+        {
+            "src": "/my-blogs",
+            "dest": "/"
+        },
+        {
+            "src": "/setting",
+            "dest": "/"
+        },
+        {
+            "src": "/password-reset",
+            "dest": "/"
+        },
+        {
+            "src": "*",
+            "dest": "/"
         }
     ]
 }
