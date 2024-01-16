@@ -101,7 +101,7 @@ const router = createBrowserRouter([
                 )
             },
             {
-                path: "https://code-and-blog.vercel.app/setting",
+                path: "/setting",
                 element:(
                     <AuthLayout authentication>
                         <Setting />
