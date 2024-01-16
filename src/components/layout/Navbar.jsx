@@ -135,7 +135,7 @@ export default function Navbar() {
                         {/* Your dropdown content */}
                         <NavLink to={`/user/${userData.userData?.name}`} onClick={closeDropdown}><div className='p-3 hover:bg-gray-100 dark:hover:bg-gray-900'>Account</div></NavLink>
                         <NavLink to={`/my-blogs`}><div className='p-3 hover:bg-gray-100 dark:hover:bg-gray-900' onClick={closeDropdown}>My Blogs</div></NavLink>
-                        <NavLink to={'/setting'}><div className='p-3 hover:bg-gray-100 dark:hover:bg-gray-900' onClick={closeDropdown}>Setting</div></NavLink>
+                        <NavLink to={'https://code-and-blog.vercel.app/setting'}><div className='p-3 hover:bg-gray-100 dark:hover:bg-gray-900' onClick={closeDropdown}>Setting</div></NavLink>
                         <div className='p-3'><NavLink to='/'><LogoutBtn /></NavLink></div>
                       </div>
                     )}
