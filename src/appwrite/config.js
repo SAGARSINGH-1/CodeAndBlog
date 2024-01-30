@@ -1,16 +1,16 @@
 import conf from '../conf/conf.js'
 import { Client, ID, Databases, Storage, Query } from 'appwrite'
-import { ToastContainer, toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 export class Service {
     client = new Client();
     databases;
     bucket;
 
-    // 
-    notify = (message) => { toast.success(message, { position: "bottom-right", autoClose: 2000, }); }
-    notifywar = (message) => { toast.console.warn(); (message, { position: "bottom-right", autoClose: 2000, }); }
-    notifyer = (message) => { toast.error(message, { position: "bottom-right", autoClose: 2000, }); }
+    // tost handling
+    notify = (message) => { toast.success(message); }
+    notifywar = (message) => { toast(message, { icon: '⚠️'} ); }
+    notifyer = (message) => { toast.error(message); }
 
     // EndPoints to connect to the right Appwrite server and project.
     constructor() {

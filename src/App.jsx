@@ -5,12 +5,11 @@ import { NavLink, Outlet } from 'react-router-dom';
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import CreatePost from './components/layout/CreatePost'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import LoadingBar from 'react-top-loading-bar'
 import { AiOutlineStar, AiFillGithub } from 'react-icons/ai'
 import LoadingComponent from '../src/components/layout/Loader.jsx';
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -54,7 +53,7 @@ function App() {
   }, []);
 
   return !loading ? (
-    <div className="flex justify-center overflow-hidden dark:bg-black dark:text-white"> 
+    <div className="flex justify-center overflow-hidden dark:bg-black dark:text-white">
       {isContentLoaded ? (
         <div className="">
           <div className="bg-orange-400 text-white p-2 ">
@@ -75,8 +74,11 @@ function App() {
           <Footer />
         </div>
       ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
-      <div className='absolute-0 right-0'>
-        <ToastContainer />
+      <div className=''>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+        />
       </div>
     </div>
   ) : null

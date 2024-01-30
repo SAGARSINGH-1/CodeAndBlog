@@ -5,24 +5,34 @@ import { Link } from 'react-router-dom';
 import authService from '../../appwrite/auth';
 import { useSelector } from "react-redux";
 import { useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import { MdVerified } from "react-icons/md";
 import Deactivate from '../layout/Deactivate';
 
 
 const Settings = () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState();
   const [fontSize, setFontSize] = useState('medium');
   const [selectedNavItem, setSelectedNavItem] = useState('Account');
   const userData = useSelector((state) => state.auth.userData);
+  
   const notify = (message) => {
-    toast.success(message, { position: 'bottom-right', autoClose: 2000 });
+    toast.success(message);
   };
 
+  const themeSwitch = () => {
+    const htmlElement = document.documentElement;
+    if (htmlElement.classList.contains("dark")) {
+      htmlElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      return;
+    }
+    htmlElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  };
 
-
-  const handleThemeChange = (selectedTheme) => {
-    setTheme(selectedTheme);
+  const handleThemeChange = () => {
+    themeSwitch();
     // **You can save the theme preference to user settings here
   };
 
@@ -179,7 +189,7 @@ const Settings = () => {
             <div className="mb-4">
               <h3 className="text-lg font-medium mb-2">Theme</h3>
               <select
-                value={theme}
+                value={localStorage.getItem("theme")}
                 onChange={(e) => handleThemeChange(e.target.value)}
                 className="w-full px-4 py-2 border rounded focus:outline-none focus:border-white dark:bg-black"
               >
