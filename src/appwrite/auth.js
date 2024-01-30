@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import conf from '../conf/conf.js'
 import { Client, Account, ID, Query,Avatars,Locale } from 'appwrite'
 import Service from './config';
@@ -10,9 +10,9 @@ export class AuthService {
     avatars;
     Locale;
 
-    notify = (message) => { toast.success(message, { position: "bottom-right", autoClose: 2000, }); }
-    notifywar = (message) => { toast.console.warn(); (message, { position: "bottom-right", autoClose: 2000, }); }
-    notifyer = (message) => { toast.error(message, { position: "bottom-right", autoClose: 2000, }); }
+    notify = (message) => { toast.success(message); }
+    notifywar = (message) => { toast(message, { icon: '⚠️'} ); }
+    notifyer = (message) => { toast.error(message); }
 
 
     // **EndPoints to connect to the right Appwrite server and project.
