@@ -38,7 +38,7 @@ export default function Otheruser(props) {
                     <div className='relative w-[30vw]'>
                         <div className='absolute z-0 rounded-xl w-[33vw] h-[45vh] bg-orange-500 rotate-[55deg] top-[10vh] right-[5vh]'>F</div>
                         <div className='img relative z-10 h-[30vh] w-[15vw] mt-12 rounded-full border-2 m-5 ml-10 bg-white overflow-hidden'>
-                            {avatar ? <img src={avatar} alt="profile" className='w-full h-full object-cover' /> : <FaUserSecret size="5em" className='text-black' />}
+                            {avatar ? <img src={avatar} alt="profile" className='w-full h-full object-cover' loading="lazy"/> : <FaUserSecret size="5em" className='text-black' />}
                         </div>
                         <div className='img relative z-10 text-white font-bold'>
                             <h1 className='text-2xl text-center font-semibold'>{name ? name : 'USER'}</h1>
@@ -48,7 +48,7 @@ export default function Otheruser(props) {
                             <div className='location flex justify-center gap-2 mt-2'>
                                 <h3 className='text-sm text-center text-gray-100 font-semibold inline'>{location ? location.country : "Mirzapur"}
                                 </h3>
-                                <img className='rounded-full inline h-[20px]' src={`${avatar}`} alt="" srcset="" />
+                                <img className='rounded-full inline h-[20px]' src={`${avatar}`} alt="user" loading="lazy"/>
                             </div>
                         </div>
                     </div>

@@ -144,14 +144,14 @@ export default function Home() {
               {
               //  TODO: Logo is not changing when switching to dark or light mode instantly but when you take a refresh of your browser it will change according to dark or light theme
               }
-              <img class="mx-auto h-12" src={`${userTheme==="dark"?"../../../public/Logo.png":"../../../public/Logo d.png"}`} alt="" />
+              <img class="mx-auto h-12" src={`${userTheme==="dark"?"../../../public/Logo.png":"../../../public/Logo d.png"}`} alt="company-logo" loading="lazy"/>
               <figure class="mt-10">
                 <blockquote class="text-center text-xl font-semibold leading-8 text-gray-900 dark:text-white sm:text-2xl sm:leading-9">
                   <p><span className="text-4xl text-orange-500">“</span>Explore exciting stories and learn new things with us! Dive into a world of discovery and inspiration. Join our community where we love to share cool stuff. Start your adventure now!<span className="text-4xl text-orange-500">”</span></p>
                 </blockquote>
                 <div className="flex flex-wrap justify-center gap-10">
                   <figcaption class="mt-10">
-                    <img class="mx-auto h-10 w-10 rounded-full" src="https://avatars.githubusercontent.com/u/81561733?s=400&u=f79ed79220505ff06754e9c5097a3608b77c8574&v=4" alt="" />
+                    <img class="mx-auto h-10 w-10 rounded-full" src="https://avatars.githubusercontent.com/u/81561733?s=400&u=f79ed79220505ff06754e9c5097a3608b77c8574&v=4" alt="CEO" loading="lazy"/>
                     <div class="mt-4 flex items-center justify-center space-x-3 text-base">
                       <div class="font-semibold text-gray-900 dark:text-white">Sagar Singh</div>
                       <svg viewBox="0 0 2 2" width="3" height="3" aria-hidden="true" class="fill-gray-900 dark:fill-white">
@@ -161,7 +161,7 @@ export default function Home() {
                     </div>
                   </figcaption>
                   <figcaption class="mt-10">
-                    <img class="mx-auto h-10 w-10 rounded-full" src="https://avatars.githubusercontent.com/u/142565220?v=4" alt="" />
+                    <img class="mx-auto h-10 w-10 rounded-full" src="https://avatars.githubusercontent.com/u/142565220?v=4" alt="CEO" loading="lazy"/>
                     <div class="mt-4 flex items-center justify-center space-x-3 text-base">
                       <div class="font-semibold text-gray-900 dark:text-white">Manendra Verma</div>
                       <svg viewBox="0 0 2 2" width="3" height="3" aria-hidden="true" class="fill-gray-900 dark:fill-white">

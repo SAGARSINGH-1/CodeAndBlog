@@ -13,6 +13,8 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import LoadingComponent from "../layout/Loader";
 import Profile from "./userProfile";
 import Otheruser from "../layout/Otheruser";
+import { CiEdit } from "react-icons/ci";
+import { AiOutlineDelete } from "react-icons/ai";
 
 
 export default function Post() {
@@ -21,6 +23,7 @@ export default function Post() {
     const { slug } = useParams();
     const navigate = useNavigate();
     const [refresh, setRefresh] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);        // For mobile view
 
     const userData = useSelector((state) => state.auth.userData);
     const [comments, setComments] = useState([]);
@@ -89,6 +92,19 @@ export default function Post() {
         setProfile(!profile);
     };
 
+    
+// For mobile view
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize(); 
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
     return post ? (
         <div>
             {isContentLoaded ? (
@@ -102,7 +118,7 @@ export default function Post() {
                                         <FaUserCircle className="w-full h-full object-cover dark:text-black" />
                                     </div>
 
-                                    <div className="absolute top-1/4 left-[22%] shadow-xl border-2">
+                                    <div className="absolute top-1/4 left-[22%] shadow-xl">
                                         {profile && (
                                             <div className="fixed z-[20]">
                                                 <Otheruser userid={post.userid} />
@@ -127,17 +143,22 @@ export default function Post() {
                                         src={appwriteService.getFilePreview(post.featuredImage)}
                                         alt={post.title}
                                         className="rounded-xl"
+                                        loading="lazy"
                                     />
 
                                     {isAuthor && (
-                                        <div className="absolute right-6 top-6">
+                                        <div className={`absolute ${isMobile ? 'right-2 top-[-15vw]' : 'right-6 top-6'}`}>
                                             <Link to={`/edit-post/${post.$id}`}>
-                                                <Button bgColor="bg-green-500" className="mr-3">
-                                                    Edit
+                                                <Button bgColor="bg-orange-500" className={`mr-3 ${isMobile ? "bg-transparent" : ""}`}>
+                                                    {
+                                                        isMobile ? <CiEdit className='inline text-2xl hover:scale-110 text-gray-600 dark:text-white' /> : "Edit"
+                                                    }
                                                 </Button>
                                             </Link>
-                                            <Button bgColor="bg-red-500" onClick={deletePost}>
-                                                Delete
+                                            <Button bgColor="bg-red-500" className={`${isMobile ? "bg-transparent" : ""}`} onClick={deletePost}>
+                                                    {
+                                                        isMobile ? <AiOutlineDelete className='inline text-2xl hover:scale-110 text-gray-600 dark:text-white' /> : "Delete"
+                                                    }
                                             </Button>
                                         </div>
                                     )}

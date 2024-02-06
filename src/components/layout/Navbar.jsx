@@ -100,7 +100,7 @@ export default function Navbar() {
         <div className=' flex flex-col justify-between md:flex-row md:justify-between md:max-w-6xl md:mx-auto'>
           <div className='img flex items-center'>
             <NavLink to={"/"}>
-              <img className='h-7 max-w-max' src={userTheme === "dark" ? "../Logo.png" : "../Logo d.png"} alt="logo" />
+              <img className='h-7 max-w-max' src={userTheme === "dark" ? "../Logo.png" : "../Logo d.png"} alt="companylogo" loading="lazy"/>
             </NavLink>
           </div>
 

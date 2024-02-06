@@ -17,7 +17,7 @@ export default function Carousels() {
        
             <div className=" md:flex bg-gray-50 dark:bg-black p-10 max-h-max max-w-max md:h-[70vh] md:w-[70vw] dark:border-2 dark:border-white">
                 <div className="img md:w-[150vw] md:h-[30vw] my-auto">
-                    <img src="./Exersise.jpg" className="w-full h-[85%] object-cover rounded-lg" alt="Exercise" />
+                    <img src="./Exersise.jpg" className="w-full h-[85%] object-cover rounded-lg" alt="Exercise" loading="lazy"/>
                 </div>
                 <div className="p-4 border-spacing-2 border-black text-left">
                     <h2 className="text-lg font-semibold m-2 text-gray-400">Sports and Life</h2>
@@ -35,7 +35,7 @@ export default function Carousels() {
 
             <div className="md:flex bg-gray-50 dark:bg-black md:h-[65vh] md:w-[70vw]  p-4 max-h-max max-w-max dark:border-2 dark:border-white">
                 <div className="img md:w-[150vw] md:h-[30vw] my-auto">
-                    <img src="./Health.jpg" className="w-full h-[85%] object-cover rounded-lg" alt="Exercise" />
+                    <img src="./Health.jpg" className="w-full h-[85%] object-cover rounded-lg" alt="Exercise" loading="lazy"/>
                 </div>
                 <div className="p-4 border-spacing-2 border-black text-left">
                     <h2 className="text-lg font-semibold m-2 text-gray-400">Healthy Life and Food</h2>
@@ -53,7 +53,7 @@ export default function Carousels() {
 
             <div className="md:flex bg-gray-50 dark:bg-black p-4 max-h-max max-w-max md:h-[65vh] md:w-[70vw] dark:border-2 dark:border-white">
                 <div className="img md:w-[150vw] md:h-[30vw] my-auto">
-                    <img src="./Tech-2.jpg" className="w-full h-[85%] object-cover rounded-lg" alt="Exercise" />
+                    <img src="./Tech-2.jpg" className="w-full h-[85%] object-cover rounded-lg" alt="Exercise" loading="lazy"/>
                 </div>
                 <div className="p-4 border-spacing-2 border-black text-left">
                     <h2 className="text-lg font-semibold m-2 text-gray-400">Technology</h2>
