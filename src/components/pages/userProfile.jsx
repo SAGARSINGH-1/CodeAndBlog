@@ -99,7 +99,7 @@ export default function Profile() {
 
                         <div className='profile-img flex justify-center items-center gap-3'>
                             <div className='img h-[100px] w-[100px] md:h-[25vh] md:w-[13vw] md:mt-12 rounded-full border-2 md:m-5 md:ml-10 bg-white overflow-hidden '>
-                                {avatar ? <img src={avatar} alt="profile" className='w-full h-full object-cover' /> : <FaUserSecret size="5em" className='text-black' />}
+                                {avatar ? <img src={avatar} alt="profile" className='w-full h-full object-cover' loading="lazy" /> : <FaUserSecret size="5em" className='text-black' />}
                             </div>
                                 <div className='flex flex-col gap-0 '>
                                 <h1 className='text-2xl md:hidden md:text-5xl text-center font-semibold'>{name ? name : 'USER'}</h1>
@@ -124,7 +124,7 @@ export default function Profile() {
                                     <div className='location flex justify-center gap-2 mt-1 md:mt-0'>
                                         <h3 className='text-sm text-center text-gray-500 font-semibold inline'>{location ? location.country : "Mirzapur"}
                                         </h3>
-                                        <img className='rounded-full inline h-[20px]' src={`${avatar}`} alt="" srcset="" />
+                                        <img className='rounded-full inline h-[20px]' src={`${avatar}`} alt="avatar" loading="lazy"/>
                                     </div>
                                 </div>
 

@@ -45,7 +45,7 @@ function ResetPassword() {
         <>
             <div className='flex justify-center gap-10 bg-gray-50 dark:bg-gray-900 h-[90vh] items-center'>
                 <div className='p-3'>
-                    <img className='h-[60vh]' src="./reset.svg" alt="" srcset="" />
+                    <img className='h-[60vh]' src="./reset.svg" alt="illustration" loading="lazy"/>
                 </div>
                 {secret && userId ?
                     <div className='h-[50vh] w-[25vw] flex flex-col justify-center'>

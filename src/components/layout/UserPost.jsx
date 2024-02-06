@@ -77,7 +77,7 @@ function UserPost({ $id, title, featuredImage, name, content }) {
 
                     </div>
                     <div className='p-5'>
-                        <img className="w-[40rem] mx-auto h-full object-cover rounded-lg bg-white" src={appwriteService.getFilePreview(featuredImage)} alt="img" />
+                        <img className="w-[40rem] mx-auto h-full object-cover rounded-lg bg-white" src={appwriteService.getFilePreview(featuredImage)} alt="img" loading="lazy"/>
                     </div>
                 </div>
 
