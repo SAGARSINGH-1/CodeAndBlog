@@ -21,15 +21,14 @@ export default function Login() {
     try {
       const session = await authService.login(data)
       if (session) {
-        const userData = await authService.getCurrentUser()
-        if (userData) dispatch(authLogin(userData));
+        const userData = await authService.getCurrentUser()            
+        if (userData) dispatch(authLogin(userData));          
         navigate("/")
       }
     } catch (error) {
       setError(error.message)
     }
   }
-
 
   // top Loader
   const [isContentLoaded, setContentLoaded] = useState(false);

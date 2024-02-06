@@ -29,7 +29,7 @@ export default function Post() {
     const [comments, setComments] = useState([]);
     useEffect(() => {
         if (post && userData) {
-            setIsAuthor(userData ? post.name === userData.userData.name : false);
+            setIsAuthor(userData ? post.userid === userData.userData.userid : false);
             refreshcomment();
         }
     }, [post, userData]);
