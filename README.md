@@ -2,7 +2,10 @@
 
 Dive into the ultimate content exploration at CodeAndBlog! Whether your passion revolves around sharing captivating narratives, delving into the intricacies of coding, or a beautiful fusion of both worlds, CodeAndBlog is the perfect platform for creators like you.
 
-Join us: [![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/KxqtV3bBse)
+---
+[![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/KxqtV3bBse)
+
+---
 
 ## Features
 
