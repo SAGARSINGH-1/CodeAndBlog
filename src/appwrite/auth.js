@@ -102,7 +102,7 @@ export class AuthService {
     // **Login with Google
     async googleauth() {
         try {
-            const result = this.account.createOAuth2Session('google', "https://localhost:5173", "https://localhost:5173");
+            const result = this.account.createOAuth2Session('google', "https://code-and-blog.vercel.app", "https://code-and-blog.vercel.app");
 
             if (result) {
                 this.notify("Login successfully!");
@@ -117,7 +117,7 @@ export class AuthService {
     // **Used to recover password and Send Verification Link to the user's email
     async PasswordRecovery(email) {
         try {
-            const result = await this.account.createRecovery(email, "http://localhost:5173/password-reset", "http://localhost:5173/password-reset");
+            const result = await this.account.createRecovery(email, "https://code-and-blog.vercel.app", "https://code-and-blog.vercel.app");
             if (result) {
                 this.notify("Reset Password Link Sent to your Email!");
             }
@@ -146,7 +146,7 @@ export class AuthService {
     // **Implement Email Verification and send email
     async createVerification() {
         try {
-            const result = await this.account.createVerification("http://localhost:5173/setting", "http://localhost:5173/setting");
+            const result = await this.account.createVerification("https://code-and-blog.vercel.app/setting", "https://code-and-blog.vercel.app/setting");
             if (result) {
                 this.notify("Verification link has been sent to your email!");
             }
@@ -159,7 +159,7 @@ export class AuthService {
     // **Verify Email Verification 
     async updateVerification(userId, secret) {
         try {
-            const result = await this.account.updateVerification(secret, userId, "http://localhost:5173/setting");
+            const result = await this.account.updateVerification(secret, userId, "https://code-and-blog.vercel.app/setting");
             if (result) {
                 this.notify("Email verification successful!");
             }
