@@ -9,7 +9,7 @@ export class Service {
 
     // tost handling
     notify = (message) => { toast.success(message); }
-    notifywar = (message) => { toast(message, { icon: '⚠️'} ); }
+    notifywar = (message) => { toast(message, { icon: '⚠️' }); }
     notifyer = (message) => { toast.error(message); }
 
     // EndPoints to connect to the right Appwrite server and project.
@@ -245,19 +245,29 @@ export class Service {
     // **Get a user account document from the database
     async getUser(userid) {
         try {
-            const data= await this.databases.getDocument(
+            const data = await this.databases.getDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId_3,
                 userid,
             );
-            if(data){
+            if (data) {
                 return data;
             }
         } catch (error) {
             this.notifyer(`${error.message}`);
         }
     }
-    
+
+
+
+
+
+    // To Set profile pic / Avatar of an profile
+
+    async setProfile(userImage, userid) {
+
+        // NOTE: Add another class for bucket 2
+    }
 
 
 

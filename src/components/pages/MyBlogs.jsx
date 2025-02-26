@@ -3,24 +3,27 @@ import appwriteService from '../../appwrite/config';
 import UserPost from '../layout/UserPost';
 import { useSelector } from 'react-redux';
 import Container from '../container/Container';
-import LoadingComponent from '../layout/Loader';
 import { NavLink } from 'react-router-dom';
 import { Skeleton } from '@mui/material';
 
 function MyBlogs() {
     const userData = useSelector((state) => state.auth.userData);
+    const userName = userData?.userData?.name || "";
 
     const [mypost, setPost] = useState([]);
     const [isContentLoaded, setContentLoaded] = useState(false);
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        appwriteService.getPosts().then((posts) => {
-            if (posts) {
-                setPost(posts.documents.filter((post) => post.name === userData.userData.name));
-            }
-        });
-    }, [userData.userData.name]);
+        if (userData?.userData?.name) {
+            appwriteService.getPosts().then((posts) => {
+                if (posts) {
+                    setPost(posts.documents.filter((post) => post.name === userName));
+                }
+            });
+        }
+    }, [userData]);
+
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
