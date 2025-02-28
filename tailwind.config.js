@@ -7,7 +7,7 @@ export default {
   darkMode: "class",
   theme: {
     fontFamily: {
-      Fira:['Fira Sans', 'sans-serif'],
+      Fira: ['Fira Sans', 'sans-serif'],
       Montserrat: ['Montserrat Alternates', 'sans-serif'],
       Rosarivo: ['Rosarivo', 'cursive'],
     },

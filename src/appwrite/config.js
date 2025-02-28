@@ -19,6 +19,7 @@ export class Service {
             .setProject(conf.appwriteProjectId)
         this.databases = new Databases(this.client);
         this.bucket = new Storage(this.client);
+        // this.profileBucket = new Storage(this.client);
     }
 
 
@@ -138,7 +139,7 @@ export class Service {
                 file
             );
         } catch (error) {
-            throw error;
+            this.notifyer(`${error.message}`);
         }
     }
 
@@ -151,7 +152,7 @@ export class Service {
             );
             return true;
         } catch (error) {
-            throw error;
+            this.notifyer(`${error.message}`);
         }
     }
 
@@ -258,18 +259,62 @@ export class Service {
         }
     }
 
-
-
-
-
-    // To Set profile pic / Avatar of an profile
-
-    async setProfile(userImage, userid) {
-
-        // NOTE: Add another class for bucket 2
+    // Update user : 
+    async updateUserProfile(userid, updateData) {
+        try {
+            const result = await this.databases.updateDocument(
+                conf.appwriteDatabaseId, // Your database ID
+                conf.appwriteCollectionId_3, // Your user collection ID
+                userid, // ✅ This must be the correct user ID
+                updateData
+            );
+            return result;
+        } catch (error) {
+            this.notifyer(`Error updating profile: ${error.message}`);
+            throw error;
+        }
     }
 
 
+    // To store profie picture in the 2nd bucket
+    async uploadProfileImage(file) {
+        try {
+            const uploadedFile = await this.bucket.createFile(
+                conf.appwriteBucketId_Profile,
+                ID.unique(),
+                file
+            );
+            if (uploadedFile) {
+                this.notify("Profile updated successfully");
+            }
+            return uploadedFile;
+        } catch (error) {
+            console.error("File upload error:", error);
+            throw error;
+        }
+    }
+
+    // To get the profie picture from the 2nd bucket
+    getProfilePreview(fileId) {
+        return this.bucket.getFilePreview(
+            conf.appwriteBucketId_Profile,
+            fileId,
+        );
+    }
+
+    async deleteProfile(fileId) {
+        try {
+            const isdeleted = this.bucket.deleteFile(
+                conf.appwriteBucketId_Profile,
+                fileId
+            );
+            if (isdeleted) {
+                return true
+            }
+        } catch (error) {
+            this.notifyer(`${error.message}`);
+        }
+    }
 
 }
 

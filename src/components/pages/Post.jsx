@@ -92,18 +92,18 @@ export default function Post() {
         setProfile(!profile);
     };
 
-    
-// For mobile view
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize(); 
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+
+    // For mobile view
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     return post ? (
         <div>
@@ -114,7 +114,7 @@ export default function Post() {
                             <div className="flex flex-col">
                                 <div className="relative h-[55px]"><NavLink to="/blogs"><button className="absolute text-black bg-[whitesmoke] dark:bg-white rounded-full p-4 hover:translate-x-[-3px] transition-all ease-in-out"><FaArrowLeftLong size="1em" /></button></NavLink></div>
                                 <div className="flex m-3 ml-5">
-                                    <div onClick={toggleProfile} className="rounded-full  bg-gray-300 dark:bg-white w-12 h-12 mr-3">
+                                    <div onClick={toggleProfile} className="cursor-pointer rounded-full  bg-gray-300 dark:bg-white w-12 h-12 mr-3">
                                         <FaUserCircle className="w-full h-full object-cover dark:text-black" />
                                     </div>
 
@@ -156,9 +156,9 @@ export default function Post() {
                                                 </Button>
                                             </Link>
                                             <Button bgColor="bg-red-500" className={`${isMobile ? "bg-transparent" : ""}`} onClick={deletePost}>
-                                                    {
-                                                        isMobile ? <AiOutlineDelete className='inline text-2xl hover:scale-110 text-gray-600 dark:text-white' /> : "Delete"
-                                                    }
+                                                {
+                                                    isMobile ? <AiOutlineDelete className='inline text-2xl hover:scale-110 text-gray-600 dark:text-white' /> : "Delete"
+                                                }
                                             </Button>
                                         </div>
                                     )}
@@ -176,7 +176,7 @@ export default function Post() {
                                 <div className=" md:w-[40vw] md:h-[90vh] overflow-auto scrollbar-none no-scrollbar dark:bg-black">
                                     {comments.length > 0 ? comments.map((comment) => (
                                         <div className="flex items-start border-2 p-2 pl-5 my-3 rounded-2xl bg-slate-50 dark:bg-black" key={comment.$id}>
-                                            <div onClick={toggleProfile} className="rounded-full overflow-hidden bg-gray-300 dark:text-white dark:bg-black w-12 h-12 mr-3">
+                                            <div onClick={toggleProfile} className="cursor-pointer rounded-full overflow-hidden bg-gray-300 dark:text-white dark:bg-black w-12 h-12 mr-3">
                                                 <FaUserCircle className="w-full h-full object-cover " />
                                             </div>
 
