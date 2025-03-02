@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { FaFacebookF, FaLinkedin, FaUserSecret, FaXTwitter, FaLink } from "react-icons/fa6";
 import { BsGithub } from 'react-icons/bs';
 import { CiEdit } from "react-icons/ci";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import MyBlogs from './MyBlogs';
 import authService from '../../appwrite/auth';
 import LoadingComponent from '../layout/Loader';
@@ -19,7 +19,6 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 
 export default function Profile() {
-    const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData?.userData);
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0); // Example progress state
@@ -69,25 +68,27 @@ export default function Profile() {
         } else {
 
             try {
+                console.log(image);
+
                 // Upload profile to Appwrite storage
-                const uploadedFile = await appwriteService.uploadProfileImage(image);
+                await appwriteService.uploadProfileImage(image).then(async (data) => {
+                    if (data) {
+                        const fileId = data.$id;
+                        console.log("Uploaded File ID:", fileId);
 
-                if (uploadedFile) {
-                    const fileId = uploadedFile.$id;
-                    console.log("Uploaded File ID:", fileId);
+                        // ✅ Update user document in Appwrite database with the correct file ID
+                        await appwriteService.updateUserProfile(userData.$id, { profileImageId: fileId }).then((data) => {
+                            if (data) {
+                                setImage(fileId);
+                                setPreview(appwriteService.getProfilePreview(fileId));
+                                setShowModal(false);
+                            }
+                        });
 
-                    // ✅ Update user document in Appwrite database with the correct file ID
-                    const updatedUser = await appwriteService.updateUserProfile(userData.$id, { profileImageId: fileId });
-
-                    if (updatedUser) {
-                        console.log("User profile updated successfully:", updatedUser);
-
-                        setImage(fileId);
-                        setPreview(appwriteService.getProfilePreview(fileId));
-                        setShowModal(false);
                     }
-                    navigate(0);
-                }
+
+                });
+
             } catch (error) {
                 console.error("Upload failed:", error);
             }
@@ -103,19 +104,23 @@ export default function Profile() {
 
             try {
                 // ✅ Delete the image from storage
-                const isdeleted = await appwriteService.deleteProfile(user.profileImageId);
+                await appwriteService.deleteProfile(user.profileImageId).then(async (data) => {
+                    if (data) {
+                        await appwriteService.updateUserProfile(userData.$id, { profileImageId: null }).then((data) => {
+                            if (data) {
+                                // ✅ Clear the local state
+                                setPreview("https://i.pinimg.com/736x/4a/8d/49/4a8d49ad421e02dfb6105e912d721689.jpg");
+                                setImage(null);
 
-                // ✅ Update the database to remove the image reference
-                const isupdateduser = await appwriteService.updateUserProfile(userData.$id, { profileImageId: null });
 
-                // ✅ Clear the local state
-                setPreview("https://i.pinimg.com/736x/4a/8d/49/4a8d49ad421e02dfb6105e912d721689.jpg");
-                setImage(null);
+                                toast.success("Profile image removed successfully.");
+                            }
+                        })
+                    }
+                    // ✅ Update the database to remove the image reference
 
-                if (isdeleted && isupdateduser) {
-                    toast.success("Profile image removed successfully.");
-                    navigate(0);
-                }
+                })
+
             } catch (error) {
                 console.error("Failed to remove profile image:", error);
             }

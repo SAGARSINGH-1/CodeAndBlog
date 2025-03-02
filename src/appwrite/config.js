@@ -289,8 +289,7 @@ export class Service {
             }
             return uploadedFile;
         } catch (error) {
-            console.error("File upload error:", error);
-            throw error;
+            this.notifywar("File upload error please try again after some time.", error);
         }
     }
 
