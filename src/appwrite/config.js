@@ -275,9 +275,41 @@ export class Service {
         }
     }
 
+    // Updataing all the documents of userid given to set a profileImageId which is changed
+    async updateArticleProfileId(userid, updateData) {
+        try {
+            // Fetch all articles where userId matches
+            const articles = await this.databases.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId_1, // Article Collection ID
+                [
+                    Query.equal("userid", userid) // Find all articles of the user
+                ]
+            );
+
+            // Update profileImageId for all matching articles
+            const updatePromises = articles.documents.map(article =>
+                this.databases.updateDocument(
+                    conf.appwriteDatabaseId,
+                    conf.appwriteCollectionId_1,
+                    article.$id,
+                    updateData
+                )
+            );
+
+            // Wait for all updates to complete
+            const results = await Promise.all(updatePromises);
+            return results;
+        } catch (error) {
+            this.notifyer(`Error updating articles: ${error.message}`);
+            throw error;
+        }
+    }
+
+
 
     // To store profie picture in the 2nd bucket
-    async uploadProfileImage(file) {
+    async uploadProfileImage(file, id) {
         try {
             const uploadedFile = await this.bucket.createFile(
                 conf.appwriteBucketId_Profile,

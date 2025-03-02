@@ -78,13 +78,14 @@ export default function Profile() {
 
                         // ✅ Update user document in Appwrite database with the correct file ID
                         await appwriteService.updateUserProfile(userData.$id, { profileImageId: fileId }).then((data) => {
+
                             if (data) {
                                 setImage(fileId);
                                 setPreview(appwriteService.getProfilePreview(fileId));
                                 setShowModal(false);
                             }
                         });
-
+                        await appwriteService.updateArticleProfileId(userData.$id, { profileImageId: fileId });
                     }
 
                 });

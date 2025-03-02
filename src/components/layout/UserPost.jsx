@@ -10,7 +10,7 @@ import parse from "html-react-parser";
 import { CiEdit } from "react-icons/ci";
 
 
-function UserPost({ $id, title, featuredImage, name, content }) {
+function UserPost({ $id, title, featuredImage, name, content, profileImageId }) {
 
     const [showMoreMap, setShowMoreMap] = useState({});
 
@@ -49,7 +49,7 @@ function UserPost({ $id, title, featuredImage, name, content }) {
                 <div className='user flex justify-between items-center'>
                     <div className='flex flex-row items-center'>
                         <div className='flex-shrink-0 w-10 h-10 rounded-full bg-gray-300 dark:bg-white flex justify-center items-center'>
-                            <FaUserSecret className='dark:text-black' size="1.5em" />
+                            <img src={appwriteService.getProfilePreview(profileImageId)} className="rounded-full" alt="" srcset="" />
                         </div>
                         <div>
                             <h2 className='ml-3 font-medium'>{name ? name : 'Xavier'}</h2>
@@ -77,7 +77,7 @@ function UserPost({ $id, title, featuredImage, name, content }) {
 
                     </div>
                     <div className='p-5'>
-                        <img className="w-[40rem] mx-auto h-full object-cover rounded-lg bg-white" src={appwriteService.getFilePreview(featuredImage)} alt="img" loading="lazy"/>
+                        <img className="w-[40rem] mx-auto h-full object-cover rounded-lg bg-white" src={appwriteService.getFilePreview(featuredImage)} alt="img" loading="lazy" />
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@ function UserPost({ $id, title, featuredImage, name, content }) {
 
                 <Link to={`/post/${$id}`}>
                     <div className='flex cursor-pointer hover:text-orange-500'>
-                    <FiMessageSquare size="1.2em" className='mt-0.5 '/><p className='text-gray-500 ml-1'>{randomComment + 1}</p>
+                        <FiMessageSquare size="1.2em" className='mt-0.5 ' /><p className='text-gray-500 ml-1'>{randomComment + 1}</p>
                     </div>
                 </Link>
 

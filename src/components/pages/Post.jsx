@@ -41,6 +41,8 @@ export default function Post() {
                 else navigate("/");
             });
         } else navigate("/");
+        console.log("Post Data:", post); // ✅ Debugging log
+
     }, [slug, navigate]);
 
     const deletePost = () => {
@@ -114,8 +116,8 @@ export default function Post() {
                             <div className="flex flex-col">
                                 <div className="relative h-[55px]"><NavLink to="/blogs"><button className="absolute text-black bg-[whitesmoke] dark:bg-white rounded-full p-4 hover:translate-x-[-3px] transition-all ease-in-out"><FaArrowLeftLong size="1em" /></button></NavLink></div>
                                 <div className="flex m-3 ml-5">
-                                    <div onClick={toggleProfile} className="cursor-pointer rounded-full  bg-gray-300 dark:bg-white w-12 h-12 mr-3">
-                                        <FaUserCircle className="w-full h-full object-cover dark:text-black" />
+                                    <div onClick={toggleProfile} className="cursor-pointer rounded-full bg-gray-300 dark:bg-white w-12 h-12 mr-3">
+                                        <img src={appwriteService.getProfilePreview(post.profileImageId)} className="rounded-full" alt="" srcset="" />
                                     </div>
 
                                     <div className="absolute top-1/4 left-[22%] shadow-xl">

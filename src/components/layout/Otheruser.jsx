@@ -9,36 +9,63 @@ import authService from '../../appwrite/auth';
 export default function Otheruser(props) {
     const userid = props.userid
 
+    const [user, setuser] = useState(null);
     const [name, setName] = useState('')
-    const [avatar, setAvatar] = useState(null);
+    const [profilepicture, setprofilepicture] = useState(null);
     const [location, setLocation] = useState(null);
+    const [regionImg, setRegionImg] = useState(null);
 
-    // console.log(data);
 
     // Get other user details
     useEffect(() => {
-        const data = appwriteService.getUser(userid).then((data) => {
-            setName(data.name)
-        })
+        const fetchUserData = async () => {
+            try {
+                const data = await appwriteService.getUser(userid);
+                setuser(data);
+                setName(data.name);
+                console.log("Fetched User Data:", data); // ✅ Debugging log
 
-        const LocationData = authService.getLocale().then((location) => {
-            if (location) {
-                setLocation(location)
-                const ImageData = authService.getAvtar(location.countryCode).then((img) => {
-                    setAvatar(img.href);
-                });
+                if (data.profileImageId) {
+                    const profilePreview = await appwriteService.getProfilePreview(data.profileImageId);
+                    setprofilepicture(profilePreview);
+                    console.log("Profile Image Set:", profilePreview); // ✅ Debugging log
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
             }
-        });
-    }, [userid])
+        };
+
+        const fetchLocationAndImage = async () => {
+            try {
+                const location = await authService.getLocale();
+                if (location) {
+                    setLocation(location);
+                    console.log("Location Set:", location); // ✅ Debugging log
+
+                    const img = await authService.getAvtar(location.countryCode);
+                    if (img) {
+                        setRegionImg(img.href); // Uncomment if you want to use country-based profilepictures
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching location or profilepicture:", error);
+            }
+        };
+
+        fetchUserData();
+        fetchLocationAndImage();
+    }, [userid]); // ✅ Proper dependency
+
+
     return (
         <div>
-            <div className='flex bg-slate-100  h-[65vh] shadow-xl overflow-hidden'>
+            <div className='flex bg-slate-100 dark:bg-gray-900  h-[65vh] shadow-md shadow-orange-100 overflow-hidden rounded-xl'>
                 <div className='flex w-[60vw]'>
 
                     <div className='relative w-[30vw]'>
                         <div className='absolute z-0 rounded-xl w-[33vw] h-[45vh] bg-orange-500 rotate-[55deg] top-[10vh] right-[5vh]'>F</div>
                         <div className='img relative z-10 h-[30vh] w-[15vw] mt-12 rounded-full border-2 m-5 ml-10 bg-white overflow-hidden'>
-                            {avatar ? <img src={avatar} alt="profile" className='w-full h-full object-cover' loading="lazy"/> : <FaUserSecret size="5em" className='text-black' />}
+                            {profilepicture ? <img src={profilepicture} alt="profile" className='w-full h-full object-cover' loading="lazy" /> : <FaUserSecret size="5em" className='text-black' />}
                         </div>
                         <div className='img relative z-10 text-white font-bold'>
                             <h1 className='text-2xl text-center font-semibold'>{name ? name : 'USER'}</h1>
@@ -48,7 +75,7 @@ export default function Otheruser(props) {
                             <div className='location flex justify-center gap-2 mt-2'>
                                 <h3 className='text-sm text-center text-gray-100 font-semibold inline'>{location ? location.country : "Mirzapur"}
                                 </h3>
-                                <img className='rounded-full inline h-[20px]' src={`${avatar}`} alt="user" loading="lazy"/>
+                                <img className='rounded-full inline h-[20px]' src={`${regionImg}`} alt="location" loading="lazy" />
                             </div>
                         </div>
                     </div>
@@ -88,7 +115,7 @@ export default function Otheruser(props) {
                         </div>
 
                         <div className='buttons flex p-4 justify-center '>
-                            <div className='flex text-lg font-semibold gap-5 bg-white px-5 '>
+                            <div className='flex text-lg font-semibold gap-5 text-black bg-white px-5 '>
                                 <h1 className='p-3 border-r-2'>48 Followers</h1>
                                 <h1 className='p-3'>166 Following</h1>
                             </div>
