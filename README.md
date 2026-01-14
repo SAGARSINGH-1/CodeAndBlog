@@ -2,6 +2,9 @@
 
 Dive into the ultimate content exploration at CodeAndBlog! Whether your passion revolves around sharing captivating narratives, delving into the intricacies of coding, or a beautiful fusion of both worlds, CodeAndBlog is the perfect platform for creators like you.
 
+<img width="1886" height="835" alt="image" src="https://github.com/user-attachments/assets/cbf6c35e-6cfe-477e-9713-6366461d843c" />
+
+
 ---
 [![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/vpH5CvFsep)
 
