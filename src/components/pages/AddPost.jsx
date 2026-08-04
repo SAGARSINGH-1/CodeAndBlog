@@ -1,44 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import Container from '../container/Container'
-import PostForm from '../layout/PostForm'
-import LoadingBar from 'react-top-loading-bar'
+import React, { useEffect, useState } from 'react';
+import Container from '../container/Container';
+import PostForm from '../layout/PostForm';
 import LoadingComponent from '../layout/Loader';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 function AddPost() {
+  const userData = useSelector((state) => state.auth.userData);
+  const authStatus = useSelector((state) => state.auth.status);
 
-   // top Loader
-const [isContentLoaded, setContentLoaded] = useState(false);
-const [progress, setProgress] = useState(0);
-useEffect(() => {
-  const timeoutId = setTimeout(() => {
-    setContentLoaded(true);
-  }, 2000);
+  const [isContentLoaded, setContentLoaded] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  const intervalId = setInterval(() => {
-    setProgress((prevProgress) => {
-      const randomIncrement = Math.floor(Math.random() * 50) + 1;
-      const newProgress = Math.min(prevProgress + randomIncrement, 100);
-      return newProgress;
-    });
-  }, 300);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => setContentLoaded(true), 400);
+    const intervalId = setInterval(() => {
+      setProgress((prev) => Math.min(prev + Math.floor(Math.random() * 40) + 1, 100));
+    }, 150);
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
+  }, []);
 
-  // Clean up the timeout and interval when the component unmounts
-  return () => {
-    clearTimeout(timeoutId);
-    clearInterval(intervalId);
-  };
-}, []);
-    
+  if (!authStatus || !userData) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
-    <div className='py-8'>
-       {isContentLoaded ? (
+    <div className="py-8">
+      {isContentLoaded ? (
         <Container>
-            <PostForm />
+          <h1 className="text-2xl md:text-3xl font-semibold mb-6 px-4">Create a new post</h1>
+          <PostForm />
         </Container>
-         ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
+      ) : (
+        <LoadingComponent
+          isContentLoaded={isContentLoaded}
+          progress={progress}
+          setProgress={setProgress}
+        />
+      )}
     </div>
-  )
+  );
 }
 
-export default AddPost
+export default AddPost;

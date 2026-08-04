@@ -1,22 +1,31 @@
-import { Fragment, useRef, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { Fragment, useRef } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import authService from '../../appwrite/auth';
-export default function Deactivate(props) {
-  const open=props.show;
-  const userid=props.userId;
-  const setOpen=props.setOpen;
-  const cancelButtonRef = useRef(null)
+import { useDispatch } from 'react-redux';
+import { logout } from '../../store/authSlice';
+import { useNavigate } from 'react-router-dom';
 
+export default function Deactivate({ open, show, setOpen, userId }) {
+  const isOpen = open ?? show ?? false;
+  const cancelButtonRef = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  //** Delete the User
   const DeleteUser = async () => {
-    await authService.deleteAccount(userid);
-    setOpen(false);
-  }
+    if (!userId) return;
+    try {
+      await authService.deleteAccount(userId);
+      dispatch(logout());
+      setOpen(false);
+      navigate('/signup');
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
         <Transition.Child
           as={Fragment}
@@ -53,8 +62,8 @@ export default function Deactivate(props) {
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          Are you sure you want to deactivate your account? All of your data will be permanently
-                          removed. This action cannot be undone.
+                          Are you sure you want to deactivate your account? All of your data will be
+                          permanently removed. This action cannot be undone.
                         </p>
                       </div>
                     </div>
@@ -83,5 +92,5 @@ export default function Deactivate(props) {
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }

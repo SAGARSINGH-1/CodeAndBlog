@@ -83,7 +83,7 @@ export const Posts = [
         comment: 15,
         category: "Travel",
     }
-] 
+]
 
 export const topBlog = [
 
@@ -92,7 +92,7 @@ export const topBlog = [
         icon: "./Blogs/Politics-2.jpg",
         title: "Protest On The Streets ",
         author: "Andrew Malik",
-        date: "05 Jun 24", 
+        date: "05 Jun 24",
     },
 
     {
@@ -100,7 +100,7 @@ export const topBlog = [
         icon: "./Blogs/Politics-3.jpg",
         title: "Union Meeting ON go",
         author: "Katu Nit",
-        date: "02 Jul 23", 
+        date: "02 Jul 23",
     },
 
 ]
@@ -111,7 +111,7 @@ export const TrendBlogs = [
         img: "./Blogs/Lifestyle.jpeg",
         title: "Living Well: Embrace the Lifestyle.",
         author: "Kao Ren",
-        date: "01 May", 
+        date: "01 May",
     },
 
     {
@@ -119,7 +119,7 @@ export const TrendBlogs = [
         img: "./Blogs/Science.jpeg",
         title: "Science: A Universe of Knowledge.",
         author: "Andrew Malik",
-        date: "07 Apr", 
+        date: "07 Apr",
     },
 
     {
@@ -127,7 +127,7 @@ export const TrendBlogs = [
         img: "./Blogs/Travel.jpeg",
         title: "Wanderlust: Exploring the Globe.",
         author: "Samantha Rao",
-        date: "17 Mar", 
+        date: "17 Mar",
     },
 
     {
@@ -135,7 +135,7 @@ export const TrendBlogs = [
         img: "./Blogs/Health.jpeg",
         title: "Fitness Journey: Unleash Your Potential",
         author: "Leo zang",
-        date: "02 Feb", 
+        date: "02 Feb",
     },
 
     {
@@ -143,7 +143,7 @@ export const TrendBlogs = [
         img: "./Blogs/Lifestyle.jpeg",
         title: "Living Well: Embrace the Lifestyle.",
         author: "Kao Ren",
-        date: "01 May", 
+        date: "01 May",
     },
 
     {
@@ -151,7 +151,7 @@ export const TrendBlogs = [
         img: "./Blogs/Science.jpeg",
         title: "Science: A Universe of Knowledge.",
         author: "Andrew Malik",
-        date: "07 Apr", 
+        date: "07 Apr",
     },
 
     {
@@ -159,7 +159,7 @@ export const TrendBlogs = [
         img: "./Blogs/Travel.jpeg",
         title: "Wanderlust: Exploring the Globe.",
         author: "Samantha Rao",
-        date: "17 Mar", 
+        date: "17 Mar",
     },
 
     {
@@ -167,6 +167,6 @@ export const TrendBlogs = [
         img: "./Blogs/Health.jpeg",
         title: "Fitness Journey: Unleash Your Potential",
         author: "Leo zang",
-        date: "02 Feb", 
+        date: "02 Feb",
     },
 ]

@@ -2,6 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
+@layer base {
+  html {
+    scroll-behavior: smooth;
   }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased dark:bg-zinc-950 dark:text-zinc-100;
+  }
+
+  ::selection {
+    @apply bg-orange-200 text-orange-950 dark:bg-orange-500/40 dark:text-white;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-slate-200/80 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900;
+  }
+
+  .card-hover {
+    @apply card transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-orange-200 dark:hover:border-orange-500/30;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl;
+  }
+
+  .muted {
+    @apply text-slate-500 dark:text-zinc-400;
+  }
+
+  .page-shell {
+    @apply mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-10;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Prose-ish content on post pages */
+.browser-css h1,
+.browser-css h2,
+.browser-css h3 {
+  @apply mb-3 mt-6 font-semibold text-slate-900 dark:text-white;
+}
+
+.browser-css p {
+  @apply mb-3 leading-relaxed text-slate-700 dark:text-zinc-300;
+}
+
+.browser-css a {
+  @apply text-orange-600 underline-offset-2 hover:underline dark:text-orange-400;
+}
+
+.browser-css code {
+  @apply rounded bg-slate-100 px-1.5 py-0.5 text-sm dark:bg-zinc-800;
+}
+
+.browser-css ul {
+  @apply mb-3 list-disc pl-5;
+}

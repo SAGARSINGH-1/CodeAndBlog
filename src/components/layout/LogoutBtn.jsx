@@ -1,26 +1,32 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import authService from '../../appwrite/auth'
-import { logout } from '../../store/authSlice'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import authService from '../../appwrite/auth';
+import { logout } from '../../store/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 function LogoutBtn() {
-  const dispatch = useDispatch()
-  const Navigate = useNavigate()
-  const logoutHandler = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
     try {
-      authService.logout().then(() => {
-          dispatch(logout())
-          Navigate('/signup')
-      })
-      
+      await authService.logout();
+      dispatch(logout());
+      navigate('/login');
     } catch (error) {
-      console.log("Logout error", error);
+      console.log('Logout error', error);
     }
-  }
+  };
+
   return (
-    <div> <button className="rounded-lg border border-transparent px-3 py-2 text-lg font-semibold bg-orange-500 text-white cursor-pointer transition duration-250 hover:border-white hover:bg-orange-400" onClick={logoutHandler}>Logout</button></div>
-  )
+    <button
+      type="button"
+      onClick={logoutHandler}
+      className="w-full rounded-lg bg-orange-500 px-3 py-2 text-sm font-semibold text-white transition hover:bg-orange-600"
+    >
+      Logout
+    </button>
+  );
 }
 
-export default LogoutBtn
+export default LogoutBtn;

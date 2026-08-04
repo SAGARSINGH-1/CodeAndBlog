@@ -1,155 +1,116 @@
 import React, { useEffect, useState } from 'react';
-import authService from '../../appwrite/auth'
-import { Link, useNavigate, NavLink } from 'react-router-dom'
-import { login } from '../../store/authSlice'
-import { useDispatch } from 'react-redux'
-import { useForm } from 'react-hook-form'
-import LoadingBar from 'react-top-loading-bar'
-import Button from '../layout/Button';
-import { FcGoogle } from "react-icons/fc";
+import authService from '../../appwrite/auth';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { login } from '../../store/authSlice';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import LoadingComponent from '../layout/Loader';
-
-
+import Button from '../layout/Button';
 
 export default function Signup() {
-  const navigate = useNavigate()
-  const [error, setError] = useState("")
-  const dispatch = useDispatch()
-  const { register, handleSubmit } = useForm()
-
-  const create = async (data) => {
-    setError("")
-    try {
-      const userData = await authService.createAccount(data);
-      if (userData) {
-        const userData = await authService.getCurrentUser();
-        if (userData) dispatch(login(userData));
-        navigate("/");
-      }
-    } catch (error) {
-      setError(error.message);
-    }
-  }
-
-
-  // Google Auth
-
-  const googleauth = () => {
-    authService.googleauth().then((response) => {
-      console.log(response)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
-
-
-  // top Loader
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm();
   const [isContentLoaded, setContentLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  const create = async (data) => {
+    setError('');
+    try {
+      const user = await authService.createAccount(data);
+      if (user) {
+        dispatch(login(user));
+        navigate('/');
+      }
+    } catch (err) {
+      setError(err?.response?.data?.message || err.message || 'Signup failed');
+    }
+  };
+
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setContentLoaded(true);
-    }, 2000);
-
-    const intervalId = setInterval(() => {
-      setProgress((prevProgress) => {
-        const randomIncrement = Math.floor(Math.random() * 50) + 1;
-        const newProgress = Math.min(prevProgress + randomIncrement, 100);
-        return newProgress;
-      });
-    }, 300);
-
-    // Clean up the timeout and interval when the component unmounts
+    const t = setTimeout(() => setContentLoaded(true), 300);
+    const i = setInterval(() => setProgress((p) => Math.min(p + 25, 100)), 100);
     return () => {
-      clearTimeout(timeoutId);
-      clearInterval(intervalId);
+      clearTimeout(t);
+      clearInterval(i);
     };
   }, []);
 
+  if (!isContentLoaded) {
+    return (
+      <LoadingComponent isContentLoaded={false} progress={progress} setProgress={setProgress} />
+    );
+  }
+
   return (
-    <div>
-      {isContentLoaded ? (
-        <div className="flex items-center justify-center my-4 py-4 md:m-5 md:p-5">
-          <div className="bg-white dark:bg-gray-900 p-8 rounded shadow-xl min-h-min md:w-96">
-            <h2 className="text-2xl font-semibold text-center mb-4">Sign Up</h2>
-            {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-            <form onSubmit={handleSubmit(create)}>
-              <div className="mb-4">
-                <label htmlFor="name" className="block dark:text-gray-200 text-gray-600 text-sm font-medium mb-2">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full border rounded-md py-2 px-3 focus:outline-none dark:bg-gray-900 focus:border-blue-400"
-                  placeholder="Name"
-                  required
-                  {...register("name", {
-                    required: true,
-                  })}
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block dark:text-gray-200 text-gray-600 text-sm font-medium mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full border rounded-md py-2 px-3 focus:outline-none dark:bg-gray-900 focus-border-blue-400"
-                  placeholder="Email"
-                  required
-                  {...register("email", {
-                    required: true,
-                    validate: {
-                      matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                        "Email address must be a valid address",
-                    }
-                  })}
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="password" className="block dark:text-gray-200 text-gray-600 text-sm font-medium mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  className="w-full border rounded-md py-2 px-3 focus:outline-none dark:bg-gray-900 focus-border-blue-400"
-                  placeholder="Password"
-                  required
-                  {...register("password", {
-                    required: true,
-                  })}
-                />
-              </div>
-
-              <div className="mb-4">
-                <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300">Sign Up</button>
-              </div>
-
-              <div className="social-login-label relative mt-4 text-center">
-                <span className="label-text relative z-10 inline-block px-2 bg-white dark:bg-gray-900 dark:text-gray-100 text-gray-500 font-semibold">
-                  or connect with
-                </span>
-                <div className="absolute top-1/2 left-0 right-0 border-t border-gray-300 mt-0.5"></div>
-              </div>
-
-          
-              <NavLink onClick={googleauth}>
-                <button className="rounded-full w-full bg-white dark:bg-gray-900 border border-gray-300 flex items-center justify-center p-3 shadow-sm hover:shadow-md my-3 font-semibold">
-                  <span className="mr-2"><FcGoogle size="1.5em"/></span>
-                  Continue with Google
-                </button>
-              </NavLink>
-              
-            </form>
-
-            <p className="text-center dark:text-gray-200 text-gray-600 text-sm"> Have an account? <NavLink className="text-indigo-500" to='/login'>Login</NavLink> </p>
-          </div>
+    <div className="flex min-h-[70vh] items-center justify-center px-4 py-12">
+      <div className="card w-full max-w-md p-8 shadow-soft">
+        <div className="mb-8 text-center">
+          <h2 className="text-2xl font-bold tracking-tight">Create your account</h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-zinc-400">
+            Join CodeAndBlog and start publishing
+          </p>
         </div>
-      ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
 
+        {error && (
+          <p className="mb-4 rounded-xl bg-red-50 px-3 py-2 text-center text-sm text-red-600 dark:bg-red-500/10 dark:text-red-400">
+            {error}
+          </p>
+        )}
+
+        <form onSubmit={handleSubmit(create)} className="space-y-4">
+          <div>
+            <label htmlFor="name" className="mb-1.5 block text-sm font-medium">
+              Full name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="input-field"
+              placeholder="Jane Doe"
+              autoComplete="name"
+              {...register('name', { required: true })}
+            />
+          </div>
+          <div>
+            <label htmlFor="email" className="mb-1.5 block text-sm font-medium">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="input-field"
+              placeholder="you@example.com"
+              autoComplete="email"
+              {...register('email', { required: true })}
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="mb-1.5 block text-sm font-medium">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="input-field"
+              placeholder="Min 8 characters"
+              autoComplete="new-password"
+              {...register('password', { required: true, minLength: 8 })}
+            />
+          </div>
+          <Button type="submit" className="w-full py-3">
+            Sign up
+          </Button>
+        </form>
+
+        <p className="mt-6 text-center text-sm text-slate-500 dark:text-zinc-400">
+          Already have an account?{' '}
+          <NavLink className="font-semibold text-orange-500 hover:text-orange-600" to="/login">
+            Log in
+          </NavLink>
+        </p>
+      </div>
     </div>
   );
 }

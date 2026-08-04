@@ -2,105 +2,126 @@ import React, { useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { FaHeart } from 'react-icons/fa';
 import { FiMessageSquare, FiShare2 } from 'react-icons/fi';
-import { FaUserSecret } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
-import appwriteService from "../../appwrite/config"
-import { Link } from 'react-router-dom'
-import parse from "html-react-parser";
-import { CiEdit } from "react-icons/ci";
+import appwriteService from '../../appwrite/config';
+import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
+import { CiEdit } from 'react-icons/ci';
 
+function UserPost({
+  slug,
+  $id,
+  title,
+  featuredImage,
+  featuredImageUrl,
+  name,
+  content,
+  profileImageId,
+  profileImageUrl,
+  createdAt,
+}) {
+  const postSlug = slug || $id;
+  const userData = useSelector((state) => state.auth.userData);
+  const description = typeof content === 'string' ? parse(content) : content;
 
-function UserPost({ $id, title, featuredImage, name, content, profileImageId }) {
+  const [isHeartFilled, setIsHeartFilled] = useState(false);
+  const [likeCount, setLikeCount] = useState(Math.floor(Math.random() * 30) + 1);
+  const [commentCount] = useState(Math.floor(Math.random() * 20) + 1);
 
-    const [showMoreMap, setShowMoreMap] = useState({});
+  const handleLike = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setLikeCount((n) => (isHeartFilled ? n - 1 : n + 1));
+    setIsHeartFilled((v) => !v);
+  };
 
-    const description = parse(content);
+  const dateLabel = createdAt
+    ? new Date(createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+    : '';
 
-    // for edit
-    const userData = useSelector((state) => state.auth.userData.userData);
+  const imageSrc = appwriteService.getFilePreview(featuredImageUrl || featuredImage);
+  const avatarSrc = appwriteService.getProfilePreview(profileImageUrl || profileImageId);
 
-    //For like dislike
-    const [isHeartFilled, setIsHeartFilled] = useState(false);
-    const [randomNumber, setRandomNumber] = useState(Math.floor(Math.random() * 30) + 1);
-
-    const handleClick = () => {
-        setRandomNumber(isHeartFilled ? randomNumber - 1 : randomNumber + 1);
-        setIsHeartFilled(!isHeartFilled);
-    };
-
-    // For Comment
-    const [randomComment, setRandomComment] = useState(Math.floor(Math.random() * 30) + 1);
-
-    function getRandomMonthName() {
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const randomIndex = Math.floor(Math.random() * months.length);
-        return months[randomIndex];
-    }
-
-    // Usage
-    const [randomMonthName, setRandomMonthName] = useState(getRandomMonthName());
-    const randomDate = useState(Math.floor(Math.random() * 30) + 1);
-
-
-    return (
-
-        <div key={$id} className='Category bg-slate-100 dark:bg-gray-900 p-2 md:p-3 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition duration-300 mb-5'>
-            <Link to={`/post/${$id}`}>
-                <div className='user flex justify-between items-center'>
-                    <div className='flex flex-row items-center'>
-                        <div className='flex-shrink-0 w-10 h-10 rounded-full bg-gray-300 dark:bg-white flex justify-center items-center'>
-                            <img src={appwriteService.getProfilePreview(profileImageId)} className="rounded-full" alt="" srcset="" />
-                        </div>
-                        <div>
-                            <h2 className='ml-3 font-medium'>{name ? name : 'Xavier'}</h2>
-                            <h2 className='ml-4 text-sm text-gray-500'>{ }</h2>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h1 className='text-sm items-center inline'>{
-                            userData.name === name
-                                ? (<Link to={`/edit-post/${$id}`}><CiEdit className='inline text-2xl mr-2 text-orange-500 mb-1 hover:scale-110' /></Link>)
-                                : null
-                        }{randomMonthName} {randomDate}</h1>
-                    </div>
-                </div>
-
-                <div className='content'>
-                    <div className='px-10 py-3 '>
-                        <div className="text-xl font-semibold dark:text-white text-black pb-2">
-                            <h1>{title}</h1>
-                        </div>
-                        <div className='text-gray-500 text-sm'>
-                            <p>{description}</p>
-                        </div>
-
-                    </div>
-                    <div className='p-5'>
-                        <img className="w-[40rem] mx-auto h-full object-cover rounded-lg bg-white" src={appwriteService.getFilePreview(featuredImage)} alt="img" loading="lazy" />
-                    </div>
-                </div>
-
-            </Link>
-
-            <div className='btns flex justify-around'>
-                <div onClick={handleClick} className='flex cursor-pointer hover:text-orange-500'>
-                    {isHeartFilled ? (<FaHeart color='#FF5733' size="1.1em" className='mt-0.5' />) : (<AiOutlineHeart size="1.2em" className='mt-0.5' />)} <p className='text-gray-500 ml-1.5'>{randomNumber}</p>
-                </div>
-
-                <Link to={`/post/${$id}`}>
-                    <div className='flex cursor-pointer hover:text-orange-500'>
-                        <FiMessageSquare size="1.2em" className='mt-0.5 ' /><p className='text-gray-500 ml-1'>{randomComment + 1}</p>
-                    </div>
-                </Link>
-
-                <div className='cursor-pointer hover:text-orange-500'>
-                    <FiShare2 size="1.1em" className='mt-0.5' />
-                </div>
+  return (
+    <article className="card-hover mb-5 overflow-hidden p-4 md:p-5">
+      <Link to={`/post/${postSlug}`} className="block">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-200 dark:bg-zinc-700">
+              {avatarSrc ? (
+                <img src={avatarSrc} className="h-full w-full object-cover" alt="" />
+              ) : (
+                <span className="text-sm font-semibold text-slate-600 dark:text-zinc-300">
+                  {(name || 'U')[0].toUpperCase()}
+                </span>
+              )}
             </div>
+            <div>
+              <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                {name || 'User'}
+              </p>
+              {dateLabel && <p className="text-xs text-slate-400">{dateLabel}</p>}
+            </div>
+          </div>
+          {userData?.name === name && (
+            <Link
+              to={`/edit-post/${postSlug}`}
+              onClick={(e) => e.stopPropagation()}
+              className="rounded-lg p-1.5 text-orange-500 transition hover:bg-orange-50 dark:hover:bg-orange-500/10"
+            >
+              <CiEdit className="text-xl" />
+            </Link>
+          )}
         </div>
 
-    )
+        <h2 className="mb-2 text-lg font-bold leading-snug text-slate-900 dark:text-white md:text-xl">
+          {title}
+        </h2>
+        <div className="line-clamp-3 text-sm leading-relaxed text-slate-500 dark:text-zinc-400">
+          {description}
+        </div>
+
+        {imageSrc && (
+          <div className="mt-4 overflow-hidden rounded-xl bg-slate-100 dark:bg-zinc-800">
+            <img
+              className="max-h-72 w-full object-cover"
+              src={imageSrc}
+              alt={title}
+              loading="lazy"
+            />
+          </div>
+        )}
+      </Link>
+
+      <div className="mt-4 flex items-center justify-around border-t border-slate-100 pt-3 text-slate-500 dark:border-zinc-800 dark:text-zinc-400">
+        <button
+          type="button"
+          onClick={handleLike}
+          className="flex items-center gap-1.5 text-sm transition hover:text-orange-500"
+        >
+          {isHeartFilled ? (
+            <FaHeart color="#f97316" size="1.05em" />
+          ) : (
+            <AiOutlineHeart size="1.15em" />
+          )}
+          {likeCount}
+        </button>
+        <Link
+          to={`/post/${postSlug}`}
+          className="flex items-center gap-1.5 text-sm transition hover:text-orange-500"
+        >
+          <FiMessageSquare size="1.15em" />
+          {commentCount}
+        </Link>
+        <button
+          type="button"
+          className="flex items-center gap-1.5 text-sm transition hover:text-orange-500"
+        >
+          <FiShare2 size="1.1em" />
+        </button>
+      </div>
+    </article>
+  );
 }
 
 export default UserPost;

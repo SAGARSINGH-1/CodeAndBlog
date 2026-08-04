@@ -16,8 +16,6 @@
     "@heroicons/react": "^2.1.1",
     "@mui/material": "^5.15.1",
     "@reduxjs/toolkit": "^1.9.7",
-    "@tinymce/tinymce-react": "^4.3.0",
-    "appwrite": "^13.0.0",
     "axios": "^1.19.0",
     "emoji-picker-element": "^1.18.4",
     "html-react-parser": "^5.0.6",

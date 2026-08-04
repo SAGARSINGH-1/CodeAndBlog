@@ -1,54 +1,58 @@
-import appwriteService from "../../appwrite/config";
-import { useSelector } from "react-redux";
+import appwriteService from '../../appwrite/config';
+import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import Button from "./Button";
+import Button from './Button';
 
-const Comment = ({ postid, title, refreshcomment }) => {
+const Comment = ({ postid, onAdded }) => {
   const userData = useSelector((state) => state.auth.userData);
   const [replyText, setReplyText] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleAddReply(e) {
+  async function handleAddReply(e) {
     e.preventDefault();
-    
-    // Check if userData is available before accessing its properties
-    if (userData && userData.userData) {
-      const commentData = {
-        userid: userData.userData.$id,
-        name: userData.userData.name,
-        comment: replyText,
-        postid: postid, // Assuming the text of the reply is stored in the 'comment' property
-      };
-      
-      //console.log(commentData);
-      appwriteService.createComment(commentData);
-      
-      // Reset the textarea after submitting the reply
+    if (!userData?._id) return;
+    if (!replyText.trim()) return;
+
+    setSubmitting(true);
+    try {
+      await appwriteService.createComment({
+        postid, // should be the post slug
+        comment: replyText.trim(),
+      });
       setReplyText('');
+      if (typeof onAdded === 'function') onAdded();
+    } catch (err) {
+      console.error('Failed to add comment', err);
+    } finally {
+      setSubmitting(false);
     }
+  }
+
+  if (!userData) {
+    return (
+      <p className="text-sm text-gray-500 mx-2">Log in to leave a comment.</p>
+    );
   }
 
   return (
     <div className="comment mx-2 bg-white border dark:text-white dark:bg-black border-gray-300 p-6 mb-6 rounded-lg shadow-lg">
-      <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Comment Title</h3>
-      {/* Populate this div with comment content and replies */}
-      <div className="mt-4">
-        {/* Content goes here */}
-      </div>
-      <form className="mt-6" onSubmit={(e) => handleAddReply(e)}>
-        <label className="block text-gray-700 font-semibold mb-2 dark:text-white">Add Reply:</label>
+      <form className="mt-2" onSubmit={handleAddReply}>
+        <label className="block text-gray-700 font-semibold mb-2 dark:text-white">
+          Add a comment
+        </label>
         <textarea
           value={replyText}
           onChange={(e) => setReplyText(e.target.value)}
           className="w-full border border-gray-300 dark:bg-black p-3 rounded-md focus:outline-none resize-none"
           rows="3"
-          placeholder="Write your reply here..."
+          placeholder="Write your comment here..."
           name="comment"
         />
-     
-     <div className="flex justify-end">
-      <Button type="submit" onClick={refreshcomment} className="m-3">Post Reply</Button>
-    </div>
-     
+        <div className="flex justify-end">
+          <Button type="submit" className="m-3" disabled={submitting}>
+            {submitting ? 'Posting…' : 'Post Comment'}
+          </Button>
+        </div>
       </form>
     </div>
   );

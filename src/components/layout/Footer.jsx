@@ -1,89 +1,67 @@
-import React from "react";
+import React from 'react';
 import { BsGithub } from 'react-icons/bs';
 import { FaXTwitter, FaFacebookF, FaLinkedin } from 'react-icons/fa6';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+  const linkClass =
+    'text-sm text-zinc-400 transition hover:text-orange-400';
+
   return (
-    <div>
-      <footer className="bg-gray-900 text-white py-20">
-        <div className="container mx-auto flex flex-wrap justify-between">
-          {/* Footer Top Section */}
-          <div className="w-full sm:w-1/2 md:w-1/4 px-4 mb-4">
-            <li className="block my-4"><img className='h-10' src="../Logo.png" alt="logo" loading="lazy"/></li>
-            <p className="text-sm"> Explore, connect, and be inspired on our blog, where every post unfolds a new chapter in the journey of curiosity. </p>
+    <footer className="mt-16 border-t border-zinc-800 bg-zinc-950 text-zinc-100">
+      <div className="mx-auto max-w-6xl px-4 py-14 md:px-6">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <img className="mb-4 h-9" src="/Logo.png" alt="CodeAndBlog" loading="lazy" />
+            <p className="max-w-xs text-sm leading-relaxed text-zinc-400">
+              Explore, connect, and share. A home for developers and writers to publish
+              stories, tutorials, and ideas.
+            </p>
           </div>
 
-          {/* Footer Menu Links */}
-          <div className="flex flex-wrap justify-between">
-            <div className="w-full sm:w-1/2 md:w-1/4 px-10 mb-8">
-              <h4 className="text-lg font-semibold mb-2">Menu</h4>
-              <ul>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to=''>Home</NavLink></li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={'/about'}>About</NavLink></li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={"/contact"}>Contact</NavLink></li>
-              </ul>
-            </div>
-
-            <div className="w-full sm:w-1/2 md:w-1/4 px-10 mb-8">
-              <h4 className="text-lg font-semibold mb-2">Blogs</h4>
-              <ul>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={'/blogs'}>Food Blog</NavLink></li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={'/blogs'}>Tech Blog</NavLink></li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200"><NavLink to={'/blogs'}>Traveling Blog</NavLink></li>
-              </ul>
-            </div>
-
-            <div className="w-full sm:w-1/2 md:w-1/4 px-10 mb-8">
-              <h4 className="text-lg font-semibold mb-2">
-                Services
-              </h4>
-              <ul>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
-                  Privacy
-                </li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
-                  Services
-                </li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
-                  Copyright
-                </li>
-              </ul>
-            </div>
-
-            <div className="w-full sm:w-1/2 md:w-1/4 px-10 mb-8">
-              <h4 className="text-lg font-semibold mb-2">Get in Touch</h4>
-              <ul>
-                <li className="block mb-4 hover:text-indigo-400 cursor-pointer transition duration-200">
-                  Email: google123@gmail.com
-                </li>
-                <li className="block mb-2 hover:text-indigo-400 cursor-pointer transition duration-200">
-                  Phone No. 1234567890
-                </li>
-              </ul>
-            </div>
+          <div>
+            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-300">
+              Menu
+            </h4>
+            <ul className="space-y-2">
+              <li><NavLink className={linkClass} to="/">Home</NavLink></li>
+              <li><NavLink className={linkClass} to="/blogs">Blogs</NavLink></li>
+              <li><NavLink className={linkClass} to="/about">About</NavLink></li>
+              <li><NavLink className={linkClass} to="/contact">Contact</NavLink></li>
+            </ul>
           </div>
 
-          {/* Copyright and Social Media Icons */}
-          <div className="w-full px-4 mt-4 text-sm flex justify-between items-center">
-            <div>&copy; {new Date().getFullYear()} All rights reserved.</div>
-            <div className="flex space-x-2">
-              <li className="block">
-                <BsGithub className="text-xl mr-3"/>
-              </li>
-              <li className="block">
-                <FaXTwitter className="text-xl mr-3"/>
-              </li>
-              <li className="block">
-                <FaFacebookF className="text-xl mr-3"/>
-              </li>
-              <li className="block">
-                <FaLinkedin className="text-xl mr-3"/>
-              </li>
+          <div>
+            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-300">
+              Resources
+            </h4>
+            <ul className="space-y-2">
+              <li><NavLink className={linkClass} to="/help">Help</NavLink></li>
+              <li><NavLink className={linkClass} to="/add-post">Write a post</NavLink></li>
+              <li><NavLink className={linkClass} to="/signup">Join</NavLink></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-300">
+              Get in touch
+            </h4>
+            <p className="text-sm text-zinc-400">hello@codeandblog.dev</p>
+            <div className="mt-4 flex gap-3 text-zinc-400">
+              <a href="https://github.com/SAGARSINGH-1/CodeAndBlog" target="_blank" rel="noreferrer" className="hover:text-white"><BsGithub size={18} /></a>
+              <span className="hover:text-white cursor-default"><FaXTwitter size={18} /></span>
+              <span className="hover:text-white cursor-default"><FaFacebookF size={18} /></span>
+              <span className="hover:text-white cursor-default"><FaLinkedin size={18} /></span>
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-zinc-800 pt-6 text-xs text-zinc-500 sm:flex-row">
+          <p>© {year} CodeAndBlog. All rights reserved.</p>
+          <p>Built for writers & developers</p>
+        </div>
+      </div>
+    </footer>
   );
 }

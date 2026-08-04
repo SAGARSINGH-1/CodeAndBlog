@@ -1,140 +1,108 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Link, useNavigate } from 'react-router-dom'
-import { login as authLogin } from '../../store/authSlice'
-import { useDispatch } from "react-redux"
-import authService from "../../appwrite/auth"
-import { useForm } from "react-hook-form"
-import LoadingBar from 'react-top-loading-bar'
-import { FcGoogle } from 'react-icons/fc';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { login as authLogin } from '../../store/authSlice';
+import { useDispatch } from 'react-redux';
+import authService from '../../appwrite/auth';
+import { useForm } from 'react-hook-form';
 import LoadingComponent from '../layout/Loader';
-
+import Button from '../layout/Button';
 
 export default function Login() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const [error, setError] = useState("")
-  const { register, handleSubmit } = useForm()
-
-  const login = async (data) => {
-    setError("")
-    try {
-      const session = await authService.login(data)
-      if (session) {
-        const userData = await authService.getCurrentUser()            
-        if (userData) dispatch(authLogin(userData));          
-        navigate("/")
-      }
-    } catch (error) {
-      setError(error.message)
-    }
-  }
-
-  // top Loader
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [error, setError] = useState('');
+  const { register, handleSubmit } = useForm();
   const [isContentLoaded, setContentLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  const login = async (data) => {
+    setError('');
+    try {
+      const user = await authService.login(data);
+      if (user) {
+        dispatch(authLogin(user));
+        navigate('/');
+      }
+    } catch (err) {
+      setError(err?.response?.data?.message || err.message || 'Login failed');
+    }
+  };
+
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setContentLoaded(true);
-    }, 1000);
-
-    const intervalId = setInterval(() => {
-      setProgress((prevProgress) => {
-        const randomIncrement = Math.floor(Math.random() * 50) + 1;
-        const newProgress = Math.min(prevProgress + randomIncrement, 100);
-        return newProgress;
-      });
-    }, 300);
-
-    // Clean up the timeout and interval when the component unmounts
+    const t = setTimeout(() => setContentLoaded(true), 300);
+    const i = setInterval(() => setProgress((p) => Math.min(p + 25, 100)), 100);
     return () => {
-      clearTimeout(timeoutId);
-      clearInterval(intervalId);
+      clearTimeout(t);
+      clearInterval(i);
     };
   }, []);
 
-  function PasswordReset() {
-    navigate("/password-reset")
+  if (!isContentLoaded) {
+    return (
+      <LoadingComponent isContentLoaded={false} progress={progress} setProgress={setProgress} />
+    );
   }
 
   return (
-    <div className="flex items-center justify-center my-4 py-4 md:m-5 md:p-5">
-      {isContentLoaded ? (
-        <div className="bg-white dark:bg-gray-900 p-8 rounded shadow-xl min-w-min md:w-96">
-        <h2 className="text-2xl font-semibold text-center mb-4">Login</h2>
-        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-        <form onSubmit={handleSubmit(login)}>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-600 text-sm dark:text-gray-300 font-medium mb-2">
+    <div className="flex min-h-[70vh] items-center justify-center px-4 py-12">
+      <div className="card w-full max-w-md p-8 shadow-soft">
+        <div className="mb-8 text-center">
+          <h2 className="text-2xl font-bold tracking-tight">Welcome back</h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-zinc-400">
+            Log in to continue writing and reading
+          </p>
+        </div>
+
+        {error && (
+          <p className="mb-4 rounded-xl bg-red-50 px-3 py-2 text-center text-sm text-red-600 dark:bg-red-500/10 dark:text-red-400">
+            {error}
+          </p>
+        )}
+
+        <form onSubmit={handleSubmit(login)} className="space-y-4">
+          <div>
+            <label htmlFor="email" className="mb-1.5 block text-sm font-medium">
               Email
             </label>
             <input
               type="email"
               id="email"
-              className="w-full border rounded-md py-2 px-3 dark:bg-gray-900 focus:outline-none focus:border-blue-400"
-              placeholder="Email"
-              required
-              {...register("email", {
-                required: true,
-                validate: {
-                  matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                    "Email address must be a valid address",
-                }
-              })}
+              className="input-field"
+              placeholder="you@example.com"
+              autoComplete="email"
+              {...register('email', { required: true })}
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-600 text-sm dark:text-gray-300 font-medium mb-2">
+          <div>
+            <label htmlFor="password" className="mb-1.5 block text-sm font-medium">
               Password
             </label>
             <input
               type="password"
               id="password"
-              className="w-full border rounded-md py-2 px-3 dark:bg-gray-900 focus:outline-none focus:border-blue-400"
-              placeholder="Password"
-              required
-              autoComplete='on'
-              {...register("password", {
-                required: true,
-              })}
+              className="input-field"
+              placeholder="••••••••"
+              autoComplete="current-password"
+              {...register('password', { required: true })}
             />
-            <p className=" text-gray-600 text-sm dark:text-gray-300 font-semibold m-3 text-end">
-              Forget <Link className="text-orange-500 cursor-pointer" to={'/password-reset'}>password?</Link>
+            <p className="mt-2 text-right text-sm">
+              <NavLink className="font-medium text-orange-500 hover:text-orange-600" to="/password-reset">
+                Forgot password?
+              </NavLink>
             </p>
           </div>
-
-          <div className="mb-4">
-            <button
-              type="submit"
-              className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300"
-            >
-              Login
-            </button>
-          </div>
-
-          <div className="social-login-label relative mt-4 text-center">
-            <span className="label-text relative z-10 inline-block px-2 bg-white dark:bg-gray-900 dark:text-gray-200 text-gray-500 font-semibold">
-              or connect with
-            </span>
-            <div className="absolute top-1/2 left-0 right-0 border-t border-gray-300 mt-0.5"></div>
-          </div>
-
-          <NavLink>
-            <button className="rounded-full w-full bg-white dark:bg-gray-900 border border-gray-300 flex items-center justify-center p-3 shadow-sm hover:shadow-md my-3 font-semibold">
-              <span className="mr-2"><FcGoogle size="1.5em" /></span>
-              Continue with Google
-            </button>
-          </NavLink>
+          <Button type="submit" className="w-full py-3">
+            Log in
+          </Button>
         </form>
-        
-        <p className="text-center text-gray-600 text-sm dark:text-gray-300">
-          Don't have an account? <NavLink className="text-indigo-500" to='/signup'>Signup</NavLink>
+
+        <p className="mt-6 text-center text-sm text-slate-500 dark:text-zinc-400">
+          Don&apos;t have an account?{' '}
+          <NavLink className="font-semibold text-orange-500 hover:text-orange-600" to="/signup">
+            Sign up
+          </NavLink>
         </p>
       </div>
-    ) : (<LoadingComponent isContentLoaded={isContentLoaded} progress={progress} setProgress={setProgress} />)}
-
-    
-  </div>
+    </div>
   );
 }
-
