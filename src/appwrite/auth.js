@@ -1,76 +1,49 @@
-import React from 'react';
+// src/appwrite/auth.js  (kept at the same path/filename so existing imports don't break)
 import toast from 'react-hot-toast';
-import conf from '../conf/conf.js'
-import { Client, Account, ID, Query,Avatars,Locale } from 'appwrite'
-import Service from './config';
+import api from '../lib/api.js';
 
 export class AuthService {
-    client = new Client();
-    account;
-    avatars;
-    Locale;
-
     notify = (message) => { toast.success(message); }
-    notifywar = (message) => { toast(message, { icon: '⚠️'} ); }
+    notifywar = (message) => { toast(message, { icon: '⚠️' }); }
     notifyer = (message) => { toast.error(message); }
-
-
-    // **EndPoints to connect to the right Appwrite server and project.
-    constructor() {
-        this.client
-            .setEndpoint(conf.appwriteUrl)
-            .setProject(conf.appwriteProjectId)
-        this.avatars = new Avatars(this.client);
-        this.account = new Account(this.client)
-        this.Locale = new Locale(this.client)
-    }
 
     // **Create a new user account
     async createAccount({ email, password, name }) {
         try {
-            const userAccount = await this.account.create(ID.unique(), email, password, name);
-            if (userAccount) {
-                await Service.createUser(userAccount.$id, name,email);
-                this.notify("Account created successfully!");
-                return this.login({ email, password });
-            } else {
-                this.notifywar("Account creation failed. Please try again.");
-                return userAccount;
-            }
+            const { data } = await api.post('/auth/signup', { email, password, name });
+            localStorage.setItem('authToken', data.token);
+            this.notify("Account created successfully!");
+            return data.user;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
             throw error;
         }
     }
 
-
-    //** Delete a user account
-
+    // **Delete a user account
     async deleteAccount(userid) {
         try {
-            const result = await this.account.updateStatus(userid);
+            const result = await api.delete(`/users/${userid}`);
             if (result) {
-                // await Service.deleteUser(userid);
+                localStorage.removeItem('authToken');
                 this.notify("Account deleted successfully!");
             }
-            return result;
+            return result.data;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
             throw error;
         }
     }
-
 
     // **Create a login session
     async login({ email, password }) {
         try {
-            const result = await this.account.createEmailSession(email, password);
-            if (result) {
-                this.notify("Login successfully!");
-            }
-            return result;
+            const { data } = await api.post('/auth/login', { email, password });
+            localStorage.setItem('authToken', data.token);
+            this.notify("Login successfully!");
+            return data.user;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
             throw error;
         }
     }
@@ -78,7 +51,10 @@ export class AuthService {
     // **Get the current user
     async getCurrentUser() {
         try {
-            return await this.account.get();
+            const token = localStorage.getItem('authToken');
+            if (!token) return null;
+            const { data } = await api.get('/auth/me');
+            return data.user;
         } catch (error) {
             console.log("\n\nUser Not Registered yet please Signup \n\n\n", error);
         }
@@ -88,113 +64,94 @@ export class AuthService {
     // **Logout the current user
     async logout() {
         try {
-            const result = await this.account.deleteSessions();
-            if (result) {
-                this.notify("Logout successfully!");
-            }
-            return result;
+            localStorage.removeItem('authToken');
+            this.notify("Logout successfully!");
+            return true;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error.message);
             throw error;
         }
     }
 
     // **Login with Google
+    // NOTE: this is not implemented. Appwrite handled Google OAuth for you;
+    // MongoDB has no equivalent. To keep this feature you'd need to add
+    // Passport.js + the Google OAuth 2.0 strategy on the backend, which is
+    // a separate piece of work from this migration. Calling this for now
+    // will just warn and no-op.
     async googleauth() {
-        try {
-            const result = this.account.createOAuth2Session('google', "https://code-and-blog.vercel.app", "https://code-and-blog.vercel.app");
-
-            if (result) {
-                this.notify("Login successfully!");
-            }
-            return result;
-        } catch (error) {
-            this.notifyer(`${error.message}`);
-            throw error;
-        }
+        this.notifywar("Google login isn't wired up yet on the new backend.");
+        return null;
     }
 
     // **Used to recover password and Send Verification Link to the user's email
     async PasswordRecovery(email) {
         try {
-            const result = await this.account.createRecovery(email, "https://code-and-blog.vercel.app", "https://code-and-blog.vercel.app");
-            if (result) {
-                this.notify("Reset Password Link Sent to your Email!");
-            }
-            return result;
+            const { data } = await api.post('/auth/forgot-password', { email });
+            this.notify(data.message || "Reset Password Link Sent to your Email!");
+            return data;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
             throw error;
         }
     }
 
     // **Used to reset password
+    // NOTE: signature kept the same as the Appwrite version, but only
+    // `secret` (the reset token from the emailed link) and `password` are
+    // actually used now - there's no `userId` param needed anymore.
     async ResetPassword(userId, secret, password, passwordAgain) {
-
         try {
-            const result = await this.account.updateRecovery(secret, userId, password, passwordAgain);
-            if (result) {
-                this.notify("Password Reset Successfully!");
-            }
+            const { data } = await api.post(`/auth/reset-password/${secret}`, { password });
+            this.notify(data.message || "Password Reset Successfully!");
+            return data;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
             throw error;
         }
     }
-
 
     // **Implement Email Verification and send email
     async createVerification() {
         try {
-            const result = await this.account.createVerification("https://code-and-blog.vercel.app/setting", "https://code-and-blog.vercel.app/setting");
-            if (result) {
-                this.notify("Verification link has been sent to your email!");
-            }
+            const { data } = await api.get('/auth/send-verification');
+            this.notify(data.message || "Verification link has been sent to your email!");
+            return data;
         } catch (error) {
-            this.notifyer(`Error sending verification link: ${error.message}`);
+            this.notifyer(`Error sending verification link: ${error?.response?.data?.message || error.message}`);
             throw error;
         }
     }
 
-    // **Verify Email Verification 
+    // **Verify Email Verification
     async updateVerification(userId, secret) {
         try {
-            const result = await this.account.updateVerification(secret, userId, "https://code-and-blog.vercel.app/setting");
-            if (result) {
-                this.notify("Email verification successful!");
-            }
+            const { data } = await api.post(`/auth/verify-email/${secret}`);
+            this.notify(data.message || "Email verification successful!");
+            return data;
         } catch (error) {
-            this.notifyer(`Error verifying email: ${error.message}`);
+            this.notifyer(`Error verifying email: ${error?.response?.data?.message || error.message}`);
             throw error;
         }
     }
 
-
-    // **To get user awatar
+    // **To get user avatar
+    // NOTE: Appwrite's Avatars.getFlag() generated country flag images for you.
+    // There's no MongoDB equivalent - if you still want flags, use a small
+    // npm package like `flag-icons` or `country-flag-icons` on the frontend instead.
     async getAvtar(countryCode) {
-        try {
-            const avtar = this.avatars.getFlag(countryCode);
-            if (avtar) {
-                return avtar;
-            }
-        } catch (error) {
-            throw error;
-        }
+        this.notifywar("Avatar/flag generation isn't available in the new backend.");
+        return null;
     }
 
     // **To get user locale Address
+    // NOTE: same story as getAvtar - Appwrite's Locale service is gone.
+    // If you need country/locale detection, a frontend library or a free
+    // IP-geolocation API would replace this.
     async getLocale() {
-        try {
-            const locale = await this.Locale.get();
-            if (locale) {
-                return locale;
-            }
-        } catch (error) {
-            throw error;
-        }
+        this.notifywar("Locale detection isn't available in the new backend.");
+        return null;
     }
-
-
 }
 
 const authService = new AuthService();

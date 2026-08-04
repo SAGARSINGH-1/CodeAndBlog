@@ -1,354 +1,214 @@
-import conf from '../conf/conf.js'
-import { Client, ID, Databases, Storage, Query } from 'appwrite'
+// src/appwrite/config.js  (kept at the same path/filename so existing imports don't break)
 import toast from 'react-hot-toast';
+import api from '../lib/api.js';
 
 export class Service {
-    client = new Client();
-    databases;
-    bucket;
-
-    // tost handling
     notify = (message) => { toast.success(message); }
     notifywar = (message) => { toast(message, { icon: '⚠️' }); }
     notifyer = (message) => { toast.error(message); }
 
-    // EndPoints to connect to the right Appwrite server and project.
-    constructor() {
-        this.client
-            .setEndpoint(conf.appwriteUrl)
-            .setProject(conf.appwriteProjectId)
-        this.databases = new Databases(this.client);
-        this.bucket = new Storage(this.client);
-        // this.profileBucket = new Storage(this.client);
-    }
-
-
-
     // **Create a new user post/blog
-    async createPost({ title, slug, content, featuredImage, status, userid, name }) {
-        function generateUniqueID() {
-            const timestamp = Date.now().toString(36); // Convert timestamp to base36
-            const randomString = Math.random().toString(36).substring(2, 8); // Use a shorter random string
-            const uniqueID = `${timestamp}${randomString}`;
-            return uniqueID;
-        }
-
+    async createPost({ title, slug, content, featuredImage, featuredImageUrl, status, userid, name }) {
         try {
-            const postid = generateUniqueID();
-            const result = await this.databases.createDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_1,
-                slug,
-                {
-                    postid,
-                    title,
-                    content,
-                    featuredImage,
-                    status,
-                    userid,
-                    name,
-                }
-            );
-            if (result) {
-                this.notify("Post created successfully!");
-                return title;
-            }
+            const { data } = await api.post('/posts', {
+                title, slug, content, featuredImage, featuredImageUrl, status, userid, name,
+            });
+            this.notify("Post created successfully!");
+            return data;
         } catch (error) {
-            this.notifyer(`${error.message}`);
-            throw error
+            this.notifyer(error?.response?.data?.message || error.message);
+            throw error;
         }
     }
 
     // **Update a user post/blog which is already created
-    async updatePost(slug, { title, content, featuredImage, status }) {
+    async updatePost(slug, { title, content, featuredImage, featuredImageUrl, status }) {
         try {
-            const result = await this.databases.updateDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_1,
-                slug,
-                {
-                    title,
-                    content,
-                    featuredImage,
-                    status,
-                }
-            );
-            if (result) {
-                this.notify("Post Updated successfully!");
-            }
+            const { data } = await api.put(`/posts/${slug}`, { title, content, featuredImage, featuredImageUrl, status });
+            this.notify("Post Updated successfully!");
+            return data;
         } catch (error) {
-            this.notifyer(`${error.message}`);
-            throw error
+            this.notifyer(error?.response?.data?.message || error.message);
+            throw error;
         }
     }
-
 
     // **Delete a user post/blog which is already created
     async deletePost(slug) {
         try {
-            const result = await this.databases.deleteDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_1,
-                slug
-            );
+            const { data } = await api.delete(`/posts/${slug}`);
             this.notify("Post Deleted successfully!");
-            if (result) {
-                this.notify("Post created successfully!");
-            }
-            return result;
+            return data;
         } catch (error) {
-            this.notifyer(`${error.message}`);
-            throw error
+            this.notifyer(error?.response?.data?.message || error.message);
+            throw error;
         }
     }
 
     // **Get a user post/blog which is already created
     async getPost(slug) {
         try {
-            return await this.databases.getDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_1,
-                slug
-            );
+            const { data } = await api.get(`/posts/${slug}`);
+            return data;
         } catch (error) {
             throw error;
         }
     }
 
-    // **Get all user post/blog which is already created and having an status active
-    async getPosts(quries = [Query.equal('status', 'active')]) {
+    // **Get all user post/blog which is already created and having status active
+    // NOTE (breaking change): the old signature took an Appwrite `Query` array,
+    // e.g. getPosts([Query.equal('status', 'active')]).
+    // The new signature takes a plain filter object instead, e.g.:
+    //   getPosts({ status: 'active' })
+    //   getPosts({ userid: someUserId })
+    // Update any call sites in your pages that still import/use `Query`.
+    async getPosts(filters = { status: 'active' }) {
         try {
-            return await this.databases.listDocuments(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_1,
-                quries,
-                // add pagination here 
-            );
+            const { data } = await api.get('/posts', { params: filters });
+            return data; // { documents: [...], total }
         } catch (error) {
             throw error;
         }
     }
 
-
-    // **Upload files to the Appwrite storage
+    // **Upload files (post featured images)
     async uploadFile(file) {
         try {
-            return await this.bucket.createFile(
-                conf.appwriteBucketId,
-                ID.unique(),
-                file
-            );
+            const formData = new FormData();
+            formData.append('image', file);
+            const { data } = await api.post('/posts/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            return data; // { $id, url } - $id kept for compatibility with existing code
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
         }
     }
 
-    // **Delete files from the Appwrite storage
+    // **Delete files
     async deleteFile(fileId) {
         try {
-            await this.bucket.deleteFile(
-                conf.appwriteBucketId,
-                fileId
-            );
+            await api.delete(`/posts/upload/${fileId}`);
             return true;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
         }
     }
 
-    // **Get file preview from the Appwrite storage
-    getFilePreview(fileId) {
-        return this.bucket.getFilePreview(
-            conf.appwriteBucketId,
-            fileId,
-        );
+    // **Get file preview
+    // NOTE: Cloudinary URLs returned by uploadFile() are already full public
+    // URLs, so this just passes the URL through. Prefer storing/using the
+    // `url` field returned by uploadFile()/uploadProfileImage() directly
+    // going forward instead of round-tripping through an ID.
+    getFilePreview(fileIdOrUrl) {
+        if (typeof fileIdOrUrl === 'string' && fileIdOrUrl.startsWith('http')) {
+            return fileIdOrUrl;
+        }
+        this.notifywar("getFilePreview now expects the full image URL returned by uploadFile().");
+        return fileIdOrUrl;
     }
 
-    //  **Create a comment on the post with its id
+    // **Create a comment on the post with its id
     async createComment({ name, postid, userid, comment }) {
         try {
-            const documentID = ID.unique();
-            const result = this.databases.createDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_2,
-                documentID,
-                {
-                    postid,
-                    name,
-                    userid,
-                    comment,
-                }
-            );
-            if (result) {
-                this.notify("Comment Added successfully!");
-            }
+            const { data } = await api.post('/comments', { postid, comment });
+            this.notify("Comment Added successfully!");
+            return data;
         } catch (error) {
-            this.notify(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
         }
     }
-
 
     // **Get all comments on the post with its id
-    async getComments(postid, queries = [Query.equal('postid', postid)]) {
+    async getComments(postid) {
         try {
-            return await this.databases.listDocuments(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_2,
-                queries,
-                // add pagination here 
-            );
+            const { data } = await api.get(`/comments/${postid}`);
+            return data; // { documents: [...], total }
         } catch (error) {
             throw error;
         }
     }
 
-
-    // **Create a user account document in the database
+    // **Create a user account document
+    // NOTE: signup now creates the user record in one step on the backend,
+    // so this is a no-op kept only for compatibility with old call sites.
     async createUser(userid, name, email) {
-        try {
-            const result = await this.databases.createDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_3,
-                userid,
-                {
-                    userid,
-                    name,
-                    email,
-                }
-            );
-            if (result) {
-                this.notify("User added");
-            }
-        } catch (error) {
-            throw error;
-        }
+        return { userid, name, email };
     }
 
-    // **Delete a user account document from the database
+    // **Delete a user account document
     async deleteUser(userid) {
         try {
-            const result = await this.databases.deleteDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_3,
-                userid,
-            );
-            if (result) {
-                this.notify("User deleted from database");
-            }
-            return result;
+            const { data } = await api.delete(`/users/${userid}`);
+            this.notify("User deleted from database");
+            return data;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
             throw error;
         }
     }
 
-
-    // **Get a user account document from the database
+    // **Get a user account document
     async getUser(userid) {
         try {
-            const data = await this.databases.getDocument(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_3,
-                userid,
-            );
-            if (data) {
-                return data;
-            }
+            const { data } = await api.get(`/users/${userid}`);
+            return data;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
         }
     }
 
-    // Update user : 
+    // Update user profile fields
     async updateUserProfile(userid, updateData) {
         try {
-            const result = await this.databases.updateDocument(
-                conf.appwriteDatabaseId, // Your database ID
-                conf.appwriteCollectionId_3, // Your user collection ID
-                userid, // ✅ This must be the correct user ID
-                updateData
-            );
-            return result;
+            const { data } = await api.put(`/users/${userid}`, updateData);
+            return data;
         } catch (error) {
-            this.notifyer(`Error updating profile: ${error.message}`);
+            this.notifyer(`Error updating profile: ${error?.response?.data?.message || error.message}`);
             throw error;
         }
     }
 
-    // Updataing all the documents of userid given to set a profileImageId which is changed
+    // Propagate a user's new avatar onto all of their articles
     async updateArticleProfileId(userid, updateData) {
         try {
-            // Fetch all articles where userId matches
-            const articles = await this.databases.listDocuments(
-                conf.appwriteDatabaseId,
-                conf.appwriteCollectionId_1, // Article Collection ID
-                [
-                    Query.equal("userid", userid) // Find all articles of the user
-                ]
-            );
-
-            // Update profileImageId for all matching articles
-            const updatePromises = articles.documents.map(article =>
-                this.databases.updateDocument(
-                    conf.appwriteDatabaseId,
-                    conf.appwriteCollectionId_1,
-                    article.$id,
-                    updateData
-                )
-            );
-
-            // Wait for all updates to complete
-            const results = await Promise.all(updatePromises);
-            return results;
+            const { data } = await api.patch(`/users/${userid}/articles-profile-image`, updateData);
+            return data;
         } catch (error) {
-            this.notifyer(`Error updating articles: ${error.message}`);
+            this.notifyer(`Error updating articles: ${error?.response?.data?.message || error.message}`);
             throw error;
         }
     }
 
-
-
-    // To store profie picture in the 2nd bucket
+    // Store profile picture
     async uploadProfileImage(file, id) {
         try {
-            const uploadedFile = await this.bucket.createFile(
-                conf.appwriteBucketId_Profile,
-                ID.unique(),
-                file
-            );
-            if (uploadedFile) {
-                this.notify("Profile updated successfully");
-            }
-            return uploadedFile;
+            const formData = new FormData();
+            formData.append('image', file);
+            const { data } = await api.post(`/users/${id}/profile-image`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            this.notify("Profile updated successfully");
+            return data; // { $id, url }
         } catch (error) {
-            this.notifywar("File upload error please try again after some time.", error);
+            this.notifywar("File upload error please try again after some time.");
         }
     }
 
-    // To get the profie picture from the 2nd bucket
-    getProfilePreview(fileId) {
-        return this.bucket.getFilePreview(
-            conf.appwriteBucketId_Profile,
-            fileId,
-        );
+    // Get profile picture preview
+    getProfilePreview(fileIdOrUrl) {
+        return this.getFilePreview(fileIdOrUrl);
     }
 
     async deleteProfile(fileId) {
         try {
-            const isdeleted = this.bucket.deleteFile(
-                conf.appwriteBucketId_Profile,
-                fileId
-            );
-            if (isdeleted) {
-                return true
-            }
+            await api.delete(`/posts/upload/${fileId}`);
+            return true;
         } catch (error) {
-            this.notifyer(`${error.message}`);
+            this.notifyer(error?.response?.data?.message || error.message);
         }
     }
-
 }
 
 const service = new Service();
-
 export default service;
